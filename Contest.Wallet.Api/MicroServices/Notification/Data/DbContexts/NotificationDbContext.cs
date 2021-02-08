@@ -1,6 +1,7 @@
 ﻿using Contest.Wallet.Common.Repository.SQL.Abstract;
 using Contest.Wallet.Api.Notification.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Data.Entity.Infrastructure;
 
 namespace Contest.Wallet.Api.Notification.Data.DbContexts
 {
@@ -10,8 +11,13 @@ namespace Contest.Wallet.Api.Notification.Data.DbContexts
 
         public NotificationDbContext(DbContextOptions<NotificationDbContext> options) : base(options)
         {
-
         }
+
+        public DbQuery<TQuery> Query<TQuery>() where TQuery : class
+        {
+            throw new System.NotImplementedException();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();

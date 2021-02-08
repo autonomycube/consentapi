@@ -8,7 +8,7 @@ namespace Contest.Wallet.Api.Tenant.Data.Repositories
     public class IssuerRepository
         : Repository<TblIssuers, string>, IIssuerRepository
     {
-        public IssuerRepository(IssuerDbContext context)
+        public IssuerRepository(TenantDbContext context)
             : base(context)
         {
         }

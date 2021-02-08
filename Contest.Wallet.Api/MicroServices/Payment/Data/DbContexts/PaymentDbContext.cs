@@ -1,16 +1,17 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Abstract;
-using Contest.Wallet.Api.Auth.Data.Entities;
+﻿using Contest.Wallet.Api.Payment.Data.Entities;
+using Contest.Wallet.Common.Repository.SQL.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.Infrastructure;
 
-namespace Contest.Wallet.Api.Auth.Data.DbContexts
+namespace Contest.Wallet.Api.Payment.Data.DbContexts
 {
-    public class AuthDbContext : DbContext, IDbContext
+    public class PaymentDbContext : DbContext, IDbContext
     {
-        public DbSet<TblUsers> Tests { get; set; }
+        public DbSet<TblPayments> Tests { get; set; }
 
-        public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
+        public PaymentDbContext(DbContextOptions<PaymentDbContext> options) : base(options)
         {
+
         }
 
         public DbQuery<TQuery> Query<TQuery>() where TQuery : class
@@ -32,7 +33,7 @@ namespace Contest.Wallet.Api.Auth.Data.DbContexts
 
         private void ConfigureIdentityContext(ModelBuilder builder)
         {
-            builder.Entity<TblUsers>(entity =>
+            builder.Entity<TblPayments>(entity =>
             {
                 entity.ToTable("tbl_test");
 

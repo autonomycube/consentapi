@@ -13,12 +13,9 @@ namespace Contest.Wallet.Api.Infrastructure.Installers
             //Register HealthChecks and UI
             services.AddHealthChecks()
                     .AddCheck("Google Ping", new PingHealthCheck("www.google.com", 100))
-                    .AddCheck("Bing Ping", new PingHealthCheck("www.bing.com", 100))
-                    .AddMySql(config["ConnectionStrings:DbConnection"],
-                            name: "MySQL:DbConnection",
-                            failureStatus: HealthStatus.Unhealthy);
+                    .AddCheck("Bing Ping", new PingHealthCheck("www.bing.com", 100));
 
-            services.AddHealthChecksUI();
+            //services.AddHealthChecksUI();
         }
     }
 }

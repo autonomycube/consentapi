@@ -1,17 +1,23 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Abstract;
-using Contest.Wallet.Api.Tenant.Data.Entities;
+﻿using Contest.Wallet.Api.Tenant.Data.Entities;
+using Contest.Wallet.Common.Repository.SQL.Abstract;
 using Microsoft.EntityFrameworkCore;
+using System.Data.Entity.Infrastructure;
 
 namespace Contest.Wallet.Api.Tenant.Data.DbContexts
 {
-    public class IssuerDbContext : DbContext, IDbContext
+    public class TenantDbContext : DbContext, IDbContext
     {
         public DbSet<TblIssuers> Tests { get; set; }
 
-        public IssuerDbContext(DbContextOptions<IssuerDbContext> options) : base(options)
+        public TenantDbContext(DbContextOptions<TenantDbContext> options) : base(options)
         {
-
         }
+
+        public DbQuery<TQuery> Query<TQuery>() where TQuery : class
+        {
+            throw new System.NotImplementedException();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();

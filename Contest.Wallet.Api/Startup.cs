@@ -2,8 +2,8 @@ using AspNetCoreRateLimit;
 using AutoMapper;
 using AutoWrapper;
 using Contest.Wallet.Api.Infrastructure.Extensions;
+using Contest.Wallet.Api.Infrastructure.Helpers;
 using Contest.Wallet.Api.Infrastructure.Middlewares;
-using Contest.Wallet.Api.Auth.Infrastructure.Configs;
 using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Extensions;
 using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Models;
 using FluentValidation.AspNetCore;
@@ -15,6 +15,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
+using AuthMappingProfileConfiguration = Contest.Wallet.Api.Auth.Infrastructure.Configs.MappingProfileConfiguration;
+using NotificationMappingProfileConfiguration = Contest.Wallet.Api.Notification.Infrastructure.Configs.MappingProfileConfiguration;
+using PaymentMappingProfileConfiguration = Contest.Wallet.Api.Payment.Infrastructure.Configs.MappingProfileConfiguration;
+using TenantMappingProfileConfiguration = Contest.Wallet.Api.Tenant.Infrastructure.Configs.MappingProfileConfiguration;
+using UtilityMappingProfileConfiguration = Contest.Wallet.Api.Utility.Infrastructure.Configs.MappingProfileConfiguration;
 
 namespace Contest.Wallet.Api
 {
@@ -42,8 +47,15 @@ namespace Contest.Wallet.Api
                     .AddNewtonsoftJson(ops => { ops.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore; })
                     .AddFluentValidation(fv => { fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; });
 
+            // Register DB Contexts
+            services.AddDbContexts(Configuration);
+
             //Register Automapper
-            services.AddAutoMapper(typeof(MappingProfileConfiguration));
+            services.AddAutoMapper(typeof(AuthMappingProfileConfiguration));
+            services.AddAutoMapper(typeof(NotificationMappingProfileConfiguration));
+            services.AddAutoMapper(typeof(PaymentMappingProfileConfiguration));
+            services.AddAutoMapper(typeof(TenantMappingProfileConfiguration));
+            services.AddAutoMapper(typeof(UtilityMappingProfileConfiguration));
 
             // Register Health Checks
             services.AddHealthChecks();

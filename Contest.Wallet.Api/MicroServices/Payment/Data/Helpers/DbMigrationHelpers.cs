@@ -1,4 +1,4 @@
-using Contest.Wallet.Api.Tenant.Data.DbContexts;
+using Contest.Wallet.Api.Payment.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Tenant.Data.Helpers
+namespace Contest.Wallet.Api.Payment.Data.Helpers
 {
     public static class DbMigrationHelpers
     {
@@ -29,7 +29,7 @@ namespace Contest.Wallet.Api.Tenant.Data.Helpers
         {
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                using (var context = scope.ServiceProvider.GetRequiredService<TenantDbContext>())
+                using (var context = scope.ServiceProvider.GetRequiredService<PaymentDbContext>())
                 {
                     await context.Database.MigrateAsync();
                 }
@@ -40,7 +40,7 @@ namespace Contest.Wallet.Api.Tenant.Data.Helpers
         {
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                var testDBContext = scope.ServiceProvider.GetRequiredService<TenantDbContext>();
+                var testDBContext = scope.ServiceProvider.GetRequiredService<PaymentDbContext>();
 
                 await EnsureSeedIssuerData(testDBContext);
             }
@@ -49,7 +49,7 @@ namespace Contest.Wallet.Api.Tenant.Data.Helpers
         /// <summary>
         /// Generate default Categories, Roles, Connection Types, Genders
         /// </summary>
-        private static async Task EnsureSeedIssuerData(TenantDbContext testDbContext)
+        private static async Task EnsureSeedIssuerData(PaymentDbContext testDbContext)
         {
             if (!testDbContext.Tests.Any())
             {
