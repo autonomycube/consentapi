@@ -1,5 +1,5 @@
 ﻿
-namespace Contest.Wallet.Common.Configuration.Extensions.Extensions
+namespace Consent.Common.Configuration.Extensions.Extensions
 {
     public static class DefaultValueExtensions
     {

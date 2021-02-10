@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace Contest.Wallet.Common.Configuration
+namespace Consent.Common.Configuration
 {
     public class AppSettings : IAppSetting
     {

@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Common.Cache.Abstract;
-using Contest.Wallet.Common.Cache.Distributed.RedisCache.Helper;
+﻿using Consent.Common.Cache.Abstract;
+using Consent.Common.Cache.Distributed.RedisCache.Helper;
 using Microsoft.Extensions.Caching.Distributed;
 using System;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Cache.Distributed.RedisCache
+namespace Consent.Common.Cache.Distributed.RedisCache
 {
     internal sealed class RedisCache : IRedisCache
     {

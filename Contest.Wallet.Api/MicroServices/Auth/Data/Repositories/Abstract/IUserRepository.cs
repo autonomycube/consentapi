@@ -1,7 +1,7 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Abstract;
-using Contest.Wallet.Api.Auth.Data.Entities;
+﻿using Consent.Common.Repository.SQL.Abstract;
+using Consent.Api.Auth.Data.Entities;
 
-namespace Contest.Wallet.Api.Auth.Data.Repositories.Abstract
+namespace Consent.Api.Auth.Data.Repositories.Abstract
 {
     public interface IUserRepository : IRepository<TblUsers, string>
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Contest.Wallet.Common.Firebase.Models
+namespace Consent.Common.Firebase.Models
 {
     public class FirebaseMessage
     {

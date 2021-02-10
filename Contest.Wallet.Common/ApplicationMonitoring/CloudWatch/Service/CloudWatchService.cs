@@ -1,10 +1,10 @@
 ﻿using Amazon.CloudWatchLogs;
 using Amazon.CloudWatchLogs.Model;
-using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Abstraction;
+using Consent.Common.ApplicationMonitoring.CloudWatch.Abstraction;
 using System;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Service
+namespace Consent.Common.ApplicationMonitoring.CloudWatch.Service
 {
     internal class CloudWatchService
     {

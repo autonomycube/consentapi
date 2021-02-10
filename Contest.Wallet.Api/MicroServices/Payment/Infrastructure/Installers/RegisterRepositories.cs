@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Api.Contracts;
-using Contest.Wallet.Api.Payment.Data.Repositories;
-using Contest.Wallet.Api.Payment.Data.Repositories.Abstract;
+﻿using Consent.Api.Contracts;
+using Consent.Api.Payment.Data.Repositories;
+using Consent.Api.Payment.Data.Repositories.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Api.Payment.Infrastructure.Installers
+namespace Consent.Api.Payment.Infrastructure.Installers
 {
     internal class RegisterRepositories : IServiceRegistration
     {

@@ -49,14 +49,12 @@
     <Folder Include="MicroServices\Notification\DTO\Response\" />
     <Folder Include="MicroServices\Payment\DTO\Request\" />
     <Folder Include="MicroServices\Payment\DTO\Response\" />
-    <Folder Include="MicroServices\Tenant\DTO\Request\" />
-    <Folder Include="MicroServices\Tenant\DTO\Response\" />
     <Folder Include="MicroServices\Utility\DTO\Request\" />
     <Folder Include="MicroServices\Utility\DTO\Response\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Contest.Wallet.Common\Contest.Wallet.Common.csproj" />
+    <ProjectReference Include="..\Contest.Wallet.Common\Consent.Common.csproj" />
   </ItemGroup>
 
 </Project>

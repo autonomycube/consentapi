@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.S3Bucket.Abstract
+namespace Consent.Common.S3Bucket.Abstract
 {
     public interface IS3BucketService
     {

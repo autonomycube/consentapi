@@ -4,7 +4,7 @@ using MongoDB.Driver;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Repository.Mongo.Abstract
+namespace Consent.Common.Repository.Mongo.Abstract
 {
     public interface IDbContext
     {

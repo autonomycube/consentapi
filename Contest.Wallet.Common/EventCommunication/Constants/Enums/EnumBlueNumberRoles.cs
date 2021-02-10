@@ -1,5 +1,5 @@
 ﻿
-namespace Contest.Wallet.Common.EventCommunication.Constants.Enums
+namespace Consent.Common.EventCommunication.Constants.Enums
 {
     public enum EnumBlueNumberRoles
     {

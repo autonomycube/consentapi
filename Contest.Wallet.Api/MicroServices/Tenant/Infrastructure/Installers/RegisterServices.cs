@@ -1,20 +1,20 @@
-﻿using Contest.Wallet.Common.Data.UOW;
-using Contest.Wallet.Common.Data.UOW.Abstract;
-using Contest.Wallet.Api.Contracts;
-using Contest.Wallet.Api.Tenant.Data.DbContexts;
-using Contest.Wallet.Api.Tenant.Services;
-using Contest.Wallet.Api.Tenant.Services.Abstract;
+﻿using Consent.Common.Data.UOW;
+using Consent.Common.Data.UOW.Abstract;
+using Consent.Api.Contracts;
+using Consent.Api.Tenant.Data.DbContexts;
+using Consent.Api.Tenant.Services;
+using Consent.Api.Tenant.Services.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Api.Tenant.Infrastructure.Installers
+namespace Consent.Api.Tenant.Infrastructure.Installers
 {
     public class RegisterServices : IServiceRegistration
     {
         public void RegisterAppServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IUnitOfWork<TenantDbContext>, UnitOfWork<TenantDbContext>>();
-            services.AddTransient<ITestService, TestService>();
+            services.AddTransient<ITenantService, TenantService>();
         }
     }
 }

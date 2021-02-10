@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Common.ApplicationMonitoring;
-using Contest.Wallet.Common.ApplicationMonitoring.Abstract;
-using Contest.Wallet.Api.Contracts;
+﻿using Consent.Common.ApplicationMonitoring;
+using Consent.Common.ApplicationMonitoring.Abstract;
+using Consent.Api.Contracts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Api.Infrastructure.Installers
+namespace Consent.Api.Infrastructure.Installers
 {
     public class RegisterMonitoringResources : IServiceRegistration
     {

@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using Contest.Wallet.Api.Payment.Services.Abstract;
-using Contest.Wallet.Api.Tenant.Data.Repositories.Abstract;
-using Contest.Wallet.Common.ApplicationMonitoring.Abstract;
+using Consent.Api.Payment.Services.Abstract;
+using Consent.Api.Tenant.Data.Repositories.Abstract;
+using Consent.Common.ApplicationMonitoring.Abstract;
 using System;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Payment.Services
+namespace Consent.Api.Payment.Services
 {
     public class PaymentService : IPaymentService
     {
         #region Private Variables
 
-        private readonly IIssuerRepository _testRepository;
+        private readonly ITenantRepository _testRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<PaymentService> _logger;
 
@@ -19,7 +19,7 @@ namespace Contest.Wallet.Api.Payment.Services
 
         #region Constructor
 
-        public PaymentService(IIssuerRepository testRepository,
+        public PaymentService(ITenantRepository testRepository,
             IMapper mapper,
             ILogger<PaymentService> logger)
         {

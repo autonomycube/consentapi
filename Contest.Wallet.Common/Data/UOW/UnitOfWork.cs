@@ -1,11 +1,11 @@
-﻿using Contest.Wallet.Common.Data.UOW.Abstract;
-using Contest.Wallet.Common.Repository.SQL.Abstract;
+﻿using Consent.Common.Data.UOW.Abstract;
+using Consent.Common.Repository.SQL.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Data.UOW
+namespace Consent.Common.Data.UOW
 {
     public class UnitOfWork<TDbContext>
         : IUnitOfWork<TDbContext> where TDbContext : IDbContext

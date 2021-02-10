@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Contest.Wallet.Common.Repository.SQL.Models.Abstract
+namespace Consent.Common.Repository.SQL.Models.Abstract
 {
     public interface IEntity<TEntityKey>
     {

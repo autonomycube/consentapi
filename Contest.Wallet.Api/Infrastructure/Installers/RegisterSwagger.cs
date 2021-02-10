@@ -1,5 +1,6 @@
-﻿using Contest.Wallet.Api.Contracts;
-using Contest.Wallet.Api.Infrastructure.Filters;
+﻿using Consent.Api.Contracts;
+using Consent.Api.Infrastructure.Filters;
+using Consent.Api.Tenant.Services.DTO.Response;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-namespace Contest.Wallet.Api.Infrastructure.Installers
+namespace Consent.Api.Infrastructure.Installers
 {
     internal class RegisterSwagger : IServiceRegistration
     {
@@ -18,7 +19,7 @@ namespace Contest.Wallet.Api.Infrastructure.Installers
             //See: https://www.scottbrady91.com/Identity-Server/ASPNET-Core-Swagger-UI-Authorization-using-IdentityServer4
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Contest.Wallet.Api.Notification ASP.NET Core API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Consent.Api ASP.NET Core API", Version = "v1" });
 
                 var IdentityServerUrl = config["ApiResourceBaseUrls:AuthServer"];
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
@@ -39,6 +40,7 @@ namespace Contest.Wallet.Api.Infrastructure.Installers
                 options.OperationFilter<SwaggerAuthorizeCheckOperationFilter>();
 
                 //Adding excluded models
+                options.DocumentFilter<SwaggerModelDocumentFilter<TenantResponse>>();
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

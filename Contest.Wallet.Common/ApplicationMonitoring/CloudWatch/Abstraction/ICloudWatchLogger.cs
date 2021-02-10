@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Abstraction
+namespace Consent.Common.ApplicationMonitoring.CloudWatch.Abstraction
 {
     public interface ICloudWatchLogger<T> where T : class
     {

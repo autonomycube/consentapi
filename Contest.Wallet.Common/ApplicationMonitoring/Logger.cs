@@ -1,9 +1,9 @@
-﻿using Contest.Wallet.Common.ApplicationMonitoring.Abstract;
-using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Abstraction;
+﻿using Consent.Common.ApplicationMonitoring.Abstract;
+using Consent.Common.ApplicationMonitoring.CloudWatch.Abstraction;
 using NLog;
 using System;
 
-namespace Contest.Wallet.Common.ApplicationMonitoring
+namespace Consent.Common.ApplicationMonitoring
 {
     public class Logger<T> : ILogger<T> where T : class
     {

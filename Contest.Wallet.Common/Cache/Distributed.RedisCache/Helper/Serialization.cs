@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Contest.Wallet.Common.Cache.Distributed.RedisCache.Helper
+namespace Consent.Common.Cache.Distributed.RedisCache.Helper
 {
     internal static class Serialization
     {

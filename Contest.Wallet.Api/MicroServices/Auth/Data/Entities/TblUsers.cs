@@ -1,6 +1,6 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Models;
+﻿using Consent.Common.Repository.SQL.Models;
 
-namespace Contest.Wallet.Api.Auth.Data.Entities
+namespace Consent.Api.Auth.Data.Entities
 {
     public partial class TblUsers : EntityBase<string>
     {

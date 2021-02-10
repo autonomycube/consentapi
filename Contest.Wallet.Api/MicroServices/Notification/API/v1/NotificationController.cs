@@ -1,31 +1,31 @@
 ﻿using AutoMapper;
-using Contest.Wallet.Api.Notification.Services.Abstract;
+using Consent.Api.Notification.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 
-namespace Contest.Wallet.Api.Notification.API.v1
+namespace Consent.Api.Notification.API.v1
 {
     [Produces("application/json")]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/notification")]
     [ApiController]
-    public class SMSController : ControllerBase
+    public class NotificationController : ControllerBase
     {
         #region Private Variables
 
         private readonly ISMSService _testService;
-        private readonly ILogger<SMSController> _logger;
+        private readonly ILogger<NotificationController> _logger;
         private readonly IMapper _mapper;
 
         #endregion
 
         #region Constructor
 
-        public SMSController(ISMSService testService,
+        public NotificationController(ISMSService testService,
             IMapper mapper,
-            ILogger<SMSController> logger)
+            ILogger<NotificationController> logger)
         {
             _testService = testService
                 ?? throw new ArgumentNullException(nameof(testService));

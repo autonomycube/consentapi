@@ -1,11 +1,11 @@
-﻿using Contest.Wallet.Common.Repository.Helpers;
-using Contest.Wallet.Common.Repository.SQL.Models;
+﻿using Consent.Common.Repository.Helpers;
+using Consent.Common.Repository.SQL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Repository.SQL.Abstract
+namespace Consent.Common.Repository.SQL.Abstract
 {
     public interface IRepository<TEntity, TEntityKey> :
         IDisposable where TEntity : EntityBase<TEntityKey>

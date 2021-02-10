@@ -1,9 +1,9 @@
-﻿using Contest.Wallet.Common.Repository.Helpers;
+﻿using Consent.Common.Repository.Helpers;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 
-namespace Contest.Wallet.Common.Repository.Extensions
+namespace Consent.Common.Repository.Extensions
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class QueryableExtensions

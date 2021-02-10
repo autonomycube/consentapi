@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Contest.Wallet.Common.Repository.Mongo.Helpers
+namespace Consent.Common.Repository.Mongo.Helpers
 {
     public class DataSettingHelper
     {

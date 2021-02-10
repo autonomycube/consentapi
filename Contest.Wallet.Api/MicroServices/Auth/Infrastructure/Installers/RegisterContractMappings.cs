@@ -1,8 +1,8 @@
-﻿using Contest.Wallet.Api.Contracts;
+﻿using Consent.Api.Contracts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Api.Auth.Infrastructure.Installers
+namespace Consent.Api.Auth.Infrastructure.Installers
 {
     internal class RegisterContractMappings : IServiceRegistration
     {

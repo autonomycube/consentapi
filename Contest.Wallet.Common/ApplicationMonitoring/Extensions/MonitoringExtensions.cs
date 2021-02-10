@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
 
-namespace Contest.Wallet.Common.ApplicationMonitoring.Extensions
+namespace Consent.Common.ApplicationMonitoring.Extensions
 {
     public static class MonitoringExtensions
     {
@@ -21,7 +21,7 @@ namespace Contest.Wallet.Common.ApplicationMonitoring.Extensions
                     logging.ClearProviders();
                     logging.SetMinimumLevel(LogLevel.Information);
                     logging.AddFilter("Microsoft", LogLevel.None);
-                    logging.AddFilter("Contest.Wallet.Common.CorrelationId", LogLevel.None);
+                    logging.AddFilter("Consent.Common.CorrelationId", LogLevel.None);
                 }).UseNLog(options);
         }
     }

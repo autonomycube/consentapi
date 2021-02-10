@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Common.Repository.Mongo.Infrastructure;
+﻿using Consent.Common.Repository.Mongo.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Contest.Wallet.Common.Repository.Mongo.Helpers
+namespace Consent.Common.Repository.Mongo.Helpers
 {
     public partial class DataSettingsManager
     {

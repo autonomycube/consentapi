@@ -1,11 +1,11 @@
-﻿using Contest.Wallet.Api.Contracts;
+﻿using Consent.Api.Contracts;
 using IdentityModel;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Api.Infrastructure.Installers
+namespace Consent.Api.Infrastructure.Installers
 {
     internal class RegisterIdentityServerAuthentication : IServiceRegistration
     {

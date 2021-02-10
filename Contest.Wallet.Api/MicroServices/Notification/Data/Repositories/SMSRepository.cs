@@ -1,9 +1,9 @@
-﻿using Contest.Wallet.Common.Repository.SQL;
-using Contest.Wallet.Api.Notification.Data.DbContexts;
-using Contest.Wallet.Api.Notification.Data.Entities;
-using Contest.Wallet.Api.Notification.Data.Repositories.Abstract;
+﻿using Consent.Common.Repository.SQL;
+using Consent.Api.Notification.Data.DbContexts;
+using Consent.Api.Notification.Data.Entities;
+using Consent.Api.Notification.Data.Repositories.Abstract;
 
-namespace Contest.Wallet.Api.Notification.Data.Repositories
+namespace Consent.Api.Notification.Data.Repositories
 {
     public class SMSRepository
         : Repository<TblSMS, string>, ISMSRepository

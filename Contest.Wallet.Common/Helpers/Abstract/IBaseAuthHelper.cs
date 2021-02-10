@@ -1,5 +1,5 @@
 ﻿
-namespace Contest.Wallet.Common.Helpers.Abstract
+namespace Consent.Common.Helpers.Abstract
 {
     public interface IBaseAuthHelper
     {

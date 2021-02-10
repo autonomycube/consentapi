@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Contest.Wallet.Common.Repository.Helpers
+namespace Consent.Common.Repository.Helpers
 {
     public class PaginatedList<T> : List<T>
     {

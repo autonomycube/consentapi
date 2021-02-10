@@ -1,9 +1,9 @@
-﻿using Contest.Wallet.Api.Payment.Data.Entities;
-using Contest.Wallet.Common.Repository.SQL.Abstract;
+﻿using Consent.Api.Payment.Data.Entities;
+using Consent.Common.Repository.SQL.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.Infrastructure;
 
-namespace Contest.Wallet.Api.Payment.Data.DbContexts
+namespace Consent.Api.Payment.Data.DbContexts
 {
     public class PaymentDbContext : DbContext, IDbContext
     {

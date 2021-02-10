@@ -1,5 +1,5 @@
 ﻿
-namespace Contest.Wallet.Common.Repository.Helpers
+namespace Consent.Common.Repository.Helpers
 {
     public enum OrderBy
     {

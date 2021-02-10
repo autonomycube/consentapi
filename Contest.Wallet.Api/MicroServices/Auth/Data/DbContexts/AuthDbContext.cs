@@ -1,9 +1,9 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Abstract;
-using Contest.Wallet.Api.Auth.Data.Entities;
+﻿using Consent.Common.Repository.SQL.Abstract;
+using Consent.Api.Auth.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.Infrastructure;
 
-namespace Contest.Wallet.Api.Auth.Data.DbContexts
+namespace Consent.Api.Auth.Data.DbContexts
 {
     public class AuthDbContext : DbContext, IDbContext
     {

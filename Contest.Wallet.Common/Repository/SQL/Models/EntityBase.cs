@@ -1,9 +1,9 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Models.Abstract;
+﻿using Consent.Common.Repository.SQL.Models.Abstract;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Contest.Wallet.Common.Repository.SQL.Models
+namespace Consent.Common.Repository.SQL.Models
 {
     public class EntityBase<TEntityKey> : IEntity<TEntityKey>
     {

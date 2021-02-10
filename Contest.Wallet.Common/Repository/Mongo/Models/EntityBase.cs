@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Common.Repository.Mongo.Models.Abstract;
+﻿using Consent.Common.Repository.Mongo.Models.Abstract;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Contest.Wallet.Common.Repository.Mongo.Models
+namespace Consent.Common.Repository.Mongo.Models
 {
     public class EntityBase : IEntity
     {

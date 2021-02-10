@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Cache.Abstract
+namespace Consent.Common.Cache.Abstract
 {
     public interface IRedisCache
     {

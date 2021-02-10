@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Api.Contracts
+namespace Consent.Api.Contracts
 {
     public interface IServiceRegistration
     {

@@ -1,6 +1,6 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Models;
+﻿using Consent.Common.Repository.SQL.Models;
 
-namespace Contest.Wallet.Api.Notification.Data.Entities
+namespace Consent.Api.Notification.Data.Entities
 {
     public partial class TblSMS : EntityBase<string>
     {

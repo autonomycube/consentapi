@@ -1,4 +1,4 @@
-﻿using Contest.Wallet.Common.Repository.Mongo.Models;
+﻿using Consent.Common.Repository.Mongo.Models;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Repository.Mongo.Abstract
+namespace Consent.Common.Repository.Mongo.Abstract
 {
     public partial interface IRepository<T> where T : EntityBase
     {

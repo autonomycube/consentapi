@@ -1,6 +1,6 @@
-﻿using Contest.Wallet.Common.Configuration.Extensions.Extensions;
+﻿using Consent.Common.Configuration.Extensions.Extensions;
 
-namespace Contest.Wallet.Common.Configuration.Options
+namespace Consent.Common.Configuration.Options
 {
     public class CachingOptions : OptionsBase
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Contest.Wallet.Common.Configuration.Options.HelperModels
+namespace Consent.Common.Configuration.Options.HelperModels
 {
     public class CachingOptionsModel
     {

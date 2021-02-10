@@ -1,12 +1,12 @@
 ﻿using Amazon.S3;
 using Amazon.S3.Model;
-using Contest.Wallet.Common.S3Bucket.Abstract;
+using Consent.Common.S3Bucket.Abstract;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.S3Bucket
+namespace Consent.Common.S3Bucket
 {
     public class S3BucketService : IS3BucketService
     {

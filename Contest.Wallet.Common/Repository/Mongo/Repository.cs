@@ -1,7 +1,7 @@
-﻿using Contest.Wallet.Common.Repository.Mongo.Abstract;
-using Contest.Wallet.Common.Repository.Mongo.Attributes;
-using Contest.Wallet.Common.Repository.Mongo.Helpers;
-using Contest.Wallet.Common.Repository.Mongo.Models;
+﻿using Consent.Common.Repository.Mongo.Abstract;
+using Consent.Common.Repository.Mongo.Attributes;
+using Consent.Common.Repository.Mongo.Helpers;
+using Consent.Common.Repository.Mongo.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Repository.Mongo
+namespace Consent.Common.Repository.Mongo
 {
     public partial class Repository<T> : IRepository<T> where T : EntityBase
     {

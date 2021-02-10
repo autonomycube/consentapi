@@ -1,6 +1,6 @@
-using Contest.Wallet.Common.ApplicationMonitoring.Abstract;
-using Contest.Wallet.Common.ApplicationMonitoring.Extensions;
-using Contest.Wallet.Api.Auth.Data.Helpers;
+using Consent.Common.ApplicationMonitoring.Abstract;
+using Consent.Common.ApplicationMonitoring.Extensions;
+using Consent.Api.Auth.Data.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api
+namespace Consent.Api
 {
     public class Program
     {

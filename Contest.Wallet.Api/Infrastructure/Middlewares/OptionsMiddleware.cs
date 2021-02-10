@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Infrastructure.Middlewares
+namespace Consent.Api.Infrastructure.Middlewares
 {
     public class OptionsMiddleware
     {

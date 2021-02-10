@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Notification.Services.Abstract
+namespace Consent.Api.Notification.Services.Abstract
 {
     public interface ISMSService
     {

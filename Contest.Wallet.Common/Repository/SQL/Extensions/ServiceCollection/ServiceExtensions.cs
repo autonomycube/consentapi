@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Abstract;
+﻿using Consent.Common.Repository.SQL.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Contest.Wallet.Common.Repository.Extensions.ServiceCollection
+namespace Consent.Common.Repository.Extensions.ServiceCollection
 {
     public static class ServiceExtensions
     {

@@ -3,7 +3,7 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Infrastructure.HealthChecks
+namespace Consent.Api.Infrastructure.HealthChecks
 {
     internal class PingHealthCheck : IHealthCheck
     {

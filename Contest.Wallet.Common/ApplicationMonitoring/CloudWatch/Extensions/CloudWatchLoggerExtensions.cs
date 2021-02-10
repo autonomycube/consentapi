@@ -1,9 +1,9 @@
-﻿using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Abstraction;
-using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Models;
-using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Service;
+﻿using Consent.Common.ApplicationMonitoring.CloudWatch.Abstraction;
+using Consent.Common.ApplicationMonitoring.CloudWatch.Models;
+using Consent.Common.ApplicationMonitoring.CloudWatch.Service;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Extensions
+namespace Consent.Common.ApplicationMonitoring.CloudWatch.Extensions
 {
     public static class CloudWatchLoggerExtensions
     {

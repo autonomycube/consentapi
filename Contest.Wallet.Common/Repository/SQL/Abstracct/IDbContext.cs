@@ -10,7 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Repository.SQL.Abstract
+namespace Consent.Common.Repository.SQL.Abstract
 {
     public interface IDbContext
     {

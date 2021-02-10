@@ -1,4 +1,4 @@
-﻿namespace Contest.Wallet.Api.Infrastructure.Configs
+﻿namespace Consent.Api.Infrastructure.Configs
 {
     public class HttpClientPolicyConfiguration
     {

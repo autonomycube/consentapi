@@ -1,7 +1,7 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Abstract;
-using Contest.Wallet.Api.Notification.Data.Entities;
+﻿using Consent.Common.Repository.SQL.Abstract;
+using Consent.Api.Notification.Data.Entities;
 
-namespace Contest.Wallet.Api.Notification.Data.Repositories.Abstract
+namespace Consent.Api.Notification.Data.Repositories.Abstract
 {
     public interface ISMSRepository : IRepository<TblSMS, string>
     {

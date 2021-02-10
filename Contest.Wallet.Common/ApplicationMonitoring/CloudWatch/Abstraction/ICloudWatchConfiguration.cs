@@ -1,6 +1,6 @@
 ﻿using Amazon;
 
-namespace Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Abstraction
+namespace Consent.Common.ApplicationMonitoring.CloudWatch.Abstraction
 {
     public interface ICloudWatchConfiguration
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Contracts
+namespace Consent.Api.Contracts
 {
     public interface IAuthServerConnect
     {

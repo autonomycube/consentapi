@@ -1,13 +1,13 @@
-﻿using Contest.Wallet.Common.ApplicationMonitoring.Abstract;
-using Contest.Wallet.Common.Firebase.Abstract;
-using Contest.Wallet.Common.Firebase.Models;
+﻿using Consent.Common.ApplicationMonitoring.Abstract;
+using Consent.Common.Firebase.Abstract;
+using Consent.Common.Firebase.Models;
 using FirebaseAdmin.Messaging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Firebase
+namespace Consent.Common.Firebase
 {
     public class FirebaseService : IFirebaseService
     {

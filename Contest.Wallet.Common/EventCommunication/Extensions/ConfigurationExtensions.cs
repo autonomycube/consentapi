@@ -1,9 +1,9 @@
 ﻿using Amazon;
-using Contest.Wallet.Common.EventCommunication.Models;
+using Consent.Common.EventCommunication.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 
-namespace Contest.Wallet.Common.EventCommunication.Extensions
+namespace Consent.Common.EventCommunication.Extensions
 {
     public static class ConfigurationExtensions
     {

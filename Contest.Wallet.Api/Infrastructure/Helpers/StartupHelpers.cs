@@ -1,15 +1,15 @@
-﻿using Contest.Wallet.Api.Auth.Data.DbContexts;
-using Contest.Wallet.Api.Notification.Data.DbContexts;
-using Contest.Wallet.Api.Payment.Data.DbContexts;
-using Contest.Wallet.Api.Tenant.Data.DbContexts;
-using Contest.Wallet.Common.Constants;
-using Contest.Wallet.Common.Data.Configuration;
+﻿using Consent.Api.Auth.Data.DbContexts;
+using Consent.Api.Notification.Data.DbContexts;
+using Consent.Api.Payment.Data.DbContexts;
+using Consent.Api.Tenant.Data.DbContexts;
+using Consent.Common.Constants;
+using Consent.Common.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Contest.Wallet.Api.Infrastructure.Helpers
+namespace Consent.Api.Infrastructure.Helpers
 {
     public static class StartupHelpers
     {

@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Api.Contracts;
+﻿using Consent.Api.Contracts;
 using IdentityModel.Client;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Infrastructure.Handlers
+namespace Consent.Api.Infrastructure.Handlers
 {
     public class ProtectedApiBearerTokenHandler : DelegatingHandler
     {

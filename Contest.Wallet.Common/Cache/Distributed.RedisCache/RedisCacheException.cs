@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Contest.Wallet.Common.Cache.Distributed.RedisCache
+namespace Consent.Common.Cache.Distributed.RedisCache
 {
     public class RedisCacheException : Exception
     {

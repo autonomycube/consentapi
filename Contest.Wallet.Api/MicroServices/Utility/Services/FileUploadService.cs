@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Contest.Wallet.Common.ApplicationMonitoring.Abstract;
-using Contest.Wallet.Api.Utility.Services.Abstract;
+using Consent.Common.ApplicationMonitoring.Abstract;
+using Consent.Api.Utility.Services.Abstract;
 using System;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Utility.Services
+namespace Consent.Api.Utility.Services
 {
     public class FileUploadService : IFileUploadService
     {

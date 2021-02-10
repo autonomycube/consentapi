@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Contest.Wallet.Api.Infrastructure.Extensions
+namespace Consent.Api.Infrastructure.Extensions
 {
     public static class TypeConverterExtension
     {

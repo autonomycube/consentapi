@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Contest.Wallet.Common.Repository.Mongo.Infrastructure
+namespace Consent.Common.Repository.Mongo.Infrastructure
 {
     /// <summary>
     /// A statically compiled "singleton" used to store objects throughout the 

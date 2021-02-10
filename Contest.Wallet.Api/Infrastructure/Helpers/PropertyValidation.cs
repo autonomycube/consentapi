@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Contest.Wallet.Api.Infrastructure.Helpers
+namespace Consent.Api.Infrastructure.Helpers
 {
     public static class PropertyValidation
     {

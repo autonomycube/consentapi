@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Abstraction;
+﻿using Consent.Common.ApplicationMonitoring.CloudWatch.Abstraction;
 using NLog;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Service
+namespace Consent.Common.ApplicationMonitoring.CloudWatch.Service
 {
     public class CloudWatchLogger<T> : ICloudWatchLogger<T> where T : class
     {

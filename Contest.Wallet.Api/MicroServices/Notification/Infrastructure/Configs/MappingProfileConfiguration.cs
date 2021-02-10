@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Contest.Wallet.Api.Notification.Infrastructure.Configs
+namespace Consent.Api.Notification.Infrastructure.Configs
 {
     public class MappingProfileConfiguration : Profile
     {

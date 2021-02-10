@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Api.Contracts;
-using Contest.Wallet.Api.Infrastructure.HealthChecks;
+﻿using Consent.Api.Contracts;
+using Consent.Api.Infrastructure.HealthChecks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Contest.Wallet.Api.Infrastructure.Installers
+namespace Consent.Api.Infrastructure.Installers
 {
     internal class RegisterHealthChecks : IServiceRegistration
     {

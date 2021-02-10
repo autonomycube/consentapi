@@ -1,31 +1,31 @@
 ﻿using AutoMapper;
-using Contest.Wallet.Api.Utility.Services.Abstract;
+using Consent.Api.Auth.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 
-namespace Contest.Wallet.Api.Utility.API.v1
+namespace Consent.Api.Auth.API.v1
 {
     [Produces("application/json")]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/auth")]
     [ApiController]
-    public class FileUploadController : ControllerBase
+    public class AuthController : ControllerBase
     {
         #region Private Variables
 
-        private readonly IFileUploadService _testService;
-        private readonly ILogger<FileUploadController> _logger;
+        private readonly IUserService _testService;
+        private readonly ILogger<AuthController> _logger;
         private readonly IMapper _mapper;
 
         #endregion
 
         #region Constructor
 
-        public FileUploadController(IFileUploadService testService,
+        public AuthController(IUserService testService,
             IMapper mapper,
-            ILogger<FileUploadController> logger)
+            ILogger<AuthController> logger)
         {
             _testService = testService
                 ?? throw new ArgumentNullException(nameof(testService));

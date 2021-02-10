@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Contest.Wallet.Common.Repository.Mongo.Helpers
+namespace Consent.Common.Repository.Mongo.Helpers
 {
     public partial class DataSettings
     {

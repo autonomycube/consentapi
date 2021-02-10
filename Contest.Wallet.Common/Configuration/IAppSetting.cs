@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Contest.Wallet.Common.Configuration
+namespace Consent.Common.Configuration
 {
     public interface IAppSetting
     {

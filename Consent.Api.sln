@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contest.Wallet.Api", "Contest.Wallet.Api\Contest.Wallet.Api.csproj", "{209385E7-CAB0-462A-B60A-5886A8BAD52F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consent.Api", "Contest.Wallet.Api\Consent.Api.csproj", "{209385E7-CAB0-462A-B60A-5886A8BAD52F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{2C846DC5-8A47-43A1-A6C5-8F4DFE639C71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{A708BEA9-0F3F-46B0-B382-1249BB2512E0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contest.Wallet.Common", "Contest.Wallet.Common\Contest.Wallet.Common.csproj", "{0876AFE4-D5D2-4A1E-BE52-3CF2983F8983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consent.Common", "Contest.Wallet.Common\Consent.Common.csproj", "{0876AFE4-D5D2-4A1E-BE52-3CF2983F8983}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

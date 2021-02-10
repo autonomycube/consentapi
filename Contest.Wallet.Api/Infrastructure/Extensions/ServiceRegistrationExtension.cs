@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Api.Contracts;
+﻿using Consent.Api.Contracts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 
-namespace Contest.Wallet.Api.Infrastructure.Extensions
+namespace Consent.Api.Infrastructure.Extensions
 {
     public static class ServiceRegistrationExtension
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Utility.Services.Abstract
+namespace Consent.Api.Utility.Services.Abstract
 {
     public interface IFileUploadService
     {

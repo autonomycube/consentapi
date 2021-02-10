@@ -1,6 +1,6 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Models;
+﻿using Consent.Common.Repository.SQL.Models;
 
-namespace Contest.Wallet.Api.Payment.Data.Entities
+namespace Consent.Api.Payment.Data.Entities
 {
     public partial class TblPayments : EntityBase<string>
     {

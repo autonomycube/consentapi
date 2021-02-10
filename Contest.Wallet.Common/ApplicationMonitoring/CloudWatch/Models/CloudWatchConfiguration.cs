@@ -1,9 +1,9 @@
 ﻿using Amazon;
-using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Abstraction;
+using Consent.Common.ApplicationMonitoring.CloudWatch.Abstraction;
 using Microsoft.Extensions.Configuration;
 using System;
 
-namespace Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Models
+namespace Consent.Common.ApplicationMonitoring.CloudWatch.Models
 {
     public class CloudWatchConfiguration : ICloudWatchConfiguration
     {

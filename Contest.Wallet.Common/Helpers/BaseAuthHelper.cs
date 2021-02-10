@@ -1,11 +1,11 @@
-﻿using Contest.Wallet.Common.ApplicationMonitoring.Abstract;
-using Contest.Wallet.Common.Constants;
-using Contest.Wallet.Common.Helpers.Abstract;
+﻿using Consent.Common.ApplicationMonitoring.Abstract;
+using Consent.Common.Constants;
+using Consent.Common.Helpers.Abstract;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
 
-namespace Contest.Wallet.Common.Helpers
+namespace Consent.Common.Helpers
 {
     public class BaseAuthHelper : IBaseAuthHelper
     {

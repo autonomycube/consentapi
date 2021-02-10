@@ -1,4 +1,4 @@
-using Contest.Wallet.Api.Tenant.Data.DbContexts;
+using Consent.Api.Tenant.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Tenant.Data.Helpers
+namespace Consent.Api.Tenant.Data.Helpers
 {
     public static class DbMigrationHelpers
     {
@@ -51,7 +51,7 @@ namespace Contest.Wallet.Api.Tenant.Data.Helpers
         /// </summary>
         private static async Task EnsureSeedIssuerData(TenantDbContext testDbContext)
         {
-            if (!testDbContext.Tests.Any())
+            if (!testDbContext.Tenants.Any())
             {
             }
         }

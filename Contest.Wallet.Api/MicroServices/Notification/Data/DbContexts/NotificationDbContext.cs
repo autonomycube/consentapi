@@ -1,9 +1,9 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Abstract;
-using Contest.Wallet.Api.Notification.Data.Entities;
+﻿using Consent.Common.Repository.SQL.Abstract;
+using Consent.Api.Notification.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.Infrastructure;
 
-namespace Contest.Wallet.Api.Notification.Data.DbContexts
+namespace Consent.Api.Notification.Data.DbContexts
 {
     public class NotificationDbContext : DbContext, IDbContext
     {

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Contest.Wallet.Common.ApplicationMonitoring.Abstract;
-using Contest.Wallet.Api.Notification.Data.Repositories.Abstract;
-using Contest.Wallet.Api.Notification.Services.Abstract;
+using Consent.Common.ApplicationMonitoring.Abstract;
+using Consent.Api.Notification.Data.Repositories.Abstract;
+using Consent.Api.Notification.Services.Abstract;
 using System;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Notification.Services
+namespace Consent.Api.Notification.Services
 {
     public class SMSService : ISMSService
     {

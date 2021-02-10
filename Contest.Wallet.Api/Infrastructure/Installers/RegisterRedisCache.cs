@@ -1,9 +1,9 @@
-﻿using Contest.Wallet.Common.Cache.Distributed.RedisCache;
-using Contest.Wallet.Api.Contracts;
+﻿using Consent.Common.Cache.Distributed.RedisCache;
+using Consent.Api.Contracts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Api.Infrastructure.Installers
+namespace Consent.Api.Infrastructure.Installers
 {
     internal class RegisterRedisCache : IServiceRegistration
     {

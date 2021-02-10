@@ -1,8 +1,8 @@
-﻿using Contest.Wallet.Common.Repository.Helpers;
+﻿using Consent.Common.Repository.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Contest.Wallet.Common.Repository.Extensions
+namespace Consent.Common.Repository.Extensions
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class ListExtensions

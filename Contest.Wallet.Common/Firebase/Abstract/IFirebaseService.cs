@@ -1,7 +1,7 @@
-﻿using Contest.Wallet.Common.Firebase.Models;
+﻿using Consent.Common.Firebase.Models;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Firebase.Abstract
+namespace Consent.Common.Firebase.Abstract
 {
     public interface IFirebaseService
     {

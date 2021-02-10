@@ -1,9 +1,9 @@
-﻿using Contest.Wallet.Common.Cache.Abstract;
+﻿using Consent.Common.Cache.Abstract;
 using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Contest.Wallet.Common.Cache.Distributed.RedisCache
+namespace Consent.Common.Cache.Distributed.RedisCache
 {
     public static class Configuration
     {

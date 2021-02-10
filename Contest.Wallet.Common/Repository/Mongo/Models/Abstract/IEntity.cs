@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using System;
 
-namespace Contest.Wallet.Common.Repository.Mongo.Models.Abstract
+namespace Consent.Common.Repository.Mongo.Models.Abstract
 {
     public interface IEntity
     {

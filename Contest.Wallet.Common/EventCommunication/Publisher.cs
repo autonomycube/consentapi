@@ -1,11 +1,11 @@
-﻿using Contest.Wallet.Common.EventCommunication.Abstract;
+﻿using Consent.Common.EventCommunication.Abstract;
 using JustSaying.Messaging;
 using JustSaying.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.EventCommunication
+namespace Consent.Common.EventCommunication
 {
     public class Publisher : IPublisher
     {

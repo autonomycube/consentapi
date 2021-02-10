@@ -1,5 +1,5 @@
 ﻿
-namespace Contest.Wallet.Common.Constants
+namespace Consent.Common.Constants
 {
     internal class HttpContentMediaTypes
     {

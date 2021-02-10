@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Contest.Wallet.Api.Auth.Infrastructure.Configs
+namespace Consent.Api.Auth.Infrastructure.Configs
 {
     public class MappingProfileConfiguration : Profile
     {

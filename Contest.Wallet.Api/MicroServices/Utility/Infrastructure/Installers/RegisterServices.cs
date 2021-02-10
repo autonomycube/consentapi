@@ -1,12 +1,12 @@
-﻿using Contest.Wallet.Common.Data.UOW;
-using Contest.Wallet.Common.Data.UOW.Abstract;
-using Contest.Wallet.Api.Contracts;
-using Contest.Wallet.Api.Utility.Services;
-using Contest.Wallet.Api.Utility.Services.Abstract;
+﻿using Consent.Common.Data.UOW;
+using Consent.Common.Data.UOW.Abstract;
+using Consent.Api.Contracts;
+using Consent.Api.Utility.Services;
+using Consent.Api.Utility.Services.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Api.Utility.Infrastructure.Installers
+namespace Consent.Api.Utility.Infrastructure.Installers
 {
     public class RegisterServices : IServiceRegistration
     {

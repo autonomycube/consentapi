@@ -1,5 +1,5 @@
 ﻿
-namespace Contest.Wallet.Common.Data.Configuration
+namespace Consent.Common.Data.Configuration
 {
     public enum DatabaseProviderType
     {

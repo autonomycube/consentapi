@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Contest.Wallet.Common.Configuration.Options
+namespace Consent.Common.Configuration.Options
 {
     public class OptionsBase
     {

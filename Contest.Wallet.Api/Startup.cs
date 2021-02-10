@@ -1,11 +1,11 @@
 using AspNetCoreRateLimit;
 using AutoMapper;
 using AutoWrapper;
-using Contest.Wallet.Api.Infrastructure.Extensions;
-using Contest.Wallet.Api.Infrastructure.Helpers;
-using Contest.Wallet.Api.Infrastructure.Middlewares;
-using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Extensions;
-using Contest.Wallet.Common.ApplicationMonitoring.CloudWatch.Models;
+using Consent.Api.Infrastructure.Extensions;
+using Consent.Api.Infrastructure.Helpers;
+using Consent.Api.Infrastructure.Middlewares;
+using Consent.Common.ApplicationMonitoring.CloudWatch.Extensions;
+using Consent.Common.ApplicationMonitoring.CloudWatch.Models;
 using FluentValidation.AspNetCore;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
@@ -15,13 +15,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
-using AuthMappingProfileConfiguration = Contest.Wallet.Api.Auth.Infrastructure.Configs.MappingProfileConfiguration;
-using NotificationMappingProfileConfiguration = Contest.Wallet.Api.Notification.Infrastructure.Configs.MappingProfileConfiguration;
-using PaymentMappingProfileConfiguration = Contest.Wallet.Api.Payment.Infrastructure.Configs.MappingProfileConfiguration;
-using TenantMappingProfileConfiguration = Contest.Wallet.Api.Tenant.Infrastructure.Configs.MappingProfileConfiguration;
-using UtilityMappingProfileConfiguration = Contest.Wallet.Api.Utility.Infrastructure.Configs.MappingProfileConfiguration;
+using AuthMappingProfileConfiguration = Consent.Api.Auth.Infrastructure.Configs.MappingProfileConfiguration;
+using NotificationMappingProfileConfiguration = Consent.Api.Notification.Infrastructure.Configs.MappingProfileConfiguration;
+using PaymentMappingProfileConfiguration = Consent.Api.Payment.Infrastructure.Configs.MappingProfileConfiguration;
+using TenantMappingProfileConfiguration = Consent.Api.Tenant.Infrastructure.Configs.MappingProfileConfiguration;
+using UtilityMappingProfileConfiguration = Consent.Api.Utility.Infrastructure.Configs.MappingProfileConfiguration;
 
-namespace Contest.Wallet.Api
+namespace Consent.Api
 {
     public class Startup
     {
@@ -87,7 +87,7 @@ namespace Contest.Wallet.Api
             app.UseSwaggerUI(c =>
             {
                 c.OAuthClientId("all_swagger_ui");
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contest.Wallet.Api.Auth ASP.NET Core API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Consent.Api ASP.NET Core API v1");
             });
 
             //Enable HealthChecks and UI

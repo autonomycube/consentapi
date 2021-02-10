@@ -1,10 +1,10 @@
 ﻿using AspNetCoreRateLimit;
-using Contest.Wallet.Api.Contracts;
+using Consent.Api.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Api.Infrastructure.Installers
+namespace Consent.Api.Infrastructure.Installers
 {
     internal class RegisterRequestRateLimiter : IServiceRegistration
     {

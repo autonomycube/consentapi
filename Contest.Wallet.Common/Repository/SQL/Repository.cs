@@ -1,7 +1,7 @@
-﻿using Contest.Wallet.Common.Repository.Extensions;
-using Contest.Wallet.Common.Repository.Helpers;
-using Contest.Wallet.Common.Repository.SQL.Abstract;
-using Contest.Wallet.Common.Repository.SQL.Models;
+﻿using Consent.Common.Repository.Extensions;
+using Consent.Common.Repository.Helpers;
+using Consent.Common.Repository.SQL.Abstract;
+using Consent.Common.Repository.SQL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Repository.SQL
+namespace Consent.Common.Repository.SQL
 {
     public class Repository<TEntity, TEntityKey>
         : IRepository<TEntity, TEntityKey> where TEntity : EntityBase<TEntityKey>

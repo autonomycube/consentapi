@@ -1,7 +1,7 @@
 ﻿using NLog;
 using System;
 
-namespace Contest.Wallet.Common.ApplicationMonitoring.Abstract
+namespace Consent.Common.ApplicationMonitoring.Abstract
 {
     public interface ILogger<T> where T : class
     {

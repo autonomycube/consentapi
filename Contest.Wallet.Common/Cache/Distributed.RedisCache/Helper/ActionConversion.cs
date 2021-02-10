@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using System;
 
-namespace Contest.Wallet.Common.Cache.Distributed.RedisCache.Helper
+namespace Consent.Common.Cache.Distributed.RedisCache.Helper
 {
     internal static class ActionConversion
     {

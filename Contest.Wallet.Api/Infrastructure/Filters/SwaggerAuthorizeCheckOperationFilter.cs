@@ -4,7 +4,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Contest.Wallet.Api.Infrastructure.Filters
+namespace Consent.Api.Infrastructure.Filters
 {
     public class SwaggerAuthorizeCheckOperationFilter : IOperationFilter
     {

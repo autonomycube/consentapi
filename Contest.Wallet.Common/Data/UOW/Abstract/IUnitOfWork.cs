@@ -1,8 +1,8 @@
-﻿using Contest.Wallet.Common.Repository.SQL.Abstract;
+﻿using Consent.Common.Repository.SQL.Abstract;
 using System;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Common.Data.UOW.Abstract
+namespace Consent.Common.Data.UOW.Abstract
 {
     public interface IUnitOfWork<TDbContext> : IDisposable where TDbContext : IDbContext
     {

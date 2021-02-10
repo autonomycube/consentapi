@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Contest.Wallet.Api.Infrastructure.Filters
+namespace Consent.Api.Infrastructure.Filters
 {
     public class SwaggerModelDocumentFilter<T> : IDocumentFilter where T : class
     {

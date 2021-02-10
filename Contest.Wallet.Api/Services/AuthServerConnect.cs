@@ -1,11 +1,11 @@
-﻿using Contest.Wallet.Api.Contracts;
+﻿using Consent.Api.Contracts;
 using IdentityModel.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Services
+namespace Consent.Api.Services
 {
     public class AuthServerConnect : IAuthServerConnect
     {

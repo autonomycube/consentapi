@@ -1,4 +1,4 @@
-using Contest.Wallet.Api.Auth.Data.DbContexts;
+using Consent.Api.Auth.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Contest.Wallet.Api.Auth.Data.Helpers
+namespace Consent.Api.Auth.Data.Helpers
 {
     public static class DbMigrationHelpers
     {

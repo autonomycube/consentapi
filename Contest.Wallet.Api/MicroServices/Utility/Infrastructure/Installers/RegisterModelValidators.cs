@@ -1,10 +1,10 @@
-﻿using Contest.Wallet.Api.Contracts;
+﻿using Consent.Api.Contracts;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Contest.Wallet.Api.Utility.Infrastructure.Installers
+namespace Consent.Api.Utility.Infrastructure.Installers
 {
     internal class RegisterModelValidators : IServiceRegistration
     {

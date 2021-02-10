@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using Contest.Wallet.Api.Payment.Services.Abstract;
+using Consent.Api.Payment.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 
-namespace Contest.Wallet.Api.Payment.API.v1
+namespace Consent.Api.Payment.API.v1
 {
     [Produces("application/json")]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/payment")]
     [ApiController]
     public class PaymentController : ControllerBase
     {

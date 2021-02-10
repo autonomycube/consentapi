@@ -1,6 +1,6 @@
 ﻿using Amazon;
 
-namespace Contest.Wallet.Common.EventCommunication.Models
+namespace Consent.Common.EventCommunication.Models
 {
     public class AwsEventOptions
     {

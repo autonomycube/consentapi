@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Contest.Wallet.Common.Repository.Mongo.Attributes
+namespace Consent.Common.Repository.Mongo.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class BsonCollectionAttribute : Attribute
