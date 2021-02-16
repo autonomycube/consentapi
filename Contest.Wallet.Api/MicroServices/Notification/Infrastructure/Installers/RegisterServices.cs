@@ -14,7 +14,7 @@ namespace Consent.Api.Notification.Infrastructure.Installers
         public void RegisterAppServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IUnitOfWork<NotificationDbContext>, UnitOfWork<NotificationDbContext>>();
-            services.AddTransient<ISMSService, SMSService>();
+            services.AddTransient<ISmsService, SmsService>();
         }
     }
 }

@@ -3,7 +3,7 @@ using Consent.Common.EnityFramework.Entities;
 
 namespace Consent.Api.Notification.Data.Repositories.Abstract
 {
-    public interface ISmsRepository : IRepository<TblNotifySmsTemplate, string>
+    public interface IUserSubscriptionRepository : IRepository<TblNotifyUserSubscription, string>
     {
     }
 }

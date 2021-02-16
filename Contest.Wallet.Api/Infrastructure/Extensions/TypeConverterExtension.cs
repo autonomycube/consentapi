@@ -8,9 +8,6 @@ namespace Consent.Api.Infrastructure.Extensions
         public static DateTime ToDateTime(this string value)
             => DateTime.TryParse(value, out var result) ? result : default;
 
-        public static DateTime? ToNullableDateTime(this string value)
-              => !string.IsNullOrEmpty((value ?? "").Trim()) ? value.ToDateTime() : (DateTime?)null;
-
         public static short ToInt16(this string value)
             => short.TryParse(value, out var result) ? result : default;
 

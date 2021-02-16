@@ -8,7 +8,7 @@ namespace Consent.Api.Tenant.Data.DbContexts
 {
     public class TenantDbContext : DbContext, IDbContext
     {
-        public DbSet<TblTenants> Tenants { get; set; }
+        public DbSet<TblAuthTenants> Tenants { get; set; }
 
         public TenantDbContext(DbContextOptions<TenantDbContext> options) : base(options)
         {
@@ -33,8 +33,8 @@ namespace Consent.Api.Tenant.Data.DbContexts
 
         private void ConfigureIdentityContext(ModelBuilder builder)
         {
-            builder.Entity<TblTenants>().ToTable(TableConsts.IdentityTenants);
-            builder.Entity<TblTenantOnboardStatus>().ToTable(TableConsts.TenantOnboardStatus);
+            builder.Entity<TblAuthTenants>().ToTable(TableConsts.IdentityTenants);
+            builder.Entity<TblAuthTenantOnboardStatus>().ToTable(TableConsts.TenantOnboardStatus);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Consent.Api.Tenant.Services
 
         public async Task<TenantResponse> CreateTenant(CreateTenantRequest request)
         {
-            var entity = _mapper.Map<TblTenants>(request);
+            var entity = _mapper.Map<TblAuthTenants>(request);
             if (entity.EmployeesCount <= 20)
             {
                 entity.TenantType = TenantType.Startup;
@@ -81,7 +81,7 @@ namespace Consent.Api.Tenant.Services
                 throw new Exception($"Onboard Comments can't be created on Tenant {request.TenantId}.");
             }
 
-            var entity = _mapper.Map<TblTenantOnboardStatus>(request);
+            var entity = _mapper.Map<TblAuthTenantOnboardStatus>(request);
             await _tenantOnboardStatusRepository.Add(entity);
 
             tenant.TenantStatus = request.Status;

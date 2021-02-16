@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Consent.Api.Notification.API.v1.DTO.Request
+namespace Consent.Api.Notification.DTO.Request
 {
     public class CreateSmsOtpRequest
     {

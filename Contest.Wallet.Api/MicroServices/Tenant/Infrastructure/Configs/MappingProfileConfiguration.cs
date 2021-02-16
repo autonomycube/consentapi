@@ -11,12 +11,12 @@ namespace Consent.Api.Tenant.Infrastructure.Configs
         {
             // Mapping DTO to Models
             // request
-            CreateMap<CreateTenantRequest, TblTenants>();
-            CreateMap<CreateTenantOnboardCommentRequest, TblTenantOnboardStatus>();
+            CreateMap<CreateTenantRequest, TblAuthTenants>();
+            CreateMap<CreateTenantOnboardCommentRequest, TblAuthTenantOnboardStatus>();
 
             //response
-            CreateMap<TblTenants, TenantResponse>();
-            CreateMap<TblTenantOnboardStatus, TenantOnboardCommentResponse>();
+            CreateMap<TblAuthTenants, TenantResponse>();
+            CreateMap<TblAuthTenantOnboardStatus, TenantOnboardCommentResponse>();
         }
     }
 }

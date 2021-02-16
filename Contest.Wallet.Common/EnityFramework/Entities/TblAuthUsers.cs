@@ -4,9 +4,9 @@ using System;
 
 namespace Consent.Common.EnityFramework.Entities
 {
-    public class TblUsers : IdentityUser
+    public class TblAuthUsers : IdentityUser
     {
-        public TblUsers()
+        public TblAuthUsers()
         {
             Id = Guid.NewGuid().ToString();
         }

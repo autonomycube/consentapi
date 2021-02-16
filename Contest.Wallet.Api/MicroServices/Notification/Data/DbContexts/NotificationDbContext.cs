@@ -1,5 +1,6 @@
-﻿using Consent.Common.Repository.SQL.Abstract;
-using Consent.Api.Notification.Data.Entities;
+﻿using Consent.Common.EnityFramework.Constants;
+using Consent.Common.EnityFramework.Entities;
+using Consent.Common.Repository.SQL.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.Infrastructure;
 
@@ -7,7 +8,9 @@ namespace Consent.Api.Notification.Data.DbContexts
 {
     public class NotificationDbContext : DbContext, IDbContext
     {
-        public DbSet<TblSMS> Tests { get; set; }
+        public DbSet<TblNotifyEmailTemplate> EmailTemplates { get; set; }
+        public DbSet<TblNotifySmsTemplate> SmsTemplates { get; set; }
+        public DbSet<TblNotifyOtpTracker> OtpTrackers { get; set; }
 
         public NotificationDbContext(DbContextOptions<NotificationDbContext> options) : base(options)
         {
@@ -32,47 +35,9 @@ namespace Consent.Api.Notification.Data.DbContexts
 
         private void ConfigureIdentityContext(ModelBuilder builder)
         {
-            builder.Entity<TblSMS>(entity =>
-            {
-                entity.ToTable("tbl_test");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasMaxLength(55)
-                    .IsUnicode(false)
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Prop)
-                    .HasColumnName("prop")
-                    .IsRequired()
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.TenantId)
-                    .HasColumnName("tenant_id")
-                    .HasMaxLength(55)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CreatedBy)
-                    .IsRequired()
-                    .HasColumnName("created_by")
-                    .HasMaxLength(55)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnName("created_date")
-                    .HasColumnType("datetime(6)");
-
-                entity.Property(e => e.UpdatedBy)
-                    .IsRequired()
-                    .HasColumnName("updated_by")
-                    .HasMaxLength(55)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnName("updated_date")
-                    .HasColumnType("datetime(6)");
-            });
+            builder.Entity<TblNotifyEmailTemplate>().ToTable(TableConsts.NotifyEmailTemplate);
+            builder.Entity<TblNotifySmsTemplate>().ToTable(TableConsts.NotifySmsTemplate);
+            builder.Entity<TblNotifyOtpTracker>().ToTable(TableConsts.NotifyOtpTracker);
         }
     }
 }

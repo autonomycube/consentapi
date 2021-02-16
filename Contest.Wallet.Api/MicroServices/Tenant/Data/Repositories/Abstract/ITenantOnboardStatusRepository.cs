@@ -3,7 +3,7 @@ using Consent.Common.EnityFramework.Entities;
 
 namespace Consent.Api.Tenant.Data.Repositories.Abstract
 {
-    public interface ITenantOnboardStatusRepository : IRepository<TblTenantOnboardStatus, string>
+    public interface ITenantOnboardStatusRepository : IRepository<TblAuthTenantOnboardStatus, string>
     {
     }
 }

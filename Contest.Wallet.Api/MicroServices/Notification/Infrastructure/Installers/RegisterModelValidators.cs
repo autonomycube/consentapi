@@ -1,5 +1,5 @@
 ﻿using Consent.Api.Contracts;
-using Consent.Api.Notification.API.v1.DTO.Request;
+using Consent.Api.Notification.DTO.Request;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

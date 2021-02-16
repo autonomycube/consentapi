@@ -6,7 +6,7 @@ using Consent.Common.EnityFramework.Entities;
 namespace Consent.Api.Tenant.Data.Repositories
 {
     public class TenantRepository
-        : Repository<TblTenants, string>, ITenantRepository
+        : Repository<TblAuthTenants, string>, ITenantRepository
     {
         public TenantRepository(TenantDbContext context)
             : base(context)

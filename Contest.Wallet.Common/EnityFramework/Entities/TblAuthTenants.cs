@@ -3,9 +3,9 @@ using System;
 
 namespace Consent.Common.EnityFramework.Entities
 {
-    public class TblTenants : EntityBase<string>
+    public class TblAuthTenants : EntityBase<string>
     {
-        public TblTenants()
+        public TblAuthTenants()
         {
             Id = Guid.NewGuid().ToString();
             CreatedDate = DateTime.UtcNow;

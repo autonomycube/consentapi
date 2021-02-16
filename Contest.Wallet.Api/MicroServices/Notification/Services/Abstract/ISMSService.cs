@@ -1,11 +1,18 @@
-﻿using Consent.Api.Notification.API.v1.DTO.Request;
+﻿using Consent.Api.Notification.DTO.Request;
+using Consent.Api.Notification.DTO.Response;
+using System;
 using System.Threading.Tasks;
 
 namespace Consent.Api.Notification.Services.Abstract
 {
-    public interface ISMSService
+    public interface ISmsService
     {
-        Task<string> SendOTP(CreateSmsOtpRequest request);
-        Task<bool> VerifyOTP(VerifySmsOtpRequest request);
+        Task<CreateTmpSmsResponse> SendSingleTemplateSMS(CreateTmpSmsRequest smsRequest);
+        Task<bool> SendCustomSMS(CustomSmsRequest smsRequest);
+        Task<VerifyOtpResponse> VerifyOtp(VerifyOtpRequest otpRequest);
+        Task<bool> subscribeEndpointToTopic(SubscribeTopicRequest topicRequest);
+        Task<UnSubscribeTopicResponse> UnsubscribeEndpointToTopic(UnsubscribeTopicRequest unsubcribeRequest);
+        Task<DeleteTopicResponse> DeleteTopic(string tenantId);
+        Task<bool> PublishMessageToTopic(TopicMessageRequest messageRequest);
     }
 }

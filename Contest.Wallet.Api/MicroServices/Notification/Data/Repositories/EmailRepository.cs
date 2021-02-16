@@ -6,18 +6,18 @@ using Consent.Common.Repository.SQL;
 
 namespace Consent.Api.Notification.Data.Repositories
 {
-    public class SmsRepository :  Repository<TblNotifySmsTemplate, string>, ISmsRepository
+    public class EmailRepository :  Repository<TblNotifyEmailTemplate, string>, IEmailRepository
     {
         #region Private Variables
 
-        private readonly NotificationDbContext _context;       
+        private readonly NotificationDbContext _context;
         private readonly IUnitOfWork<NotificationDbContext> _uow;
 
         #endregion
 
         #region Constructors
 
-        public SmsRepository(NotificationDbContext context, IUnitOfWork<NotificationDbContext> uow) : base(context)
+        public EmailRepository(NotificationDbContext context, IUnitOfWork<NotificationDbContext> uow) : base(context)
         {
             _context = context;
             _uow = uow;

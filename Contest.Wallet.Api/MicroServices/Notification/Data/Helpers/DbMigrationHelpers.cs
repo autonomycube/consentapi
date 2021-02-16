@@ -51,9 +51,6 @@ namespace Consent.Api.Notification.Data.Helpers
         /// </summary>
         private static async Task EnsureSeedIssuerData(NotificationDbContext testDbContext)
         {
-            if (!testDbContext.Tests.Any())
-            {
-            }
         }
     }
 }

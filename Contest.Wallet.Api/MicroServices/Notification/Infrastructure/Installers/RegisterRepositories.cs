@@ -11,7 +11,9 @@ namespace Consent.Api.Notification.Infrastructure.Installers
         public void RegisterAppServices(IServiceCollection services, IConfiguration config)
         {
             //Register Interface Mappings for Repositories
-            services.AddTransient<ISMSRepository, SMSRepository>();
+            services.AddTransient<IEmailRepository, EmailRepository>();
+            services.AddTransient<IOtpTrackerRepository, OtpTrackerRepository>();
+            services.AddTransient<ISmsRepository, SmsRepository>();
         }
     }
 }
