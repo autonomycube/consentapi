@@ -12,6 +12,7 @@ namespace Consent.Api.Tenant.Infrastructure.Installers
         {
             //Register Interface Mappings for Repositories
             services.AddTransient<ITenantRepository, TenantRepository>();
+            services.AddTransient<ITenantOnboardStatusRepository, TenantOnboardStatusRepository>();
         }
     }
 }

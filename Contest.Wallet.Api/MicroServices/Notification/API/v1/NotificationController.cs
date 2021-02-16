@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using AutoWrapper.Extensions;
+using AutoWrapper.Wrappers;
+using Consent.Api.Notification.API.v1.DTO.Request;
 using Consent.Api.Notification.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,7 +18,8 @@ namespace Consent.Api.Notification.API.v1
     {
         #region Private Variables
 
-        private readonly ISMSService _testService;
+        private readonly ISMSService _smsService;
+        private readonly IEmailService _emailService;
         private readonly ILogger<NotificationController> _logger;
         private readonly IMapper _mapper;
 
@@ -23,12 +27,15 @@ namespace Consent.Api.Notification.API.v1
 
         #region Constructor
 
-        public NotificationController(ISMSService testService,
+        public NotificationController(ISMSService smsService,
+            IEmailService emailService,
             IMapper mapper,
             ILogger<NotificationController> logger)
         {
-            _testService = testService
-                ?? throw new ArgumentNullException(nameof(testService));
+            _smsService = smsService
+                ?? throw new ArgumentNullException(nameof(smsService));
+            _emailService = emailService
+                ?? throw new ArgumentNullException(nameof(emailService));
             _mapper = mapper
                 ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger
@@ -37,18 +44,78 @@ namespace Consent.Api.Notification.API.v1
 
         #endregion
 
-        #region CRUD - R
+        #region CRUD - C
 
         /// <summary>
-        /// Test Method
+        /// Send OTP to Mobilenumber
         /// </summary>
-        /// <returns>Returns string array</returns>
-        /// <response code="200">Returns string array</response>
-        [HttpGet]
-        [ProducesResponseType(typeof(string[]), Status200OK)]
-        public async Task<string[]> Get()
+        /// <param name="request">sms otp request parameters</param>
+        /// <returns></returns>
+        [HttpPost("sms/sendotp")]
+        public async Task<ApiResponse> SendOTP([FromBody] CreateSmsOtpRequest request)
         {
-            return await _testService.Get();
+            if (ModelState.IsValid)
+            {
+                throw new ApiException(ModelState.AllErrors());
+            }
+
+            try
+            {
+                var result = await _smsService.SendOTP(request);
+                return new ApiResponse("Otp sent successfully.", result, Status200OK);
+            }
+            catch (Exception ex)
+            {
+                throw new ApiException(ex);
+            }
+        }
+
+        /// <summary>
+        /// Verifies OTP
+        /// </summary>
+        /// <param name="request">verify otp request parameters</param>
+        /// <returns></returns>
+        [HttpPost("sms/verifyotp")]
+        public async Task<ApiResponse> VerifyOTP([FromBody] VerifySmsOtpRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                throw new ApiException(ModelState.AllErrors());
+            }
+
+            try
+            {
+                var result = await _smsService.VerifyOTP(request);
+                return new ApiResponse("Otp verified successfully.", result, Status200OK);
+            }
+            catch (Exception ex)
+            {
+                throw new ApiException(ex);
+            }
+        }
+
+        /// <summary>
+        /// Send Email
+        /// </summary>
+        /// <param name="request">sms otp request parameters</param>
+        /// <returns></returns>
+        [HttpPost("email/send")]
+        public async Task<ApiResponse> SendEmail([FromBody] CreateEmailRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                throw new ApiException(ModelState.AllErrors());
+            }
+
+            try
+            {
+                var result = await _emailService.SendEmail(request);
+                return new ApiResponse("Email sent successfully.", result, Status200OK);
+            }
+            catch (Exception ex)
+            {
+                throw new ApiException(ex);
+            }
         }
 
         #endregion

@@ -5,10 +5,10 @@ using Consent.Common.EnityFramework.Entities;
 
 namespace Consent.Api.Tenant.Data.Repositories
 {
-    public class TenantRepository
-        : Repository<TblTenants, string>, ITenantRepository
+    public class TenantOnboardStatusRepository
+        : Repository<TblTenantOnboardStatus, string>, ITenantOnboardStatusRepository
     {
-        public TenantRepository(TenantDbContext context)
+        public TenantOnboardStatusRepository(TenantDbContext context)
             : base(context)
         {
         }

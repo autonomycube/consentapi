@@ -15,7 +15,7 @@ namespace Consent.Common.Repository.SQL.Models.Abstract
         /// <summary>
         /// Entity created on
         /// </summary>
-        DateTime CreatedDate { get; set; }
+        DateTime? CreatedDate { get; set; }
         /// <summary>
         /// Entity updated by
         /// </summary>
@@ -23,6 +23,6 @@ namespace Consent.Common.Repository.SQL.Models.Abstract
         /// <summary>
         /// Entity updated on
         /// </summary>
-        DateTime UpdatedDate { get; set; }
+        DateTime? UpdatedDate { get; set; }
     }
 }

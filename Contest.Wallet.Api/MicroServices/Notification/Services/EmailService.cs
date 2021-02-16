@@ -8,24 +8,20 @@ using Consent.Api.Notification.API.v1.DTO.Request;
 
 namespace Consent.Api.Notification.Services
 {
-    public class SMSService : ISMSService
+    public class EmailService : IEmailService
     {
         #region Private Variables
 
-        private readonly ISMSRepository _testRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger<SMSService> _logger;
+        private readonly ILogger<EmailService> _logger;
 
         #endregion
 
         #region Constructor
 
-        public SMSService(ISMSRepository testRepository,
-            IMapper mapper,
-            ILogger<SMSService> logger)
+        public EmailService(IMapper mapper,
+            ILogger<EmailService> logger)
         {
-            _testRepository = testRepository
-                ?? throw new ArgumentNullException(nameof(testRepository));
             _mapper = mapper
                 ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger
@@ -36,12 +32,7 @@ namespace Consent.Api.Notification.Services
 
         #region CRUD - C
 
-        public async Task<string> SendOTP(CreateSmsOtpRequest request)
-        {
-            return await Task.FromResult(string.Empty);
-        }
-
-        public async Task<bool> VerifyOTP(VerifySmsOtpRequest request)
+        public async Task<bool> SendEmail(CreateEmailRequest request)
         {
             return await Task.FromResult(true);
         }

@@ -6,7 +6,7 @@
         public string Contact { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
-        public short EmployeesCount { get; set; }
+        public int EmployeesCount { get; set; }
         public string CIN { get; set; }
     }
 }

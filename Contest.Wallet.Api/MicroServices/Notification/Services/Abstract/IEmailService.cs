@@ -3,9 +3,8 @@ using System.Threading.Tasks;
 
 namespace Consent.Api.Notification.Services.Abstract
 {
-    public interface ISMSService
+    public interface IEmailService
     {
-        Task<string> SendOTP(CreateSmsOtpRequest request);
-        Task<bool> VerifyOTP(VerifySmsOtpRequest request);
+        Task<bool> SendEmail(CreateEmailRequest request);
     }
 }

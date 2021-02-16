@@ -45,10 +45,10 @@
     <Folder Include="Logs\" />
     <Folder Include="Logs\Error\" />
     <Folder Include="Logs\Info\" />
-    <Folder Include="MicroServices\Notification\DTO\Request\" />
     <Folder Include="MicroServices\Notification\DTO\Response\" />
     <Folder Include="MicroServices\Payment\DTO\Request\" />
     <Folder Include="MicroServices\Payment\DTO\Response\" />
+    <Folder Include="MicroServices\Tenant\Data\Entities\" />
     <Folder Include="MicroServices\Utility\DTO\Request\" />
     <Folder Include="MicroServices\Utility\DTO\Response\" />
   </ItemGroup>

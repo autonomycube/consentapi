@@ -14,7 +14,7 @@ namespace Consent.Api.Infrastructure.Helpers
     public static class StartupHelpers
     {
         /// <summary>
-        /// Register DbContext for Blue Number Global Issuer
+        /// Register DbContext for Consent
         /// Configure the connection strings in AppSettings.json
         /// </summary>
         /// <param name="services"></param>
