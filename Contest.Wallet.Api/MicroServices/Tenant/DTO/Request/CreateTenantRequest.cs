@@ -19,6 +19,8 @@ namespace Consent.Api.Tenant.Services.DTO.Request
         {
             RuleFor(o => o.CIN).NotNull().NotEmpty();
             RuleFor(o => o.Phone).NotNull().NotEmpty();
+            RuleFor(o => o.Email).NotNull().NotEmpty()
+                .EmailAddress().WithMessage("Email is invalid");
             RuleFor(o => o.EmployeesCount).NotNull();
         }
     }

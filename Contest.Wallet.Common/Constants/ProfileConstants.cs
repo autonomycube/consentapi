@@ -3,8 +3,7 @@ namespace Consent.Common.Constants
 {
     public class ProfileConstants
     {
-        public const string BlueNumber = "BlueNumber";
+        public const string UserId = "UserId";
         public const string TenantId = "TenantId";
-        public const string Issuer = "Issuer";
     }
 }

@@ -4,6 +4,7 @@ using Consent.Common.Helpers.Abstract;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
+using Consent.Common.EnityFramework.Constants;
 
 namespace Consent.Common.Helpers
 {
@@ -31,19 +32,16 @@ namespace Consent.Common.Helpers
 
         #region Public Methods
 
-        public string GetBlueNumber()
+        public string GetUserId()
         {
-            return GetData(ProfileConstants.BlueNumber);
+            //return GetData(ProfileConstants.UserId);
+            return ConsentConsts.UserId;
         }
 
         public string GetTenantId()
         {
-            return GetData(ProfileConstants.TenantId);
-        }
-
-        public string GetIssuer()
-        {
-            return GetData(ProfileConstants.Issuer);
+            //return GetData(ProfileConstants.TenantId);
+            return ConsentConsts.TenantId;
         }
 
         #endregion

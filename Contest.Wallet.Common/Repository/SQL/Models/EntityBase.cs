@@ -9,14 +9,10 @@ namespace Consent.Common.Repository.SQL.Models
     {
         [Key]
         [Required]
-        public TEntityKey Id { get; set; }
-
-        public string CreatedBy { get; set; }
-
-        public DateTime? CreatedDate { get; set; }
-
-        public string UpdatedBy { get; set; }
-
-        public DateTime? UpdatedDate { get; set; }
+        public virtual TEntityKey Id { get; set; }
+        public virtual string CreatedBy { get; set; }
+        public virtual DateTime? CreatedDate { get; set; }
+        public virtual string UpdatedBy { get; set; }
+        public virtual DateTime? UpdatedDate { get; set; }
     }
 }

@@ -8,6 +8,8 @@ using Consent.Api.Infrastructure.Helpers;
 using Consent.Api.Infrastructure.Middlewares;
 using Consent.Common.ApplicationMonitoring.CloudWatch.Extensions;
 using Consent.Common.ApplicationMonitoring.CloudWatch.Models;
+using Consent.Common.EnityFramework.DbContexts;
+using Consent.Common.EnityFramework.Entities.Identity;
 using FluentValidation.AspNetCore;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
@@ -51,6 +53,9 @@ namespace Consent.Api
 
             // Register DB Contexts
             services.AddDbContexts(Configuration);
+
+            // Register 
+            services.AddAuthenticationServices<ConsentIdentityDbContext, UserIdentity, UserIdentityRole>(Configuration);
 
             //Register Automapper
             services.AddAutoMapper(typeof(AuthMappingProfileConfiguration));
@@ -108,7 +113,7 @@ namespace Consent.Api
 
             //Enable AutoWrapper.Core
             //More info see: https://github.com/proudmonkey/AutoWrapper
-            app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions { IsDebug = true, UseApiProblemDetailsException = true });
+            app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions { IsDebug = true });
 
             //Enable AspNetCoreRateLimit
             app.UseIpRateLimiting();

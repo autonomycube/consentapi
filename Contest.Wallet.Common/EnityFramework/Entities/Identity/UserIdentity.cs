@@ -1,12 +1,11 @@
-﻿using Consent.Common.Repository.SQL.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 
-namespace Consent.Common.EnityFramework.Entities
+namespace Consent.Common.EnityFramework.Entities.Identity
 {
-    public class TblAuthUsers : IdentityUser
+    public class UserIdentity : IdentityUser
     {
-        public TblAuthUsers()
+        public UserIdentity()
         {
             Id = Guid.NewGuid().ToString();
         }
@@ -24,5 +23,9 @@ namespace Consent.Common.EnityFramework.Entities
         public virtual string Gender { get; set; }
         public virtual bool? IsActive { get; set; }
         public virtual string TenantId { get; set; }
+        public virtual string CreatedBy { get; set; }
+        public virtual DateTime? CreatedDate { get; set; }
+        public virtual string UpdatedBy { get; set; }
+        public virtual DateTime? UpdatedDate { get; set; }
     }
 }

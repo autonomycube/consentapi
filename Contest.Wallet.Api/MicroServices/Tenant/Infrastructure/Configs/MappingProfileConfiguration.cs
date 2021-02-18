@@ -2,6 +2,7 @@
 using Consent.Api.Tenant.Services.DTO.Request;
 using Consent.Api.Tenant.Services.DTO.Response;
 using Consent.Common.EnityFramework.Entities;
+using Consent.Common.EnityFramework.Entities.Identity;
 
 namespace Consent.Api.Tenant.Infrastructure.Configs
 {
@@ -13,10 +14,13 @@ namespace Consent.Api.Tenant.Infrastructure.Configs
             // request
             CreateMap<CreateTenantRequest, TblAuthTenants>();
             CreateMap<CreateTenantOnboardCommentRequest, TblAuthTenantOnboardStatus>();
-
-            //response
+            
+            // response
             CreateMap<TblAuthTenants, TenantResponse>();
             CreateMap<TblAuthTenantOnboardStatus, TenantOnboardCommentResponse>();
+
+            // others
+            CreateMap<TblAuthTenants, UserIdentity>();
         }
     }
 }

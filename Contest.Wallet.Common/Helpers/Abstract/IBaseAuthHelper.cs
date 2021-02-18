@@ -3,8 +3,7 @@ namespace Consent.Common.Helpers.Abstract
 {
     public interface IBaseAuthHelper
     {
-        string GetBlueNumber();
+        string GetUserId();
         string GetTenantId();
-        string GetIssuer();
     }
 }

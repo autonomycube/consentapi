@@ -33,7 +33,7 @@ namespace Consent.Api.Tenant.Data.DbContexts
 
         private void ConfigureIdentityContext(ModelBuilder builder)
         {
-            builder.Entity<TblAuthTenants>().ToTable(TableConsts.IdentityTenants);
+            builder.Entity<TblAuthTenants>().ToTable(TableConsts.IdentityUserTenants);
             builder.Entity<TblAuthTenantOnboardStatus>().ToTable(TableConsts.TenantOnboardStatus);
         }
     }

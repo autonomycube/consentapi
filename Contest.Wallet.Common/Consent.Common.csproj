@@ -16,6 +16,9 @@
     <PackageReference Include="MongoDB.Bson" Version="2.10.3" />
     <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.10.3" />
+    <PackageReference Include="Skoruba.AuditLogging.EntityFramework" Version="1.0.0-beta7" />
+    <PackageReference Include="Skoruba.IdentityServer4.Admin.EntityFramework" Version="1.0.0-rc1" />
+    <PackageReference Include="Skoruba.IdentityServer4.Admin.EntityFramework.Identity" Version="1.0.0-rc1" />
     <PackageReference Include="StructureMap" Version="4.7.1" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.23" />
     <PackageReference Include="NLog" Version="4.6.8" />

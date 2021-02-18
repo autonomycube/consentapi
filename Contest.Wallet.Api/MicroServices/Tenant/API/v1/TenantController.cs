@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
+using AutoWrapper.Extensions;
 using AutoWrapper.Wrappers;
 using Consent.Api.Tenant.Services.Abstract;
-using Consent.Api.Tenant.Services.DTO.Response;
 using Consent.Api.Tenant.Services.DTO.Request;
+using Consent.Api.Tenant.Services.DTO.Response;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using static Microsoft.AspNetCore.Http.StatusCodes;
-using AutoWrapper.Extensions;
-using System.Collections.Generic;
+
 
 namespace Consent.Api.Tenant.API.v1
 {
@@ -23,7 +23,7 @@ namespace Consent.Api.Tenant.API.v1
         private readonly ITenantService _tenantService;
         private readonly ILogger<TenantController> _logger;
         private readonly IMapper _mapper;
-
+        
         #endregion
 
         #region Constructor
@@ -186,7 +186,7 @@ namespace Consent.Api.Tenant.API.v1
         ///     }
         /// 
         /// </remarks>
-        /// <param name="request">Tenant Details</param>
+        /// <param name="tenantId">Tenant Id</param>
         /// <returns>Returns Tenant Details</returns>
         /// <response code="200">Returns Tenant Details</response>
         [HttpGet("onboard/comment/{tenantId}")]
