@@ -1,0 +1,23 @@
+{
+  "NotificationSeedData": {
+    "SmsTemplates": [
+      {
+        "Context": "Login",
+        "SubContext": "Send OTP",
+        "SmsContent": "{{Otp}} is the OTP for mobile number verification from BlueNumber login on {{Date}}.  Pls do not share it with anyone.",
+        "ArabicContent": null,
+        "HasPlaceholder": true,
+        "IsDeleted": false
+      },
+      {
+        "Context": "Registration",
+        "SubContext": "Send OTP",
+        "SmsContent": "{{Otp}} is the OTP for mobile number verification from BlueNumber registration on {{Date}}.  Pls do not share it with anyone.",
+        "ArabicContent": null,
+        "HasPlaceholder": true,
+        "IsDeleted": false
+      }
+    ],
+    "EmailTemplates": []
+  }
+}

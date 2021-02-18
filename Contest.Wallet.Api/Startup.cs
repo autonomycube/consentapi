@@ -1,6 +1,8 @@
 using AspNetCoreRateLimit;
 using AutoMapper;
 using AutoWrapper;
+using Consent.Api.Data.Configuration;
+using Consent.Api.Infrastructure.Configs;
 using Consent.Api.Infrastructure.Extensions;
 using Consent.Api.Infrastructure.Helpers;
 using Consent.Api.Infrastructure.Middlewares;
@@ -62,6 +64,10 @@ namespace Consent.Api
 
             // Add HttpContext Accessor Middleware
             services.AddHttpContextAccessor();
+
+            // configure strongly typed settings objects  
+            services.Configure<AppConfig>(Configuration.GetSection(nameof(AppConfig)));
+            services.Configure<NotificationSeedData>(Configuration.GetSection(nameof(NotificationSeedData)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

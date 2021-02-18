@@ -24,7 +24,8 @@ namespace Consent.Common.EnityFramework.Entities
         public virtual string Email { get; set; }
         public virtual string Phone { get; set; }
         public virtual int EmployeesCount { get; set; }
-        public virtual bool IsActive { get; set; }
+        public virtual bool? IsActive { get; set; }
+        public virtual string TenantId { get; set; }
     }
 
     public enum TenantType

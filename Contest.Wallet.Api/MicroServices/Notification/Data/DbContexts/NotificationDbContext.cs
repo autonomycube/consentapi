@@ -11,6 +11,8 @@ namespace Consent.Api.Notification.Data.DbContexts
         public DbSet<TblNotifyEmailTemplate> EmailTemplates { get; set; }
         public DbSet<TblNotifySmsTemplate> SmsTemplates { get; set; }
         public DbSet<TblNotifyOtpTracker> OtpTrackers { get; set; }
+        public DbSet<TblNotifyTopic> Topics { get; set; }
+        public DbSet<TblNotifyUserSubscription> UserSubscriptions { get; set; }
 
         public NotificationDbContext(DbContextOptions<NotificationDbContext> options) : base(options)
         {
@@ -38,6 +40,8 @@ namespace Consent.Api.Notification.Data.DbContexts
             builder.Entity<TblNotifyEmailTemplate>().ToTable(TableConsts.NotifyEmailTemplate);
             builder.Entity<TblNotifySmsTemplate>().ToTable(TableConsts.NotifySmsTemplate);
             builder.Entity<TblNotifyOtpTracker>().ToTable(TableConsts.NotifyOtpTracker);
+            builder.Entity<TblNotifyTopic>().ToTable(TableConsts.NotifyTopic);
+            builder.Entity<TblNotifyUserSubscription>().ToTable(TableConsts.NotifyUserSubscription);
         }
     }
 }

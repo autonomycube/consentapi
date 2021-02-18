@@ -49,11 +49,6 @@ namespace Consent.Api.Payment.Data.DbContexts
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TenantId)
-                    .HasColumnName("tenant_id")
-                    .HasMaxLength(55)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
                     .HasColumnName("created_by")

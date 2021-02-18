@@ -1,6 +1,6 @@
+using Consent.Api.Data.Helpers;
 using Consent.Common.ApplicationMonitoring.Abstract;
 using Consent.Common.ApplicationMonitoring.Extensions;
-using Consent.Api.Auth.Data.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -64,6 +64,7 @@ namespace Consent.Api
                     var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
                     var settings = env == null ? "appsettings.json" : $"appsettings.{env}.json";
                     config.AddJsonFile(settings, optional: true, reloadOnChange: true);
+                    config.AddJsonFile("notificationdata.json", optional: true, reloadOnChange: true);
                 }).UseCloudWatchLog();
     }
 }

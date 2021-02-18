@@ -54,7 +54,6 @@
     <Folder Include="MicroServices\Payment\DTO\Response\" />
     <Folder Include="MicroServices\Tenant\Data\Entities\" />
     <Folder Include="MicroServices\Utility\DTO\Request\" />
-    <Folder Include="MicroServices\Utility\DTO\Response\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -218,7 +218,7 @@ namespace Consent.Api.Notification.Services
                 if (response.Status)
                 {
                     //soft delete user subscription from db
-                    userSubscription.IsDeleted = true;
+                    userSubscription.IsActive = false;
                     await _subscriptionRepository.Update(userSubscription);
                 }
 
@@ -248,7 +248,7 @@ namespace Consent.Api.Notification.Services
                 deleteResponse.DeleteStatus = await _awsService.DeleteTopic(topic.Arn);
                 if (deleteResponse.DeleteStatus)
                 {
-                    topic.IsDeleted = true;
+                    topic.IsActive = false;
                     await _topicRepository.Update(topic);
                 }
 
@@ -325,7 +325,7 @@ namespace Consent.Api.Notification.Services
                 TenantId = tenantId,
                 Name = topicName,
                 Arn = topicArn,
-                IsDeleted = false,
+                IsActive = true,
                 //change audit trail later.
                 CreatedBy = Guid.NewGuid().ToString(),
                 CreatedDate = DateTime.Now
@@ -341,8 +341,7 @@ namespace Consent.Api.Notification.Services
                 TopicId = topicId,
                 UserEndpoint = endpoint,
                 SubscriptionArn = subscriptonARN,
-                IsDeleted = false,
-                //change audit trail later.
+                IsActive = true,
                 CreatedBy = Guid.NewGuid().ToString(),
                 CreatedDate = DateTime.Now
             };

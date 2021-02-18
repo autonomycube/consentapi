@@ -10,12 +10,46 @@ namespace Consent.Common.S3Bucket
 {
     public class S3BucketService : IS3BucketService
     {
+        #region Private Variables
+
         private readonly AmazonS3Client _amazonS3;
+
+        #endregion
+
+        #region Constructor
 
         public S3BucketService(AmazonS3Client amazonS3)
         {
             _amazonS3 = amazonS3
                 ?? throw new ArgumentNullException(nameof(amazonS3));
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public async Task<bool> DeleteS3key(string S3Key, string bucketName)
+        {
+            var s3DeleteObjRequest = new DeleteObjectRequest();
+            s3DeleteObjRequest.BucketName = bucketName;
+            s3DeleteObjRequest.Key = S3Key;
+            try
+            {
+                var response = await _amazonS3.DeleteObjectAsync(s3DeleteObjRequest);
+
+                if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return true;
+                }
+                else
+                {
+                    throw new Exception($"Failed to delete file {S3Key} from bucket {bucketName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Unable to Delete Key {0}", S3Key));
+            }
         }
 
         public string GetS3FileUrl(string fileName, string bucketName)
@@ -92,5 +126,7 @@ namespace Consent.Common.S3Bucket
                 throw ex;
             }
         }
+
+        #endregion
     }
 }

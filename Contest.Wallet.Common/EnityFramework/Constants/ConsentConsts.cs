@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Consent.Common.EnityFramework.Constants
+﻿namespace Consent.Common.EnityFramework.Constants
 {
     public static class ConsentConsts
     {
-        public static Guid TenantId = new Guid("00000000-0000-0000-0000-000000000001");
+        public static string TenantId = "00000000-0000-0000-0000-000000000001";
     }
 }

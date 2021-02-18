@@ -10,9 +10,10 @@ namespace Consent.Common.EnityFramework.Entities
             TblNotfyUsersubscription = new HashSet<TblNotifyUserSubscription>();
         }
 
-        public string Name { get; set; }
-        public string Arn { get; set; }
-        public bool IsDeleted { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Arn { get; set; }
+        public virtual bool? IsActive { get; set; }
+        public virtual string TenantId { get; set; }
 
         public virtual ICollection<TblNotifyUserSubscription> TblNotfyUsersubscription { get; set; }
 

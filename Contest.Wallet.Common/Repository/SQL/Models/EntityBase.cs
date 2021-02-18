@@ -11,8 +11,6 @@ namespace Consent.Common.Repository.SQL.Models
         [Required]
         public TEntityKey Id { get; set; }
 
-        public TEntityKey TenantId { get; set; }
-
         public string CreatedBy { get; set; }
 
         public DateTime? CreatedDate { get; set; }

@@ -23,5 +23,6 @@ namespace Consent.Common.EnityFramework.Entities
         public virtual string Zip { get; set; }
         public virtual string Gender { get; set; }
         public virtual bool? IsActive { get; set; }
+        public virtual string TenantId { get; set; }
     }
 }

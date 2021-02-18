@@ -13,5 +13,6 @@ namespace Consent.Common.EnityFramework.Entities
         }
 
         public virtual string Comment { get; set; }
+        public virtual string TenantId { get; set; }
     }
 }
