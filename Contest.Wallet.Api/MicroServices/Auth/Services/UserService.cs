@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using Consent.Common.ApplicationMonitoring.Abstract;
 using Consent.Api.Auth.Data.Repositories.Abstract;
 using Consent.Api.Auth.Services.Abstract;
+using Consent.Common.EnityFramework.Entities.Identity;
 using System;
 using System.Threading.Tasks;
 
@@ -11,36 +10,31 @@ namespace Consent.Api.Auth.Services
     {
         #region Private Variables
 
-        private readonly IUserRepository _testRepository;
-        private readonly IMapper _mapper;
-        private readonly ILogger<UserService> _logger;
+        private readonly IUserRepository _userRepository;
 
         #endregion
 
         #region Constructor
 
-        public UserService(IUserRepository testRepository,
-            IMapper mapper,
-            ILogger<UserService> logger)
+        public UserService(IUserRepository userRepository)
         {
-            _testRepository = testRepository
-                ?? throw new ArgumentNullException(nameof(testRepository));
-            _mapper = mapper
-                ?? throw new ArgumentNullException(nameof(mapper));
-            _logger = logger
-                ?? throw new ArgumentNullException(nameof(logger));
+            _userRepository=userRepository;
         }
 
         #endregion
 
-        #region CRUD - R
+        #region Public Methods
 
-        public async Task<string[]> Get()
+        public UserIdentity GetById(string id)
         {
-            return await Task.FromResult(new string[] { "Test Method" });
+           return  _userRepository.GetById(new Guid(id));
+        }
+
+        public async Task Update(UserIdentity entity)
+        {
+            await _userRepository.Update(entity);
         }
 
         #endregion
-
     }
 }

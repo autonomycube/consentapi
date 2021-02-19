@@ -10,7 +10,7 @@ namespace Consent.Api.Notification.Services.Abstract
         Task<CreateTmpSmsResponse> SendSingleTemplateSMS(CreateTmpSmsRequest smsRequest);
         Task<bool> SendCustomSMS(CustomSmsRequest smsRequest);
         Task<VerifyOtpResponse> VerifyOtp(VerifyOtpRequest otpRequest);
-        Task<bool> subscribeEndpointToTopic(SubscribeTopicRequest topicRequest);
+        Task<bool> SubscribeEndpointToTopic(SubscribeTopicRequest topicRequest);
         Task<UnSubscribeTopicResponse> UnsubscribeEndpointToTopic(UnsubscribeTopicRequest unsubcribeRequest);
         Task<DeleteTopicResponse> DeleteTopic(string tenantId);
         Task<bool> PublishMessageToTopic(TopicMessageRequest messageRequest);

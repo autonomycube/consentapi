@@ -14,6 +14,8 @@ namespace Consent.Api.Notification.Infrastructure.Installers
             services.AddTransient<IEmailRepository, EmailRepository>();
             services.AddTransient<IOtpTrackerRepository, OtpTrackerRepository>();
             services.AddTransient<ISmsRepository, SmsRepository>();
+            services.AddTransient<ITopicRepository, TopicRepository>();
+            services.AddTransient<IUserSubscriptionRepository, UserSubscriptionRepository>();
         }
     }
 }

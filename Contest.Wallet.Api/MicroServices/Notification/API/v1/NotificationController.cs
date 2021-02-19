@@ -88,31 +88,31 @@ namespace Consent.Api.Notification.API.v1
                 throw new ApiException(ModelState.AllErrors());
         }
 
-        /// <summary>
-        /// Verifies the otp send via sms
-        /// </summary>
-        /// <param name="otpRequest">otp verification parameters</param>
-        /// <returns></returns>
-        [HttpPost("sms/verifyotp")]
-        public async Task<ApiResponse> VerifyOTP([FromBody] VerifyOtpRequest otpRequest)
-        {
-            if (ModelState.IsValid)
-            {
-                //call service
-                var result = await _smsService.VerifyOtp(otpRequest);
-                if (result.IsValid)
-                    return new ApiResponse("Otp successfully verified.", result, Status200OK);
-                else
-                {
-                    if (result.IsError)
-                        throw new ApiException("Internal server Error.", Status500InternalServerError);
-                    else
-                        throw new ApiException("Invalid otp.", Status400BadRequest);
-                }
-            }
-            else
-                throw new ApiException(ModelState.AllErrors());
-        }
+        ///// <summary>
+        ///// Verifies the otp send via sms
+        ///// </summary>
+        ///// <param name="otpRequest">otp verification parameters</param>
+        ///// <returns></returns>
+        //[HttpPost("sms/verifyotp")]
+        //public async Task<ApiResponse> VerifyOTP([FromBody] VerifyOtpRequest otpRequest)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //call service
+        //        var result = await _smsService.VerifyOtp(otpRequest);
+        //        if (result.IsValid)
+        //            return new ApiResponse("Otp successfully verified.", result, Status200OK);
+        //        else
+        //        {
+        //            if (result.IsError)
+        //                throw new ApiException("Internal server Error.", Status500InternalServerError);
+        //            else
+        //                throw new ApiException("Invalid otp.", Status400BadRequest);
+        //        }
+        //    }
+        //    else
+        //        throw new ApiException(ModelState.AllErrors());
+        //}
 
         /// <summary>
         /// Subscribe an endpoint to topic
@@ -125,7 +125,7 @@ namespace Consent.Api.Notification.API.v1
             if (ModelState.IsValid)
             {
                 //call service
-                var response = await _smsService.subscribeEndpointToTopic(topicRequest);
+                var response = await _smsService.SubscribeEndpointToTopic(topicRequest);
                 if (response)
                     return new ApiResponse("Subscribed successfully.", response, Status200OK);
                 else

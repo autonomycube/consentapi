@@ -4,20 +4,51 @@
       {
         "Context": "Login",
         "SubContext": "Send OTP",
-        "SmsContent": "{{Otp}} is the OTP for mobile number verification from BlueNumber login on {{Date}}.  Pls do not share it with anyone.",
+        "SmsContent": "{{Otp}} is the OTP for mobile number verification from Consent login on {{Date}}.  Pls do not share it with anyone.",
         "ArabicContent": null,
         "HasPlaceholder": true,
-        "IsDeleted": false
+        "IsActive": true
       },
       {
         "Context": "Registration",
         "SubContext": "Send OTP",
-        "SmsContent": "{{Otp}} is the OTP for mobile number verification from BlueNumber registration on {{Date}}.  Pls do not share it with anyone.",
+        "SmsContent": "{{Otp}} is the OTP for mobile number verification from Consent registration on {{Date}}.  Pls do not share it with anyone.",
         "ArabicContent": null,
         "HasPlaceholder": true,
-        "IsDeleted": false
+        "IsActive": true
       }
     ],
-    "EmailTemplates": []
+    "EmailTemplates": [
+      {
+        "Context": "Password",
+        "SubContext": "ResetPassword",
+        "MailSubject": "Consent Reset Password",
+        "HtmlText": "<div style='text-align: center;'><img src='logo_white_background.jpg' alt='Consent Logo' style='width: 30%;' /></div><hr /><div style='font-family: Verdana;'><p>Hi {username}</p><p>Looks like you asked to reset your password. Just hit the link below to get started.</p><p style='text-align: center;'><a style='padding: 10px;background-color: orange;color: white;' href=''>Reset My Password</a></p><p>Didn't request a change? You can ignore this email and your password will stay the same.</p><br /><p>Cheers, <br /><strong>Infoeaze Team</strong></p></div>",
+        "ArbMailSubject": null,
+        "ArbHtmlText": null,
+        "HasPlaceholder": true,
+        "IsActive": true
+      },
+      {
+        "Context": "Invitation",
+        "SubContext": "AcceptInvitation",
+        "MailSubject": "Consent Invitation",
+        "HtmlText": "<div style='text-align: center;'><img src='logo_white_background.jpg' alt='Consent Logo' style='width: 30%;' /></div><hr /><div style='font-family: Verdana;'><p><strong>{CompanyName}</strong> has invited you to join the <strong>Consent Platform!</strong></p><p style='text-align: center;'><a style='padding: 10px;background-color: blue;color: white;' href=''>Accept Invitation</a></p><p><strong>Consent is a digital mobile wallet to store user credentials </strong></p><p>Consent is leading the digital credential verification Industry by helping individuals verify their background quickly in a transparent manner. You as an Consent user own your Credential data and have an opportunity to receive tokens in return for sharing it via our Consent platform – depending on who you wish to share, when and how long.</p><p>We’re thrilled to welcome you on our Consent Platform!</p><br/><p>Cheers, <br /><strong>Infoeaze Team</strong></p></div>",
+        "ArbMailSubject": null,
+        "ArbHtmlText": null,
+        "HasPlaceholder": true,
+        "IsActive": true
+      },
+      {
+        "Context": "Registration",
+        "SubContext": "EmailVerification",
+        "MailSubject": "Consent Email Verified",
+        "HtmlText": "<div style='text-align: center;'><img src='logo_white_background.jpg' alt='Consent Logo' style='width: 30%;' /></div><hr /><div style='font-family: Verdana;'><p>Hi {UserName}</p><p>Good news! Your Consent account is verified! You can now onboard your employees, issue credentials and carry out request verification services on verifiable credentials instantly.</p><p>To get started, just login to the Consent Platform and follow the welcome screen.</p><p>We’re thrilled to welcome you on our Consent Platform!</p><br/><p>Cheers, <br /><strong>Infoeaze Team</strong></p></div>",
+        "ArbMailSubject": null,
+        "ArbHtmlText": null,
+        "HasPlaceholder": true,
+        "IsActive": true
+      }
+    ]
   }
 }

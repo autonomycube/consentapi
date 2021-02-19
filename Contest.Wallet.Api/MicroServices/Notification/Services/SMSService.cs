@@ -15,9 +15,8 @@ namespace Consent.Api.Notification.Services
     public class SmsService : ISmsService
     {
         #region Private variables 
-        
+
         private const string otpContext = "Send OTP";
-        private readonly string[] _dummyNumbers;
         private readonly ILogger<SmsService> _logger;
         private readonly IAwsService _awsService;
         private readonly ISmsRepository _smsRepository;
@@ -29,11 +28,11 @@ namespace Consent.Api.Notification.Services
 
         #region Constructor
 
-        public SmsService(ILogger<SmsService> logger, 
-            IAwsService awsService, 
-            ISmsRepository smsRepository, 
+        public SmsService(ILogger<SmsService> logger,
+            IAwsService awsService,
+            ISmsRepository smsRepository,
             IOtpTrackerRepository otpTrackerRepository,
-            ITopicRepository topicRepository, 
+            ITopicRepository topicRepository,
             IUserSubscriptionRepository subscriptionRepository,
             IConfiguration config)
         {
@@ -43,7 +42,6 @@ namespace Consent.Api.Notification.Services
             _otpTrackerRepository = otpTrackerRepository;
             _topicRepository = topicRepository;
             _subscriptionRepository = subscriptionRepository;
-            _dummyNumbers = config["DummyNumbers"].Split(',');
         }
 
         #endregion
@@ -78,23 +76,14 @@ namespace Consent.Api.Notification.Services
                     return smsResponse;
                 }
 
-                bool dummyNumber = _dummyNumbers.Where(n => smsRequest.MobileNumber.Contains(n)).Any();
                 if (smsTemplate.SubContext.Trim().ToLower().Equals(otpContext.Trim().ToLower()))
                 {
-                    var smsText = SetOTPMessage(smsContent, smsRequest.PlaceHolders, dummyNumber);
-                    if (dummyNumber)
+                    var smsText = SetOTPMessage(smsContent, smsRequest.PlaceHolders);
+                    var response = await _awsService.SendSms(smsRequest.MobileNumber, smsText.Item1);
+                    if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
                     {
                         //Insert otp generated context to otptracker
                         smsResponse.OutputMessage = await LogOtp(smsRequest.Context, smsRequest.ContextId, smsText.Item2);
-                    }
-                    else
-                    {
-                        var response = await _awsService.SendSms(smsRequest.MobileNumber, smsText.Item1);
-                        if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            //Insert otp generated context to otptracker
-                            smsResponse.OutputMessage = await LogOtp(smsRequest.Context, smsRequest.ContextId, smsText.Item2);
-                        }
                     }
                 }
                 else
@@ -166,7 +155,7 @@ namespace Consent.Api.Notification.Services
             return otpResponse;
         }
 
-        public async Task<bool> subscribeEndpointToTopic(SubscribeTopicRequest topicRequest)
+        public async Task<bool> SubscribeEndpointToTopic(SubscribeTopicRequest topicRequest)
         {
             string topicArn = string.Empty;
             try
@@ -311,8 +300,11 @@ namespace Consent.Api.Notification.Services
                 Context = context,
                 ContextId = contextID,
                 Otp = OTP,
+                IsActive = true,
                 CreatedBy = contextID,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                UpdatedBy = contextID,
+                UpdatedDate = DateTime.Now,
             };
             var result = await _otpTrackerRepository.Add(notfyOtptracker);
             return result.Id;

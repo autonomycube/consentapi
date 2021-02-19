@@ -6,6 +6,8 @@ using Consent.Api.Tenant.Services;
 using Consent.Api.Tenant.Services.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Consent.Common.Helpers;
+using Consent.Common.Helpers.Abstract;
 
 namespace Consent.Api.Tenant.Infrastructure.Installers
 {
@@ -15,6 +17,7 @@ namespace Consent.Api.Tenant.Infrastructure.Installers
         {
             services.AddTransient<IUnitOfWork<TenantDbContext>, UnitOfWork<TenantDbContext>>();
             services.AddTransient<ITenantService, TenantService>();
+            services.AddTransient<IBaseAuthHelper, BaseAuthHelper>();
         }
     }
 }

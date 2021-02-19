@@ -1,9 +1,12 @@
-﻿using Consent.Common.Repository.SQL.Abstract;
-using Consent.Api.Auth.Data.Entities;
+﻿using Consent.Common.EnityFramework.Entities.Identity;
+using System;
+using System.Threading.Tasks;
 
 namespace Consent.Api.Auth.Data.Repositories.Abstract
 {
-    public interface IUserRepository : IRepository<TblUsers, string>
+    public interface IUserRepository
     {
+        UserIdentity GetById(Guid uid);
+        Task Update(UserIdentity entity);
     }
 }

@@ -43,8 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MicroServices\Auth\DTO\Request\" />
-    <Folder Include="MicroServices\Auth\DTO\Response\" />
     <Folder Include="Logs\" />
     <Folder Include="Logs\Error\" />
     <Folder Include="Logs\Info\" />

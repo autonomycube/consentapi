@@ -3,13 +3,8 @@ using System;
 
 namespace Consent.Common.EnityFramework.Entities.Identity
 {
-    public class UserIdentity : IdentityUser
+    public class UserIdentity : IdentityUser<string>
     {
-        public UserIdentity()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
         public virtual DateTime? DateOfBirth { get; set; }
