@@ -218,6 +218,10 @@ namespace Consent.Api.Auth.Services
                     Context = NotificationConsts.InviteEmailsContext,
                     SubContext = NotificationConsts.InviteEmailsSubContext,
                     EmailList = request.EmailList,
+                    PlaceHolders = new Dictionary<string, string>()
+                    {
+                        { "CompanyName", "Consent" } 
+                    },
                     IsArabic = false
                 };
                 var result = await _emailService.SendMultipleTemplatedEmail(emailRequest);
