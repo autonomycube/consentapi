@@ -27,7 +27,7 @@ namespace Consent.Api.Auth.Services
 
         public UserIdentity GetById(string id)
         {
-           return  _userRepository.GetById(new Guid(id));
+           return  _userRepository.GetById(id);
         }
 
         public async Task Update(UserIdentity entity)

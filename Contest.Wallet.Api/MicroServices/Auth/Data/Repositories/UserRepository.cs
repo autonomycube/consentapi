@@ -30,9 +30,9 @@ namespace Consent.Api.Auth.Data.Repositories
 
         #region Public Methods
 
-        public virtual UserIdentity GetById(Guid uid)
+        public virtual UserIdentity GetById(string id)
         {
-            return _dbSet.Where(t => t.Id.Equals(uid)).FirstOrDefault();
+            return _dbSet.Where(t => t.Id.Equals(id)).FirstOrDefault();
         }
 
         public virtual async Task Update(UserIdentity entity)

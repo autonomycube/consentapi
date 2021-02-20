@@ -4,13 +4,13 @@ namespace Consent.Api.Tenant.Services.DTO.Request
 {
     public class CreateTenantRequest
     {
-        public virtual string CIN { get; set; }
-        public virtual string Name { get; set; }
-        public virtual string Address { get; set; }
-        public virtual string Contact { get; set; }
-        public virtual string Email { get; set; }
-        public virtual string Phone { get; set; }
-        public virtual short EmployeesCount { get; set; }
+        public string CIN { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Contact { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public short EmployeesCount { get; set; }
     }
 
     public class CreateTenantRequestValidator : AbstractValidator<CreateTenantRequest>
@@ -18,7 +18,7 @@ namespace Consent.Api.Tenant.Services.DTO.Request
         public CreateTenantRequestValidator()
         {
             RuleFor(o => o.CIN).NotNull().NotEmpty();
-            RuleFor(o => o.Phone).NotNull().NotEmpty();
+            RuleFor(o => o.PhoneNumber).NotNull().NotEmpty();
             RuleFor(o => o.Email).NotNull().NotEmpty()
                 .EmailAddress().WithMessage("Email is invalid");
             RuleFor(o => o.EmployeesCount).NotNull();

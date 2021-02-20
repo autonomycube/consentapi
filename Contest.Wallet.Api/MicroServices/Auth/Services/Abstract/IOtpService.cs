@@ -8,5 +8,7 @@ namespace Consent.Api.Auth.Services.Abstract
     {
         Task<GenerateOtpResponse> GeneratePhoneNumberConfirmationOtp(GenerateOtpRequest request);
         Task<VerifyOtpResponse> VerifyPhoneNumberConfirmationOtp(VerifyOtpRequest request);
+        Task<GenerateEmailConfirmationLinkResponse> GenerateEmailConfirmationLink(GenerateEmailConfirmationLinkRequest request);
+        Task<InviteEmailsResponse> SendEmailInvitations(InviteEmailsRequest request);
     }
 }

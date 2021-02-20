@@ -6,8 +6,11 @@ using Consent.Api.Notification.Data.Repositories.Abstract;
 using Consent.Api.Notification.DTO.Request;
 using Consent.Api.Notification.Services.Abstract;
 using Consent.Common.ApplicationMonitoring.Abstract;
+using Consent.Common.Constants;
 using Consent.Common.EnityFramework.Entities;
+using Consent.Common.EnityFramework.Entities.Identity;
 using Consent.Common.Helpers.Abstract;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,7 +23,9 @@ namespace Consent.Api.Auth.Services
 
         private readonly IOtpTrackerRepository _otpTrackerRepository;
         private readonly ISmsService _smsService;
+        private readonly IEmailService _emailService;
         private readonly IUserService _userService;
+        private readonly UserManager<UserIdentity> _userManager;
         private readonly IMapper _mapper;
         private readonly ILogger<OtpService> _logger;
         private readonly IBaseAuthHelper _baseAuthHelper;
@@ -31,7 +36,9 @@ namespace Consent.Api.Auth.Services
 
         public OtpService(IOtpTrackerRepository otpTrackerRepository,
             ISmsService smsService,
+            IEmailService emailService,
             IUserService userService,
+            UserManager<UserIdentity> userManager,
             IMapper mapper,
             ILogger<OtpService> logger,
             IBaseAuthHelper baseAuthHelper)
@@ -40,8 +47,12 @@ namespace Consent.Api.Auth.Services
                 ?? throw new ArgumentNullException(nameof(otpTrackerRepository));
             _smsService = smsService
                 ?? throw new ArgumentNullException(nameof(smsService));
+            _emailService = emailService
+                ?? throw new ArgumentNullException(nameof(emailService));
             _userService = userService
                 ?? throw new ArgumentNullException(nameof(userService));
+            _userManager = userManager
+                ?? throw new ArgumentNullException(nameof(userManager));
             _mapper = mapper
                 ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger
@@ -72,8 +83,8 @@ namespace Consent.Api.Auth.Services
                 var smsRequest = new CreateTmpSmsRequest()
                 {
                     MobileNumber = user.PhoneNumber,
-                    Context = "Registration",
-                    SubContext = "Send OTP",
+                    Context = NotificationConsts.PhoneNumberConfirmationContext,
+                    SubContext = NotificationConsts.PhoneNumberConfirmationSubContext,
                     ContextId = user.Id,
                     IsArabic = false
                 };
@@ -141,6 +152,89 @@ namespace Consent.Api.Auth.Services
             catch (Exception ex)
             {
                 return new VerifyOtpResponse
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public async Task<GenerateEmailConfirmationLinkResponse> GenerateEmailConfirmationLink(GenerateEmailConfirmationLinkRequest request)
+        {
+            try
+            {
+                var user = _userService.GetById(request.UserId);
+                if (user == null)
+                {
+                    throw new KeyNotFoundException($"UserId {request.UserId} is not found.");
+                }
+
+                if (user.EmailConfirmed)
+                {
+                    throw new Exception($"Email already confirmed.");
+                }
+
+                string emailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var emailRequest = new CustomEmailRequest
+                {
+                    emailAddress = user.Email,
+                    htmlText = emailConfirmationToken,
+                    mailSubject = "Consent Email Confirmation"
+                };
+                var result = await _emailService.SendCustomEmail(emailRequest);
+                if (result)
+                {
+                    return new GenerateEmailConfirmationLinkResponse
+                    {
+                        Success = false,
+                        Message = "Email sent successfully."
+                    };
+                }
+                else
+                {
+                    return new GenerateEmailConfirmationLinkResponse
+                    {
+                        Success = true,
+                        Message = "Email sent successfully."
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new GenerateEmailConfirmationLinkResponse
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public async Task<InviteEmailsResponse> SendEmailInvitations(InviteEmailsRequest request)
+        {
+            try
+            {
+                var emailRequest = new MultipleTmpEmailRequest()
+                {
+                    Context = NotificationConsts.InviteEmailsContext,
+                    SubContext = NotificationConsts.InviteEmailsSubContext,
+                    EmailList = request.EmailList,
+                    IsArabic = false
+                };
+                var result = await _emailService.SendMultipleTemplatedEmail(emailRequest);
+                if (!string.IsNullOrEmpty(result.ErrMessage))
+                {
+                    throw new Exception(result.ErrMessage);
+                }
+
+                return new InviteEmailsResponse
+                {
+                    Success = true,
+                    Message = "Email sent successfully."
+                };
+            }
+            catch (Exception ex)
+            {
+                return new InviteEmailsResponse
                 {
                     Success = false,
                     Message = ex.Message

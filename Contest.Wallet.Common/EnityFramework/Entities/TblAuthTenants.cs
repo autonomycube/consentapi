@@ -22,7 +22,7 @@ namespace Consent.Common.EnityFramework.Entities
         public virtual TenantStatus TenantStatus { get; set; } = TenantStatus.Registered;
         public virtual string Contact { get; set; }
         public virtual string Email { get; set; }
-        public virtual string Phone { get; set; }
+        public virtual string PhoneNumber { get; set; }
         public virtual int EmployeesCount { get; set; }
         public virtual bool? IsActive { get; set; }
         public virtual string TenantId { get; set; }

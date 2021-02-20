@@ -59,6 +59,7 @@ namespace Consent.Api.Auth.API.v1
         ///     POST /auth/phonenumber/generateotp
         ///     {
         ///         "message": "Otp generated successfully.",
+        ///         "isError": false,
         ///         "result": {
         ///             "success": true,
         ///             "message": "Sms sent successfully.",
@@ -107,6 +108,7 @@ namespace Consent.Api.Auth.API.v1
         ///     POST /auth/phonenumber/verifyotp
         ///     {
         ///         "message": "Otp verified successfully.",
+        ///         "isError": false,
         ///         "result": {
         ///             "success": true,
         ///             "message": "Otp verified successfully."
@@ -134,6 +136,104 @@ namespace Consent.Api.Auth.API.v1
             catch (Exception ex)
             {
                 _logger.LogError("VerifyPhoneNumberConfirmationOtp - Exception: " + ex.Message);
+                throw new ApiException(ex);
+            }
+        }
+
+        /// <summary>
+        /// Generates Email Confirmation Link
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /auth/email/confirm
+        ///     {
+        ///        "userId": "xxxx-xxxx-xxxx-xxxxxxxx"
+        ///     }
+        ///     
+        /// Sample response:
+        ///
+        ///     POST /auth/email/confirm
+        ///     {
+        ///         "message": "Link generated successfully.",
+        ///         "isError": false,
+        ///         "result": {
+        ///             "success": true,
+        ///             "message": "Email sent successfully."
+        ///         }
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="dto">Mobile number Request</param>
+        /// <returns>Returns Mobile number success model</returns>
+        /// <response code="200">Returns Mobile number success model</response>
+        [HttpPost("email/confirm")]
+        [ProducesResponseType(typeof(GenerateEmailConfirmationLinkResponse), Status200OK)]
+        public async Task<ApiResponse> GenerateEmailConfirmationLink([FromBody] GenerateEmailConfirmationLinkRequest dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new ApiResponse(Status400BadRequest, ModelState.AllErrors());
+            }
+
+            try
+            {
+                var response = await _otpService.GenerateEmailConfirmationLink(dto);
+                return new ApiResponse("Link generated successfully.", response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("GenerateEmailConfirmationLink - Exception: " + ex.Message);
+                throw new ApiException(ex);
+            }
+        }
+
+        /// <summary>
+        /// Invites Email addresses
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /auth/invite
+        ///     {
+        ///         "emailList": [
+        ///             "xxxx@gmail.com"
+        ///         ]
+        ///     }
+        ///     
+        /// Sample response:
+        ///
+        ///     POST /auth/invite
+        ///     {
+        ///         "message": "Email sent successfully.",
+        ///         "isError": false,
+        ///         "result": {
+        ///             "success": true,
+        ///             "message": "Email sent successfully."
+        ///         }
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="dto">Mobile number Request</param>
+        /// <returns>Returns Mobile number success model</returns>
+        /// <response code="200">Returns Mobile number success model</response>
+        [HttpPost("invites")]
+        [ProducesResponseType(typeof(InviteEmailsResponse), Status200OK)]
+        public async Task<ApiResponse> SendEmailInvitations([FromBody] InviteEmailsRequest dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new ApiResponse(Status400BadRequest, ModelState.AllErrors());
+            }
+
+            try
+            {
+                var response = await _otpService.SendEmailInvitations(dto);
+                return new ApiResponse("Email sent successfully.", response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("SendEmailInvitations - Exception: " + ex.Message);
                 throw new ApiException(ex);
             }
         }
