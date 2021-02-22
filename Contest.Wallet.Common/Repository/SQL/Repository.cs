@@ -52,7 +52,8 @@ namespace Consent.Common.Repository.SQL
 
         public async virtual Task<IEnumerable<TEntity>> GetByIds(List<TEntityKey> ids)
         {
-            return await Task.FromResult(_dbSet.Where(l => ids.Any(id => id.Equals(l.Id))));
+            //return await Task.FromResult(_dbSet.Where(l => ids.Any(id => id.Equals(l.Id))));
+            return await _dbSet.Where(x => ids.Contains(x.Id)).ToListAsync();
         }
 
         public async virtual Task<IEnumerable<TEntity>> GetByIds(List<TEntityKey> ids, params Expression<Func<TEntity, object>>[] includeProperties)
@@ -62,7 +63,10 @@ namespace Consent.Common.Repository.SQL
             {
                 query = query.Include(includeProperty);
             }
-            return await Task.FromResult(query.Where(l => ids.Any(id => id.Equals(l.Id))));
+
+            return await query.Where(x => ids.Contains(x.Id)).ToListAsync();
+
+            //return await Task.FromResult(query.Where(l => ids.Any(id => id.Equals(l.Id))));
         }
 
         /// <summary>
@@ -187,7 +191,7 @@ namespace Consent.Common.Repository.SQL
         /// <returns></returns>
         public async virtual Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return await Task.FromResult(_dbSet.AsNoTracking().Where(predicate));
+            return await _dbSet.AsNoTracking().Where(predicate).ToListAsync(); // Task.FromResult(_dbSet.AsNoTracking().Where(predicate));
         }
 
         /// <summary>
@@ -202,12 +206,12 @@ namespace Consent.Common.Repository.SQL
             {
                 query = query.Include(includeProperty);
             }
-            return await Task.FromResult(query.AsEnumerable());
+            return await query.ToListAsync();//  Task.FromResult(query.AsEnumerable());
         }
 
         public async virtual Task<int> Count()
         {
-            return await Task.FromResult(_context.Set<TEntity>().Count());
+            return await _context.Set<TEntity>().CountAsync();//Task.FromResult(_context.Set<TEntity>().Count());
         }
 
         /// <summary>
@@ -217,11 +221,11 @@ namespace Consent.Common.Repository.SQL
         /// <returns>count</returns>
         public async virtual Task<int> Count(Expression<Func<TEntity, bool>> predicate)
         {
-            return await Task.FromResult(_context.Set<TEntity>().Where(predicate).Count());
+            return await _context.Set<TEntity>().Where(predicate).CountAsync(); // await Task.FromResult(_context.Set<TEntity>().Where(predicate).Count());
         }
         public async virtual Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> predicate)
         {
-            return await Task.FromResult(_context.Set<TEntity>().FirstOrDefault(predicate));
+            return await _context.Set<TEntity>().FirstOrDefaultAsync(predicate); //Task.FromResult(_context.Set<TEntity>().FirstOrDefault(predicate));
         }
 
         /// <summary>
@@ -254,12 +258,12 @@ namespace Consent.Common.Repository.SQL
                 query = query.Include(includeProperty);
             }
 
-            return await Task.FromResult(query.Where(predicate).FirstOrDefault());
+            return await query.Where(predicate).FirstOrDefaultAsync();// Task.FromResult(query.Where(predicate).FirstOrDefault());
         }
 
         public async virtual Task<IEnumerable<TEntity>> FindBy(Expression<Func<TEntity, bool>> predicate)
         {
-            return await Task.FromResult(_context.Set<TEntity>().Where(predicate));
+            return await _context.Set<TEntity>().Where(predicate).ToListAsync(); //Task.FromResult(_context.Set<TEntity>().Where(predicate));
         }
 
         public async virtual Task DeleteWhere(Expression<Func<TEntity, bool>> predicate)
@@ -274,12 +278,22 @@ namespace Consent.Common.Repository.SQL
         }
 
         #region paging
-        public async Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize, TEntityKey id)
+
+        public async Task<IEnumerable<TEntity>> GetAll(int pageIndex, int pageSize, Expression<Func<TEntity, bool>> predicate)
         {
-            return await GetAll(pageIndex, pageSize, id);
+            var entities = _dbSet.AsQueryable();
+            entities = (predicate != null) ? entities.Where(predicate) : entities;
+            return await entities.Paginate(pageIndex, pageSize).ToListAsync();
         }
 
-        public async Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize, Expression<Func<TEntity, long>> keySelector, OrderBy orderBy = OrderBy.Ascending)
+        public async Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize, bool includeTotalCount = false)
+        {
+            var entities = _dbSet.AsQueryable();
+            return await entities.ToPaginatedListAsync(pageIndex, pageSize, includeTotalCount);
+        }
+
+        public async Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize,
+            Expression<Func<TEntity, string>> keySelector, OrderBy orderBy = OrderBy.Ascending, bool includeTotalCount = false)
         {
             return await GetAll(pageIndex, pageSize, keySelector, null, orderBy);
         }
@@ -288,25 +302,26 @@ namespace Consent.Common.Repository.SQL
         {
             var entities = IncludeProperties(includeProperties);
             entities = (predicate != null) ? entities.Where(predicate) : entities;
-            return await Task.FromResult(entities.ToList());
+            return await entities.ToListAsync();//Task.FromResult(entities.ToList());
         }
-        public async Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize, Expression<Func<TEntity, long>> keySelector, Expression<Func<TEntity, bool>> predicate, OrderBy orderBy, params Expression<Func<TEntity, object>>[] includeProperties)
+
+        public async Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize,
+            Expression<Func<TEntity, string>> keySelector, Expression<Func<TEntity, bool>> predicate,
+            OrderBy orderBy, bool includeTotalCount = false, params Expression<Func<TEntity, object>>[] includeProperties)
         {
             var entities = FilterQuery(keySelector, predicate, orderBy, includeProperties);
-            var total = entities.Count();// entities.Count() is different than pageSize
-            entities = entities.Paginate(pageIndex, pageSize);
-            return await Task.FromResult(entities.ToPaginatedList(pageIndex, pageSize, total));
+            return await entities.ToPaginatedListAsync(pageIndex, pageSize, includeTotalCount);
         }
 
         public async Task<List<TEntity>> GetAllIncluding(params Expression<Func<TEntity, object>>[] includeProperties)
         {
             var entities = IncludeProperties(includeProperties);
-            return await Task.FromResult(entities.ToList());
+            return await entities.ToListAsync(); //await Task.FromResult(entities.ToList());
         }
         #endregion
 
         #region private
-        private IQueryable<TEntity> FilterQuery(Expression<Func<TEntity, long>> keySelector, Expression<Func<TEntity, bool>> predicate,
+        private IQueryable<TEntity> FilterQuery(Expression<Func<TEntity, string>> keySelector, Expression<Func<TEntity, bool>> predicate,
             OrderBy orderBy,
           Expression<Func<TEntity, object>>[] includeProperties)
         {
@@ -327,6 +342,14 @@ namespace Consent.Common.Repository.SQL
             }
             return entities;
         }
+
+        public virtual IQueryable<TEntity> GetQueryable()
+        {
+            //var set =_context.Set<TEntity>();
+
+            return _context.Set<TEntity>().AsQueryable();
+        }
+
         #endregion
 
         public void Dispose()
@@ -334,5 +357,6 @@ namespace Consent.Common.Repository.SQL
             _context.Dispose();
             GC.SuppressFinalize(this);
         }
+
     }
 }

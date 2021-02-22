@@ -48,6 +48,36 @@
         "ArbHtmlText": null,
         "HasPlaceholder": true,
         "IsActive": true
+      },
+      {
+        "Context": "TenantOnboard",
+        "SubContext": "Registered",
+        "MailSubject": "Consent Tenant Registered",
+        "HtmlText": "<div style='text-align: center;'><img src='logo_white_background.jpg' alt='Consent Logo' style='width: 30%;' /></div><hr /><div style='font-family: Verdana;'><p>Hi {UserName}</p><p>Good news! Your Consent account is verified! You can now onboard your employees, issue credentials and carry out request verification services on verifiable credentials instantly.</p><p>To get started, just login to the Consent Platform and follow the welcome screen.</p><p>We’re thrilled to welcome you on our Consent Platform!</p><br/><p>Cheers, <br /><strong>Infoeaze Team</strong></p></div>",
+        "ArbMailSubject": null,
+        "ArbHtmlText": null,
+        "HasPlaceholder": true,
+        "IsActive": true
+      },
+      {
+        "Context": "TenantOnboard",
+        "SubContext": "Rejected",
+        "MailSubject": "Consent Tenant Rejected",
+        "HtmlText": "<div style='text-align: center;'><img src='logo_white_background.jpg' alt='Consent Logo' style='width: 30%;' /></div><hr /><div style='font-family: Verdana;'><p>Hi {UserName}</p><p>Good news! Your Consent account is verified! You can now onboard your employees, issue credentials and carry out request verification services on verifiable credentials instantly.</p><p>To get started, just login to the Consent Platform and follow the welcome screen.</p><p>We’re thrilled to welcome you on our Consent Platform!</p><br/><p>Cheers, <br /><strong>Infoeaze Team</strong></p></div>",
+        "ArbMailSubject": null,
+        "ArbHtmlText": null,
+        "HasPlaceholder": true,
+        "IsActive": true
+      },
+      {
+        "Context": "TenantOnboard",
+        "SubContext": "Approved",
+        "MailSubject": "Consent Tenant Approved",
+        "HtmlText": "<div style='text-align: center;'><img src='logo_white_background.jpg' alt='Consent Logo' style='width: 30%;' /></div><hr /><div style='font-family: Verdana;'><p>Hi {UserName}</p><p>Good news! Your Consent account is verified! You can now onboard your employees, issue credentials and carry out request verification services on verifiable credentials instantly.</p><p>To get started, just login to the Consent Platform and follow the welcome screen.</p><p>We’re thrilled to welcome you on our Consent Platform!</p><br/><p>Cheers, <br /><strong>Infoeaze Team</strong></p></div>",
+        "ArbMailSubject": null,
+        "ArbHtmlText": null,
+        "HasPlaceholder": true,
+        "IsActive": true
       }
     ]
   }

@@ -4,12 +4,13 @@ using AutoWrapper.Wrappers;
 using Consent.Api.Tenant.Services.Abstract;
 using Consent.Api.Tenant.Services.DTO.Request;
 using Consent.Api.Tenant.Services.DTO.Response;
+using Consent.Common.Configuration.Options.HelperModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using static Microsoft.AspNetCore.Http.StatusCodes;
-
 
 namespace Consent.Api.Tenant.API.v1
 {
@@ -23,7 +24,7 @@ namespace Consent.Api.Tenant.API.v1
         private readonly ITenantService _tenantService;
         private readonly ILogger<TenantController> _logger;
         private readonly IMapper _mapper;
-        
+
         #endregion
 
         #region Constructor
@@ -160,6 +161,59 @@ namespace Consent.Api.Tenant.API.v1
                 return new ApiResponse("Tenant feteched successfully", result, Status200OK);
             }
             catch (Exception ex)
+            {
+                throw new ApiException(ex);
+            }
+        }
+
+        /// <summary>
+        /// Gets All List of Tenants
+        /// </summary>
+        /// <remarks>
+        /// Sample Response:
+        /// 
+        ///     GET /tenant/{id}
+        ///     {
+        ///         "message": "Tenant feteched successfully",
+        ///         "result": [
+        ///             {
+        ///                 "id": "9c441515-0820-4620-9dd6-97bcb1727248",
+        ///                 "contact": "string",
+        ///                 "address": "string",
+        ///                 "email": "string",
+        ///                 "employeesCount": 0,
+        ///                 "cin": "string"
+        ///             }
+        ///         ]
+        ///     }
+        /// 
+        /// </remarks>
+        /// <param name="urlQueryParameters">Paging Query Parameters</param>
+        /// <returns>Returns List of Tenants</returns>
+        /// <response code="200">Returns List of Tenants</response>
+        [HttpGet("registered/paged")]
+        [ProducesResponseType(typeof(TenantResponse), Status200OK)]
+        public async Task<ApiResponse> GetOnboardPendingTenantsPages([FromQuery] UrlQueryParameters urlQueryParameters)
+        {
+            try
+            {
+                var result = await _tenantService.GetAll(urlQueryParameters.PageNumber, urlQueryParameters.PageSize, urlQueryParameters.IncludeCount);
+                if (result != null)
+                {
+                    var metadata = new Pagination
+                    {
+                        PageNumber = result.PageIndex,
+                        PageSize = result.PageSize,
+                        TotalRecords = result.TotalCount,
+                    };
+
+                    Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+                    return new ApiResponse("Data Fetched Succesfully", result, Status200OK);
+                }
+                else
+                    throw new ApiException("No Data Fetched Some internal Error");
+            }
+            catch(Exception ex)
             {
                 throw new ApiException(ex);
             }

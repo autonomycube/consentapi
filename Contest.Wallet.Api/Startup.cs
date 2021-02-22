@@ -98,7 +98,7 @@ namespace Consent.Api
             app.UseSwaggerUI(c =>
             {
                 c.OAuthClientId("all_swagger_ui");
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Consent.Api ASP.NET Core API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Consent API v1");
             });
 
             //Enable HealthChecks and UI

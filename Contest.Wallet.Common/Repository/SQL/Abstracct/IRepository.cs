@@ -2,6 +2,7 @@
 using Consent.Common.Repository.SQL.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace Consent.Common.Repository.SQL.Abstract
     public interface IRepository<TEntity, TEntityKey> :
         IDisposable where TEntity : EntityBase<TEntityKey>
     {
+        IQueryable<TEntity> GetQueryable();
         Task<IEnumerable<TEntity>> AllIncluding(params Expression<Func<TEntity, object>>[] includeProperties);
         Task<int> Count();
         Task<int> Count(Expression<Func<TEntity, bool>> predicate);
@@ -30,9 +32,10 @@ namespace Consent.Common.Repository.SQL.Abstract
         Task Delete(TEntityKey id, bool save = true);
         Task Delete(TEntity entity, bool save = true);
         Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate);
-        Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize, TEntityKey id);
-        Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize, Expression<Func<TEntity, long>> keySelector, OrderBy orderBy = OrderBy.Ascending);
-        Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize, Expression<Func<TEntity, long>> keySelector, Expression<Func<TEntity, bool>> predicate, OrderBy orderBy, params Expression<Func<TEntity, object>>[] includeProperties);
+        Task<IEnumerable<TEntity>> GetAll(int pageIndex, int pageSize, Expression<Func<TEntity, bool>> predicate);
+        Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize, bool includeTotalCount = false);
+        Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize, Expression<Func<TEntity, string>> keySelector, OrderBy orderBy = OrderBy.Ascending, bool includeTotalCount = false);
+        Task<PaginatedList<TEntity>> GetAll(int pageIndex, int pageSize, Expression<Func<TEntity, string>> keySelector, Expression<Func<TEntity, bool>> predicate, OrderBy orderBy, bool includeTotalCount = false, params Expression<Func<TEntity, object>>[] includeProperties);
         Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties);
     }
 }

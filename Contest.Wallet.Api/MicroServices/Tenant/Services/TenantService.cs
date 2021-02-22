@@ -9,6 +9,7 @@ using Consent.Common.Data.UOW.Abstract;
 using Consent.Common.EnityFramework.Entities;
 using Consent.Common.EnityFramework.Entities.Identity;
 using Consent.Common.Helpers.Abstract;
+using Consent.Common.Repository.Helpers;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -161,6 +162,12 @@ namespace Consent.Api.Tenant.Services
         {
             var result = await _tenantOnboardStatusRepository.FindBy(t => t.TenantId == id);
             return _mapper.Map<IEnumerable<TenantOnboardCommentResponse>>(result.ToList());
+        }
+
+        public async Task<PaginatedList<TenantResponse>> GetAll(int pageIndex, int pageSize, bool includeCount = false)
+        {
+            var result = await _tenantRepository.GetAll(pageIndex, pageSize, includeCount);
+            return new PaginatedList<TenantResponse>(_mapper.Map<IEnumerable<TenantResponse>>(result), pageIndex, pageSize, result.TotalCount);
         }
 
         #endregion

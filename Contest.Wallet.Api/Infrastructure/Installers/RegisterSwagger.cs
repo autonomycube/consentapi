@@ -19,7 +19,7 @@ namespace Consent.Api.Infrastructure.Installers
             //See: https://www.scottbrady91.com/Identity-Server/ASPNET-Core-Swagger-UI-Authorization-using-IdentityServer4
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Consent.Api ASP.NET Core API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Consent API", Version = "v1" });
 
                 var IdentityServerUrl = config["ApiResourceBaseUrls:AuthServer"];
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme

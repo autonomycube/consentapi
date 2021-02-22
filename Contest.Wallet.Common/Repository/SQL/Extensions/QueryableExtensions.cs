@@ -1,16 +1,20 @@
 ﻿using Consent.Common.Repository.Helpers;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Threading.Tasks;
 
 namespace Consent.Common.Repository.Extensions
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class QueryableExtensions
     {
-        public static PaginatedList<T> ToPaginatedList<T>(this IQueryable<T> query, int pageIndex, int pageSize, int total)
+        public static async Task<PaginatedList<T>> ToPaginatedListAsync<T>(this IQueryable<T> query, int pageIndex, int pageSize, bool IncludeTotalCount)
         {
-            var list = query.ToList();
+
+            var total = IncludeTotalCount ? await query.CountAsync() : 0;
+            var list = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PaginatedList<T>(list, pageIndex, pageSize, total);
         }
 
