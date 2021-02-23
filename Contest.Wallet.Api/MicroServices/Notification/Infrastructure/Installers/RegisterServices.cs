@@ -17,6 +17,7 @@ namespace Consent.Api.Notification.Infrastructure.Installers
             services.AddTransient<IAwsService, AwsService>();
             services.AddTransient<ISmsService, SmsService>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<INotificationService, NotificationService>();
         }
     }
 }

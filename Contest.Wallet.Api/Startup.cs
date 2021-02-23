@@ -73,6 +73,7 @@ namespace Consent.Api
             // configure strongly typed settings objects  
             services.Configure<AppConfig>(Configuration.GetSection(nameof(AppConfig)));
             services.Configure<NotificationSeedData>(Configuration.GetSection(nameof(NotificationSeedData)));
+            services.Configure<TenantSeedData>(Configuration.GetSection(nameof(TenantSeedData)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

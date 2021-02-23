@@ -1,6 +1,7 @@
 using Consent.Api.Data.Configuration;
 using Consent.Common.EnityFramework.Constants;
 using Consent.Api.Notification.Data.DbContexts;
+using Consent.Api.Tenant.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,9 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Consent.Common.EnityFramework.Entities.Identity;
+using Consent.Common.EnityFramework.Constants;
 
 namespace Consent.Api.Data.Helpers
 {
@@ -25,6 +29,7 @@ namespace Consent.Api.Data.Helpers
                 var services = serviceScope.ServiceProvider;
                 await EnsureDatabasesMigrated(services);
                 await EnsureNotificationSeedData(services);
+                await EnsureTenantSeedData(services);
             }
         }
 
@@ -47,6 +52,18 @@ namespace Consent.Api.Data.Helpers
                 var notificationData = scope.ServiceProvider.GetRequiredService<IOptions<NotificationSeedData>>().Value;
 
                 await EnsureSeedNotificationData(notificationDBContext, notificationData);
+            }
+        }
+
+        public static async Task EnsureTenantSeedData(IServiceProvider serviceProvider)
+        {
+            using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var tenantDBContext = scope.ServiceProvider.GetRequiredService<TenantDbContext>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<UserIdentity>>();
+                var tenantData = scope.ServiceProvider.GetRequiredService<IOptions<TenantSeedData>>().Value;
+
+                await EnsureSeedTenantData(tenantDBContext, userManager, tenantData);
             }
         }
 
@@ -79,6 +96,31 @@ namespace Consent.Api.Data.Helpers
                     context.EmailTemplates.Add(template);
                     await context.SaveChangesAsync();
                 }
+            }
+        }
+
+        private static async Task EnsureSeedTenantData(TenantDbContext context, UserManager<UserIdentity> userManager, TenantSeedData tenantData)
+        {
+            if (!context.Tenants.Any() && tenantData.Tenant != null)
+            {
+                tenantData.Tenant.Id = ConsentConsts.TenantId;
+                tenantData.Tenant.CreatedBy = ConsentConsts.UserId;
+                tenantData.Tenant.CreatedDate = DateTime.UtcNow;
+                tenantData.Tenant.UpdatedBy = ConsentConsts.UserId;
+                tenantData.Tenant.UpdatedDate = DateTime.UtcNow;
+                context.Tenants.Add(tenantData.Tenant);
+                await context.SaveChangesAsync();
+            }
+
+            if (!await userManager.Users.AnyAsync())
+            {
+                tenantData.User.Id = ConsentConsts.UserId;
+                tenantData.User.TenantId = ConsentConsts.TenantId;
+                tenantData.User.CreatedBy = ConsentConsts.UserId;
+                tenantData.User.CreatedDate = DateTime.UtcNow;
+                tenantData.User.UpdatedBy = ConsentConsts.UserId;
+                tenantData.User.UpdatedDate = DateTime.UtcNow;
+                await userManager.CreateAsync(tenantData.User);
             }
         }
     }

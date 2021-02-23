@@ -1,6 +1,6 @@
 ﻿using Consent.Api.Contracts;
 using Consent.Api.Infrastructure.Filters;
-using Consent.Api.Tenant.Services.DTO.Response;
+using Consent.Api.Tenant.DTO.Response;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;

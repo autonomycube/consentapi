@@ -140,7 +140,7 @@ namespace Consent.Api.Notification.Services
                     return otpResponse;
                 }
 
-                if (otpDetails.Otp.Trim().Equals(otpRequest.OTP.Trim()))
+                if (otpDetails.Otp.Trim().Equals(otpRequest.Otp.Trim()))
                 {
                     otpDetails.OtpVerified = true;
                     await _otpTrackerRepository.Update(otpDetails);

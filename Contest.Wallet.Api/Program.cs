@@ -65,6 +65,7 @@ namespace Consent.Api
                     var settings = env == null ? "appsettings.json" : $"appsettings.{env}.json";
                     config.AddJsonFile(settings, optional: true, reloadOnChange: true);
                     config.AddJsonFile("notificationdata.json", optional: true, reloadOnChange: true);
+                    config.AddJsonFile("tenantdata.json", optional: true, reloadOnChange: true);
                 }).UseCloudWatchLog();
     }
 }

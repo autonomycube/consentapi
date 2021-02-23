@@ -46,8 +46,8 @@
     <Folder Include="Logs\" />
     <Folder Include="Logs\Error\" />
     <Folder Include="Logs\Info\" />
+    <Folder Include="MicroServices\Auth\DTO\Response\" />
     <Folder Include="MicroServices\Notification\Data\Entities\" />
-    <Folder Include="MicroServices\Notification\DTO\Response\" />
     <Folder Include="MicroServices\Payment\DTO\Request\" />
     <Folder Include="MicroServices\Payment\DTO\Response\" />
     <Folder Include="MicroServices\Tenant\Data\Entities\" />

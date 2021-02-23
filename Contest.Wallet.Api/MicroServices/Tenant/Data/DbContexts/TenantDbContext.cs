@@ -9,6 +9,7 @@ namespace Consent.Api.Tenant.Data.DbContexts
     public class TenantDbContext : DbContext, IDbContext
     {
         public DbSet<TblAuthTenants> Tenants { get; set; }
+        public DbSet<TblAuthTenants> Users { get; set; }
 
         public TenantDbContext(DbContextOptions<TenantDbContext> options) : base(options)
         {

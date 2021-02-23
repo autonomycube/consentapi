@@ -14,7 +14,6 @@ namespace Consent.Api.Auth.Infrastructure.Installers
         public void RegisterAppServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IUnitOfWork<AuthDbContext>, UnitOfWork<AuthDbContext>>();
-            services.AddTransient<IOtpService, OtpService>();
             services.AddTransient<IUserService, UserService>();
         }
     }

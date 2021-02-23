@@ -1,47 +1,34 @@
-﻿using AutoMapper;
-using Consent.Api.Auth.DTO.Request;
-using Consent.Api.Auth.DTO.Response;
-using Consent.Api.Auth.Services.Abstract;
-using Consent.Api.Notification.Data.Repositories.Abstract;
+﻿using Consent.Api.Notification.Data.Repositories.Abstract;
 using Consent.Api.Notification.DTO.Request;
+using Consent.Api.Notification.DTO.Response;
 using Consent.Api.Notification.Services.Abstract;
 using Consent.Common.ApplicationMonitoring.Abstract;
 using Consent.Common.Constants;
 using Consent.Common.EnityFramework.Entities;
 using Consent.Common.EnityFramework.Entities.Identity;
-using Consent.Common.Helpers.Abstract;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Consent.Api.Auth.Services
+namespace Consent.Api.Notification.Services
 {
-    public class OtpService : IOtpService
+    public class NotificationService : INotificationService
     {
         #region Private Variables
 
         private readonly IOtpTrackerRepository _otpTrackerRepository;
         private readonly ISmsService _smsService;
         private readonly IEmailService _emailService;
-        private readonly IUserService _userService;
-        private readonly UserManager<UserIdentity> _userManager;
-        private readonly IMapper _mapper;
-        private readonly ILogger<OtpService> _logger;
-        private readonly IBaseAuthHelper _baseAuthHelper;
+        private readonly ILogger<NotificationService> _logger;
 
         #endregion
 
         #region Constructor
 
-        public OtpService(IOtpTrackerRepository otpTrackerRepository,
+        public NotificationService(IOtpTrackerRepository otpTrackerRepository,
             ISmsService smsService,
             IEmailService emailService,
-            IUserService userService,
-            UserManager<UserIdentity> userManager,
-            IMapper mapper,
-            ILogger<OtpService> logger,
-            IBaseAuthHelper baseAuthHelper)
+            ILogger<NotificationService> logger)
         {
             _otpTrackerRepository = otpTrackerRepository
                 ?? throw new ArgumentNullException(nameof(otpTrackerRepository));
@@ -49,41 +36,22 @@ namespace Consent.Api.Auth.Services
                 ?? throw new ArgumentNullException(nameof(smsService));
             _emailService = emailService
                 ?? throw new ArgumentNullException(nameof(emailService));
-            _userService = userService
-                ?? throw new ArgumentNullException(nameof(userService));
-            _userManager = userManager
-                ?? throw new ArgumentNullException(nameof(userManager));
-            _mapper = mapper
-                ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger
                 ?? throw new ArgumentNullException(nameof(logger));
-            _baseAuthHelper = baseAuthHelper
-                ?? throw new ArgumentNullException(nameof(baseAuthHelper));
         }
 
         #endregion
 
         #region Public Methods
 
-        public async Task<GenerateOtpResponse> GeneratePhoneNumberConfirmationOtp(GenerateOtpRequest request)
+        public async Task<GenerateOtpResponse> SendConfirmationOtp(UserIdentity user)
         {
             try
             {
-                var user = _userService.GetById(request.UserId);
-                if (user == null)
-                {
-                    throw new KeyNotFoundException($"UserId {request.UserId} is not found.");
-                }
-
-                if (user.PhoneNumberConfirmed)
-                {
-                    throw new Exception($"PhoneNumber {user.PhoneNumber} already confirmed.");
-                }
-
                 var smsRequest = new CreateTmpSmsRequest()
                 {
                     MobileNumber = user.PhoneNumber,
-                    Context = NotificationConsts.PhoneNumberConfirmationContext,
+                    Context = NotificationConsts.RegistrationContext,
                     SubContext = NotificationConsts.PhoneNumberConfirmationSubContext,
                     ContextId = user.Id,
                     IsArabic = false
@@ -101,7 +69,7 @@ namespace Consent.Api.Auth.Services
                     ReferenceId = result.OutputMessage
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new GenerateOtpResponse
                 {
@@ -111,21 +79,10 @@ namespace Consent.Api.Auth.Services
             }
         }
 
-        public async Task<VerifyOtpResponse> VerifyPhoneNumberConfirmationOtp(DTO.Request.VerifyOtpRequest request)
+        public async Task<SuccessResponse> VerifyConfirmationOtp(VerifyOtpRequest request, UserIdentity user)
         {
             try
             {
-                var user = _userService.GetById(request.UserId);
-                if (user == null)
-                {
-                    throw new KeyNotFoundException($"UserId {request.UserId} is not found.");
-                }
-
-                if (user.PhoneNumberConfirmed)
-                {
-                    throw new Exception($"PhoneNumber {user.PhoneNumber} already confirmed.");
-                }
-
                 TblNotifyOtpTracker otpDetails = await _otpTrackerRepository.GetById(request.ReferenceId);
                 if (otpDetails == null)
                 {
@@ -139,11 +96,7 @@ namespace Consent.Api.Auth.Services
 
                 otpDetails.OtpVerified = true;
                 await _otpTrackerRepository.Update(otpDetails);
-                user.PhoneNumberConfirmed = true;
-                user.UpdatedBy = _baseAuthHelper.GetUserId();
-                user.UpdatedDate = DateTime.UtcNow;
-                await _userService.Update(user);
-                return new VerifyOtpResponse
+                return new SuccessResponse
                 {
                     Success = true,
                     Message = "OTP verified successfully."
@@ -151,7 +104,7 @@ namespace Consent.Api.Auth.Services
             }
             catch (Exception ex)
             {
-                return new VerifyOtpResponse
+                return new SuccessResponse
                 {
                     Success = false,
                     Message = ex.Message
@@ -159,49 +112,37 @@ namespace Consent.Api.Auth.Services
             }
         }
 
-        public async Task<GenerateEmailConfirmationLinkResponse> GenerateEmailConfirmationLink(GenerateEmailConfirmationLinkRequest request)
+        public async Task<SuccessResponse> SendEmailConfirmLink(string email, string link)
         {
             try
             {
-                var user = _userService.GetById(request.UserId);
-                if (user == null)
+                var emailRequest = new CreateTmpEmailRequest()
                 {
-                    throw new KeyNotFoundException($"UserId {request.UserId} is not found.");
-                }
-
-                if (user.EmailConfirmed)
-                {
-                    throw new Exception($"Email already confirmed.");
-                }
-
-                string emailConfirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var emailRequest = new CustomEmailRequest
-                {
-                    emailAddress = user.Email,
-                    htmlText = emailConfirmationToken,
-                    mailSubject = "Consent Email Confirmation"
+                    Context = NotificationConsts.RegistrationContext,
+                    SubContext = NotificationConsts.EmailConfirmationSubContext,
+                    Email = email,
+                    PlaceHolders = new Dictionary<string, string>()
+                    {
+                        { "CompanyName", "Consent" },
+                        { "Link", link }
+                    },
+                    IsArabic = false
                 };
-                var result = await _emailService.SendCustomEmail(emailRequest);
-                if (result)
+                var result = await _emailService.SendSingleTemplateEmail(emailRequest);
+                if (!string.IsNullOrEmpty(result.ErrMessage))
                 {
-                    return new GenerateEmailConfirmationLinkResponse
-                    {
-                        Success = false,
-                        Message = "Email sent successfully."
-                    };
+                    throw new Exception(result.ErrMessage);
                 }
-                else
+
+                return new SuccessResponse
                 {
-                    return new GenerateEmailConfirmationLinkResponse
-                    {
-                        Success = true,
-                        Message = "Email sent successfully."
-                    };
-                }
+                    Success = true,
+                    Message = "Email sent successfully."
+                };
             }
             catch (Exception ex)
             {
-                return new GenerateEmailConfirmationLinkResponse
+                return new SuccessResponse
                 {
                     Success = false,
                     Message = ex.Message
@@ -209,7 +150,44 @@ namespace Consent.Api.Auth.Services
             }
         }
 
-        public async Task<InviteEmailsResponse> SendEmailInvitations(InviteEmailsRequest request)
+        public async Task<SuccessResponse> SendRegistrationEmail(UserIdentity user)
+        {
+            try
+            {
+                var emailRequest = new CreateTmpEmailRequest()
+                {
+                    Context = NotificationConsts.TenantOnboard,
+                    SubContext = NotificationConsts.TenantOnboardRegistered,
+                    Email = user.Email,
+                    PlaceHolders = new Dictionary<string, string>()
+                    {
+                        { "UserName", user.FirstName }
+                    },
+                    IsArabic = false
+                };
+                var result = await _emailService.SendSingleTemplateEmail(emailRequest);
+                if (!string.IsNullOrEmpty(result.ErrMessage))
+                {
+                    throw new Exception(result.ErrMessage);
+                }
+
+                return new SuccessResponse
+                {
+                    Success = true,
+                    Message = "Email sent successfully."
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SuccessResponse
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public async Task<SuccessResponse> SendEmailInvitations(List<string> emails)
         {
             try
             {
@@ -217,10 +195,10 @@ namespace Consent.Api.Auth.Services
                 {
                     Context = NotificationConsts.InviteEmailsContext,
                     SubContext = NotificationConsts.InviteEmailsSubContext,
-                    EmailList = request.EmailList,
+                    EmailList = emails,
                     PlaceHolders = new Dictionary<string, string>()
                     {
-                        { "CompanyName", "Consent" } 
+                        { "CompanyName", "Consent" }
                     },
                     IsArabic = false
                 };
@@ -230,7 +208,7 @@ namespace Consent.Api.Auth.Services
                     throw new Exception(result.ErrMessage);
                 }
 
-                return new InviteEmailsResponse
+                return new SuccessResponse
                 {
                     Success = true,
                     Message = "Email sent successfully."
@@ -238,7 +216,7 @@ namespace Consent.Api.Auth.Services
             }
             catch (Exception ex)
             {
-                return new InviteEmailsResponse
+                return new SuccessResponse
                 {
                     Success = false,
                     Message = ex.Message

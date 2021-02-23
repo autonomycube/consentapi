@@ -1,7 +1,7 @@
 using Consent.Api.Auth.Data.Repositories.Abstract;
 using Consent.Api.Auth.Services.Abstract;
 using Consent.Common.EnityFramework.Entities.Identity;
-using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Consent.Api.Auth.Services
@@ -28,6 +28,16 @@ namespace Consent.Api.Auth.Services
         public UserIdentity GetById(string id)
         {
            return  _userRepository.GetById(id);
+        }
+
+        public async Task<UserIdentity> GetByPhoneNumber(string phoneNumber)
+        {
+            return (await _userRepository.FindBy(u => u.PhoneNumber == phoneNumber)).FirstOrDefault();
+        }
+
+        public async Task<UserIdentity> GetByEmail(string email)
+        {
+            return (await _userRepository.FindBy(u => u.Email == email)).FirstOrDefault();
         }
 
         public async Task Update(UserIdentity entity)

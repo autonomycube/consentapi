@@ -1,6 +1,6 @@
-﻿namespace Consent.Api.Auth.DTO.Response
+﻿namespace Consent.Api.Notification.DTO.Response
 {
-    public class GenerateEmailConfirmationLinkResponse
+    public class SuccessResponse
     {
         public bool Success { get; set; }
         public string Message { get; set; }

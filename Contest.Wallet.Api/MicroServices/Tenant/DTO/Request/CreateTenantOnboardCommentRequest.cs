@@ -1,7 +1,7 @@
 ﻿using Consent.Common.EnityFramework.Entities;
 using FluentValidation;
 
-namespace Consent.Api.Tenant.Services.DTO.Request
+namespace Consent.Api.Tenant.DTO.Request
 {
     public class CreateTenantOnboardCommentRequest
     {

@@ -3,7 +3,9 @@ using Consent.Common.EnityFramework.DbContexts;
 using Consent.Common.EnityFramework.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Consent.Api.Auth.Data.Repositories
@@ -33,6 +35,11 @@ namespace Consent.Api.Auth.Data.Repositories
         public virtual UserIdentity GetById(string id)
         {
             return _dbSet.Where(t => t.Id.Equals(id)).FirstOrDefault();
+        }
+
+        public virtual async Task<IEnumerable<UserIdentity>> FindBy(Expression<Func<UserIdentity, bool>> predicate)
+        {
+            return await _dbSet.AsNoTracking().Where(predicate).ToListAsync();
         }
 
         public virtual async Task Update(UserIdentity entity)

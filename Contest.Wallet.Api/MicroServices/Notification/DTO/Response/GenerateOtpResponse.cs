@@ -1,4 +1,4 @@
-﻿namespace Consent.Api.Auth.DTO.Response
+﻿namespace Consent.Api.Notification.DTO.Response
 {
     public class GenerateOtpResponse
     {

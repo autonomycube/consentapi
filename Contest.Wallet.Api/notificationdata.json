@@ -42,8 +42,8 @@
       {
         "Context": "Registration",
         "SubContext": "EmailVerification",
-        "MailSubject": "Consent Email Verified",
-        "HtmlText": "<div style='text-align: center;'><img src='logo_white_background.jpg' alt='Consent Logo' style='width: 30%;' /></div><hr /><div style='font-family: Verdana;'><p>Hi {UserName}</p><p>Good news! Your Consent account is verified! You can now onboard your employees, issue credentials and carry out request verification services on verifiable credentials instantly.</p><p>To get started, just login to the Consent Platform and follow the welcome screen.</p><p>We’re thrilled to welcome you on our Consent Platform!</p><br/><p>Cheers, <br /><strong>Infoeaze Team</strong></p></div>",
+        "MailSubject": "Consent Email Verification",
+        "HtmlText": "<div style='text-align: center;'><img src='logo_white_background.jpg' alt='Consent Logo' style='width: 30%;' /></div><hr /><div style='font-family: Verdana;'><p><strong>{CompanyName}</strong> has invited you to join the <strong>Consent Platform!</strong></p><p style='text-align: center;'><a style='padding: 10px;background-color: orange;color: white;' href='{Link}'>Verify Email</a></p><p><strong>Consent is a digital mobile wallet to store user credentials </strong></p><p>Consent is leading the digital credential verification Industry by helping individuals verify their background quickly in a transparent manner. You as an Consent user own your Credential data and have an opportunity to receive tokens in return for sharing it via our Consent platform – depending on who you wish to share, when and how long.</p><p>We’re thrilled to welcome you on our Consent Platform!</p><br /><p>Cheers, <br /><strong>Infoeaze Team</strong></p></div>",
         "ArbMailSubject": null,
         "ArbHtmlText": null,
         "HasPlaceholder": true,

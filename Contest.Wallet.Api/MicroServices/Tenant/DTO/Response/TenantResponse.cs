@@ -1,4 +1,4 @@
-﻿namespace Consent.Api.Tenant.Services.DTO.Response
+﻿namespace Consent.Api.Tenant.DTO.Response
 {
     public class TenantResponse
     {

@@ -1,5 +1,5 @@
 ﻿using Consent.Api.Contracts;
-using Consent.Api.Tenant.Services.DTO.Request;
+using Consent.Api.Tenant.DTO.Request;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

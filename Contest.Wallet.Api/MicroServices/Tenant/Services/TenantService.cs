@@ -1,14 +1,16 @@
 ﻿using AutoMapper;
+using Consent.Api.Infrastructure.Extensions;
 using Consent.Api.Tenant.Data.DbContexts;
 using Consent.Api.Tenant.Data.Repositories.Abstract;
+using Consent.Api.Tenant.DTO.Request;
+using Consent.Api.Tenant.DTO.Response;
 using Consent.Api.Tenant.Services.Abstract;
-using Consent.Api.Tenant.Services.DTO.Request;
-using Consent.Api.Tenant.Services.DTO.Response;
 using Consent.Common.ApplicationMonitoring.Abstract;
 using Consent.Common.Data.UOW.Abstract;
 using Consent.Common.EnityFramework.Entities;
 using Consent.Common.EnityFramework.Entities.Identity;
 using Consent.Common.Helpers.Abstract;
+using Consent.Common.Repository.Extensions;
 using Consent.Common.Repository.Helpers;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -80,17 +82,18 @@ namespace Consent.Api.Tenant.Services
                     entity.TenantType = TenantType.RA;
                 }
                 entity.IsActive = true;
+                entity.TenantId = _baseAuthHelper.GetTenantId();
                 entity.CreatedBy = _baseAuthHelper.GetUserId();
                 entity.UpdatedBy = _baseAuthHelper.GetUserId();
 
                 _unitOfWork.BeginTransaction();
                 var response = await _tenantRepository.Add(entity);
                 var userIdentity = _mapper.Map<UserIdentity>(entity);
-                userIdentity.UserName = "admin";
+                userIdentity.UserName = userIdentity.Email;
                 userIdentity.IsActive = true;
                 userIdentity.CreatedBy = _baseAuthHelper.GetUserId();
                 userIdentity.UpdatedBy = _baseAuthHelper.GetUserId();
-                userIdentity.TenantId = entity.Id;
+                userIdentity.TenantId = _baseAuthHelper.GetTenantId();
                 var result = await _userManager.CreateAsync(userIdentity);
                 if (!result.Succeeded)
                 {
@@ -100,7 +103,7 @@ namespace Consent.Api.Tenant.Services
 
                 return _mapper.Map<TenantResponse>(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await _unitOfWork.RollbackAsync();
                 throw ex;
@@ -158,15 +161,60 @@ namespace Consent.Api.Tenant.Services
             return _mapper.Map<TenantResponse>(result);
         }
 
+        public async Task<TenantDashboardResponse> GetTenantDashboard()
+        {
+            string tenantId = _baseAuthHelper.GetTenantId();
+            var tenants = (await _tenantRepository.FindBy(t => t.TenantId == tenantId)).ToList();
+            return new TenantDashboardResponse
+            {
+                ApprovedCount = tenants.Where(t => t.TenantStatus == TenantStatus.OnboardComplete).Count(),
+                KycInProgressCount = tenants.Where(t => t.TenantStatus == TenantStatus.OnboardProcessing).Count(),
+                RegistratedCount = tenants.Where(t => t.TenantStatus == TenantStatus.Registered).Count(),
+                RejectedCount = tenants.Where(t => t.TenantStatus == TenantStatus.OnboardRejected).Count(),
+            };
+        }
+
         public async Task<IEnumerable<TenantOnboardCommentResponse>> GetTenantOnboardComments(string id)
         {
             var result = await _tenantOnboardStatusRepository.FindBy(t => t.TenantId == id);
             return _mapper.Map<IEnumerable<TenantOnboardCommentResponse>>(result.ToList());
         }
 
-        public async Task<PaginatedList<TenantResponse>> GetAll(int pageIndex, int pageSize, bool includeCount = false)
+        public async Task<PaginatedList<TenantResponse>> GetOnboardPendingTenantsPages(int pageIndex, int pageSize, TenantFilter filters, bool includeCount = false)
         {
-            var result = await _tenantRepository.GetAll(pageIndex, pageSize, includeCount);
+            string tenantId = _baseAuthHelper.GetTenantId();
+            var query = _tenantRepository.GetQueryable();
+
+            query = query.Where(t => t.IsActive.Value && t.TenantStatus == TenantStatus.Registered && t.TenantId == tenantId);
+            if (filters.Name != null)
+            {
+                query = query.Where(t => t.Name.ToLower().Contains(filters.Name.ToLower()));
+            }
+
+            if (filters.CIN != null)
+            {
+                query = query.Where(t => t.CIN.ToLower().Contains(filters.CIN.ToLower()));
+            }
+
+            var fromDate = filters.FromDate.ToString().ToNullableDateTime();
+            var toDate = filters.ToDate.ToString().ToNullableDateTime();
+            if ((fromDate != null && fromDate.Value.Year > 1900) || (toDate != null && toDate.Value.Year > 1900))
+            {
+                if (fromDate != null && toDate != null)
+                {
+                    query = query.Where(t => t.UpdatedDate >= fromDate && t.UpdatedDate <= toDate);
+                }
+                else if (fromDate != null)
+                {
+                    query = query.Where(t => t.UpdatedDate >= fromDate);
+                }
+                else if (toDate != null)
+                {
+                    query = query.Where(t => t.UpdatedDate <= toDate);
+                }
+            }
+
+            var result = await query.ToPaginatedListAsync<TblAuthTenants>(pageIndex, pageSize, true);
             return new PaginatedList<TenantResponse>(_mapper.Map<IEnumerable<TenantResponse>>(result), pageIndex, pageSize, result.TotalCount);
         }
 

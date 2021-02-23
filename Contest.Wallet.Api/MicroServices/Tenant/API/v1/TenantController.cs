@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoWrapper.Extensions;
 using AutoWrapper.Wrappers;
+using Consent.Api.Tenant.DTO.Request;
+using Consent.Api.Tenant.DTO.Response;
 using Consent.Api.Tenant.Services.Abstract;
-using Consent.Api.Tenant.Services.DTO.Request;
-using Consent.Api.Tenant.Services.DTO.Response;
 using Consent.Common.Configuration.Options.HelperModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -167,14 +167,52 @@ namespace Consent.Api.Tenant.API.v1
         }
 
         /// <summary>
-        /// Gets All List of Tenants
+        /// Gets Tenant Dashboard Data
         /// </summary>
         /// <remarks>
         /// Sample Response:
         /// 
-        ///     GET /tenant/{id}
+        ///     GET /tenant/dashboard
         ///     {
-        ///         "message": "Tenant feteched successfully",
+        ///         "message": "Data feteched successfully",
+        ///         "result": {
+        ///             "id": "9c441515-0820-4620-9dd6-97bcb1727248",
+        ///             "contact": "string",
+        ///             "address": "string",
+        ///             "email": "string",
+        ///             "employeesCount": 0,
+        ///             "cin": "string"
+        ///         }
+        ///     }
+        /// 
+        /// </remarks>
+        /// <returns>Returns Tenant Dashboard Data</returns>
+        /// <response code="200">Returns Tenant Dashboard Data</response>
+        [HttpGet("dashboard")]
+        [ProducesResponseType(typeof(TenantDashboardResponse), Status200OK)]
+        public async Task<ApiResponse> GetTenantDashboard()
+        {
+            try
+            {
+                var result = await _tenantService.GetTenantDashboard();
+                return new ApiResponse("Data feteched successfully", result, Status200OK);
+            }
+            catch (Exception ex)
+            {
+                throw new ApiException(ex);
+            }
+        }
+
+        /// <summary>
+        /// Gets Tenants By filters
+        /// </summary>
+        /// <remarks>
+        /// Sample Response:
+        /// 
+        ///     GET /tregistered/paged?PageNumber=1{seperator}PageSize=25{seperator}IncludeCount=true{seperator}Name=lovaraju{seperator}CIN=cin{seperator}FromDate=null{seperator}ToDate=null
+        ///     {
+        ///         "message": "Data feteched successfully",
+        ///         "isError": false,
         ///         "result": [
         ///             {
         ///                 "id": "9c441515-0820-4620-9dd6-97bcb1727248",
@@ -189,15 +227,16 @@ namespace Consent.Api.Tenant.API.v1
         /// 
         /// </remarks>
         /// <param name="urlQueryParameters">Paging Query Parameters</param>
+        /// <param name="filters">Filters</param>
         /// <returns>Returns List of Tenants</returns>
         /// <response code="200">Returns List of Tenants</response>
         [HttpGet("registered/paged")]
         [ProducesResponseType(typeof(TenantResponse), Status200OK)]
-        public async Task<ApiResponse> GetOnboardPendingTenantsPages([FromQuery] UrlQueryParameters urlQueryParameters)
+        public async Task<ApiResponse> GetOnboardPendingTenantsPages([FromQuery] UrlQueryParameters urlQueryParameters, [FromQuery] TenantFilter filters)
         {
             try
             {
-                var result = await _tenantService.GetAll(urlQueryParameters.PageNumber, urlQueryParameters.PageSize, urlQueryParameters.IncludeCount);
+                var result = await _tenantService.GetOnboardPendingTenantsPages(urlQueryParameters.PageNumber, urlQueryParameters.PageSize, filters, urlQueryParameters.IncludeCount);
                 if (result != null)
                 {
                     var metadata = new Pagination

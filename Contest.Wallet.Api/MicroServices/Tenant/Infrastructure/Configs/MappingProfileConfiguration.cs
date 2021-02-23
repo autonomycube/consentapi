@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Consent.Api.Tenant.Services.DTO.Request;
-using Consent.Api.Tenant.Services.DTO.Response;
+using Consent.Api.Tenant.DTO.Request;
+using Consent.Api.Tenant.DTO.Response;
 using Consent.Common.EnityFramework.Entities;
 using Consent.Common.EnityFramework.Entities.Identity;
 

@@ -1,0 +1,39 @@
+{
+  "TenantSeedData": {
+    "Tenant": {
+      "CIN": "CIN00001",
+      "Name": "Consent",
+      "NormalizedName": "CONSENT",
+      "ProfilePicture": null,
+      "Country": "London",
+      "Address": "London",
+      "TenantType": 2,
+      "TenantStatus": 2,
+      "Contact": "+12354654654",
+      "Email": "admin@consent.com",
+      "PhoneNumber": "+12354654654",
+      "EmployeesCount": 0,
+      "IsActive": true,
+      "TenantId": null
+    },
+    "User": {
+      "UserName": "admin@consent.com",
+      "Email": "admin@consent.com",
+      "EmailConfirmed": true,
+      "PhoneNumber": "+12354654654",
+      "PhoneNumberConfirmed": true,
+      "FirstName": "Consent",
+      "LastName": null,
+      "DateOfBirth": null,
+      "ProfilePicture": null,
+      "Country": "London",
+      "Address": "London",
+      "City": "London",
+      "State": "London",
+      "Street": null,
+      "Zip": null,
+      "IsActive": true,
+      "Gender": null
+    }
+  }
+}

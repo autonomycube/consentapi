@@ -40,6 +40,6 @@ namespace Consent.Common.EnityFramework.Entities
         Registered = 0,
         OnboardProcessing = 1,
         OnboardComplete = 2,
-        OnboardRejected = 2
+        OnboardRejected = 3
     }
 }

@@ -13,8 +13,7 @@ namespace Consent.Api.Auth.Infrastructure.Installers
         {
             //Register DTO Validators
             services.AddTransient<IValidator<GenerateOtpRequest>, GenerateOtpRequestValidator>();
-            services.AddTransient<IValidator<VerifyOtpRequest>, VerifyOtpRequestValidator>();
-            services.AddTransient<IValidator<GenerateEmailConfirmationLinkRequest>, GenerateEmailConfirmationLinkRequestValidator>();
+            services.AddTransient<IValidator<EmailConfirmationRequest>, EmailConfirmationRequestValidator>();
             services.AddTransient<IValidator<InviteEmailsRequest>, InviteEmailsRequestValidator>();
 
             //Disable Automatic Model State Validation built-in to ASP.NET Core
