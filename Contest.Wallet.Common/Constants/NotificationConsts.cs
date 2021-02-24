@@ -8,6 +8,8 @@
 
         public const string TenantOnboard = "TenantOnboard";
         public const string TenantOnboardRegistered = "Registered";
+        public const string TenantOnboardRejected = "Rejected";
+        public const string TenantOnboardCompleted = "Completed";
 
         public const string InviteEmailsContext = "Invitation";
         public const string InviteEmailsSubContext = "AcceptInvitation";

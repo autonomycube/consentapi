@@ -11,6 +11,8 @@ namespace Consent.Api.Notification.Services.Abstract
         Task<GenerateOtpResponse> SendConfirmationOtp(UserIdentity user);
         Task<SuccessResponse> VerifyConfirmationOtp(VerifyOtpRequest request, UserIdentity user);
         Task<SuccessResponse> SendRegistrationEmail(UserIdentity user);
+        Task<SuccessResponse> SendTenantOnboardCompletedEmail(string email);
+        Task<SuccessResponse> SendTenantOnboardRejectedEmail(string email);
         Task<SuccessResponse> SendEmailConfirmLink(string email, string link);
         Task<SuccessResponse> SendEmailInvitations(List<string> emails);
     }

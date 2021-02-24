@@ -187,6 +187,78 @@ namespace Consent.Api.Notification.Services
             }
         }
 
+        public async Task<SuccessResponse> SendTenantOnboardCompletedEmail(string email)
+        {
+            try
+            {
+                var emailRequest = new CreateTmpEmailRequest()
+                {
+                    Context = NotificationConsts.TenantOnboard,
+                    SubContext = NotificationConsts.TenantOnboardCompleted,
+                    Email = email,
+                    PlaceHolders = new Dictionary<string, string>()
+                    {
+                    },
+                    IsArabic = false
+                };
+                var result = await _emailService.SendSingleTemplateEmail(emailRequest);
+                if (!string.IsNullOrEmpty(result.ErrMessage))
+                {
+                    throw new Exception(result.ErrMessage);
+                }
+
+                return new SuccessResponse
+                {
+                    Success = true,
+                    Message = "Email sent successfully."
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SuccessResponse
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public async Task<SuccessResponse> SendTenantOnboardRejectedEmail(string email)
+        {
+            try
+            {
+                var emailRequest = new CreateTmpEmailRequest()
+                {
+                    Context = NotificationConsts.TenantOnboard,
+                    SubContext = NotificationConsts.TenantOnboardRejected,
+                    Email = email,
+                    PlaceHolders = new Dictionary<string, string>()
+                    {
+                    },
+                    IsArabic = false
+                };
+                var result = await _emailService.SendSingleTemplateEmail(emailRequest);
+                if (!string.IsNullOrEmpty(result.ErrMessage))
+                {
+                    throw new Exception(result.ErrMessage);
+                }
+
+                return new SuccessResponse
+                {
+                    Success = true,
+                    Message = "Email sent successfully."
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SuccessResponse
+                {
+                    Success = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
         public async Task<SuccessResponse> SendEmailInvitations(List<string> emails)
         {
             try

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Consent.Api.Infrastructure.Extensions;
+using Consent.Api.Notification.Services.Abstract;
 using Consent.Api.Tenant.Data.DbContexts;
 using Consent.Api.Tenant.Data.Repositories.Abstract;
 using Consent.Api.Tenant.DTO.Request;
@@ -27,6 +28,7 @@ namespace Consent.Api.Tenant.Services
         private readonly ITenantRepository _tenantRepository;
         private readonly ITenantOnboardStatusRepository _tenantOnboardStatusRepository;
         private readonly UserManager<UserIdentity> _userManager;
+        private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
         private readonly ILogger<TenantService> _logger;
         private readonly IUnitOfWork<TenantDbContext> _unitOfWork;
@@ -39,6 +41,7 @@ namespace Consent.Api.Tenant.Services
         public TenantService(ITenantRepository tenantRepository,
             ITenantOnboardStatusRepository tenantOnboardStatusRepository,
             UserManager<UserIdentity> userManager,
+            INotificationService notificationService,
             IMapper mapper,
             ILogger<TenantService> logger,
             IUnitOfWork<TenantDbContext> unitOfWork,
@@ -50,6 +53,8 @@ namespace Consent.Api.Tenant.Services
                 ?? throw new ArgumentNullException(nameof(tenantOnboardStatusRepository));
             _userManager = userManager
                 ?? throw new ArgumentNullException(nameof(userManager));
+            _notificationService = notificationService
+                ?? throw new ArgumentNullException(nameof(notificationService));
             _mapper = mapper
                 ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger
@@ -100,6 +105,7 @@ namespace Consent.Api.Tenant.Services
                     throw new Exception($"{result.Errors.First().Description}");
                 }
                 await _unitOfWork.CommitAsync();
+                await _notificationService.SendRegistrationEmail(userIdentity);
 
                 return _mapper.Map<TenantResponse>(response);
             }
@@ -141,6 +147,15 @@ namespace Consent.Api.Tenant.Services
                 tenant.UpdatedBy = _baseAuthHelper.GetUserId();
                 await _tenantRepository.Update(tenant);
                 await _unitOfWork.CommitAsync();
+
+                if (tenant.TenantStatus == TenantStatus.OnboardComplete)
+                {
+                    await _notificationService.SendTenantOnboardCompletedEmail(tenant.Email);
+                }
+                else if (tenant.TenantStatus == TenantStatus.OnboardRejected)
+                {
+                    await _notificationService.SendTenantOnboardRejectedEmail(tenant.Email);
+                }
 
                 return true;
             }
