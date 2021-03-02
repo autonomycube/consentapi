@@ -41,6 +41,7 @@ namespace Consent.Api.Infrastructure.Installers
 
                 //Adding excluded models
                 options.DocumentFilter<SwaggerModelDocumentFilter<TenantResponse>>();
+                options.DocumentFilter<SwaggerModelDocumentFilter<HolderEmailAddressesResponse>>();
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

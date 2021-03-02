@@ -223,7 +223,7 @@ namespace Consent.Api.Notification.Services
             }
         }
 
-        public async Task<SuccessResponse> SendTenantOnboardRejectedEmail(string email)
+        public async Task<SuccessResponse> SendTenantOnboardRejectedEmail(string email, string firstName, string reason)
         {
             try
             {
@@ -234,6 +234,8 @@ namespace Consent.Api.Notification.Services
                     Email = email,
                     PlaceHolders = new Dictionary<string, string>()
                     {
+                        { "FirstName", firstName },
+                        { "RejectionReason", reason }
                     },
                     IsArabic = false
                 };

@@ -154,7 +154,7 @@ namespace Consent.Api.Tenant.Services
                 }
                 else if (tenant.TenantStatus == TenantStatus.OnboardRejected)
                 {
-                    await _notificationService.SendTenantOnboardRejectedEmail(tenant.Email);
+                    await _notificationService.SendTenantOnboardRejectedEmail(tenant.Email, "", request.Comment);
                 }
 
                 return true;

@@ -16,6 +16,7 @@ namespace Consent.Api.Tenant.Infrastructure.Installers
         public void RegisterAppServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IUnitOfWork<TenantDbContext>, UnitOfWork<TenantDbContext>>();
+            services.AddTransient<IHolderService, HolderService>();
             services.AddTransient<ITenantService, TenantService>();
             services.AddTransient<IBaseAuthHelper, BaseAuthHelper>();
         }

@@ -12,7 +12,7 @@ namespace Consent.Api.Notification.Services.Abstract
         Task<SuccessResponse> VerifyConfirmationOtp(VerifyOtpRequest request, UserIdentity user);
         Task<SuccessResponse> SendRegistrationEmail(UserIdentity user);
         Task<SuccessResponse> SendTenantOnboardCompletedEmail(string email);
-        Task<SuccessResponse> SendTenantOnboardRejectedEmail(string email);
+        Task<SuccessResponse> SendTenantOnboardRejectedEmail(string email, string firstName, string reason);
         Task<SuccessResponse> SendEmailConfirmLink(string email, string link);
         Task<SuccessResponse> SendEmailInvitations(List<string> emails);
     }

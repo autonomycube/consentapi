@@ -11,6 +11,7 @@ namespace Consent.Api.Tenant.Infrastructure.Installers
         public void RegisterAppServices(IServiceCollection services, IConfiguration config)
         {
             //Register Interface Mappings for Repositories
+            services.AddTransient<IInvitationsRepository, InvitationsRepository>();
             services.AddTransient<ITenantRepository, TenantRepository>();
             services.AddTransient<ITenantOnboardStatusRepository, TenantOnboardStatusRepository>();
         }
