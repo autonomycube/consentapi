@@ -10,7 +10,6 @@
     {
         Valid = 0,
         AlreadyRegistered = 1,
-        AlreadySentInvitation = 2,
-        InvitationSent = 3
+        InvitationSent = 2
     }
 }

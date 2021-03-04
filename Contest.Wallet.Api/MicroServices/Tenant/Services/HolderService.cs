@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Consent.Api.Notification.DTO.Response;
 using Consent.Api.Notification.Services.Abstract;
 using Consent.Api.Tenant.Data.DbContexts;
 using Consent.Api.Tenant.Data.Repositories.Abstract;
@@ -23,8 +22,6 @@ namespace Consent.Api.Tenant.Services
     {
         #region Private Variables
 
-        private readonly ITenantRepository _tenantRepository;
-        private readonly ITenantOnboardStatusRepository _tenantOnboardStatusRepository;
         private readonly IInvitationsRepository _invitationsRepository;
         private readonly UserManager<UserIdentity> _userManager;
         private readonly INotificationService _notificationService;
@@ -37,9 +34,7 @@ namespace Consent.Api.Tenant.Services
 
         #region Constructor
 
-        public HolderService(ITenantRepository tenantRepository,
-            ITenantOnboardStatusRepository tenantOnboardStatusRepository,
-            IInvitationsRepository invitationsRepository,
+        public HolderService(IInvitationsRepository invitationsRepository,
             UserManager<UserIdentity> userManager,
             INotificationService notificationService,
             IMapper mapper,
@@ -47,10 +42,6 @@ namespace Consent.Api.Tenant.Services
             IUnitOfWork<TenantDbContext> unitOfWork,
             IBaseAuthHelper baseAuthHelper)
         {
-            _tenantRepository = tenantRepository
-                ?? throw new ArgumentNullException(nameof(tenantRepository));
-            _tenantOnboardStatusRepository = tenantOnboardStatusRepository
-                ?? throw new ArgumentNullException(nameof(tenantOnboardStatusRepository));
             _invitationsRepository = invitationsRepository
                 ?? throw new ArgumentNullException(nameof(invitationsRepository));
             _userManager = userManager
@@ -71,11 +62,55 @@ namespace Consent.Api.Tenant.Services
 
         #region Public Methods
 
+        public async Task<HolderResponse> CreateHolder(CreateHolderRequest request)
+        {
+
+            var invitation = (await _invitationsRepository.FindBy(x => x.Email == request.Email)).FirstOrDefault();
+            if (invitation != null && invitation.Registered)
+            {
+                throw new Exception($"Email already registered");
+            }
+
+            var userIdentity = _mapper.Map<UserIdentity>(request);
+            try
+            {
+                _unitOfWork.BeginTransaction();
+                userIdentity.UserName = userIdentity.Email;
+                userIdentity.UserType = UserType.Holder;
+                userIdentity.IsActive = false;
+                userIdentity.CreatedBy = _baseAuthHelper.GetUserId();
+                userIdentity.UpdatedBy = _baseAuthHelper.GetUserId();
+                userIdentity.TenantId = _baseAuthHelper.GetTenantId();
+                var result = await _userManager.CreateAsync(userIdentity);
+                if (!result.Succeeded)
+                {
+                    throw new Exception($"{result.Errors.First().Description}");
+                }
+
+                if (invitation != null)
+                {
+                    invitation.Registered = true;
+                    invitation.UpdatedBy = _baseAuthHelper.GetUserId();
+                    invitation.UpdatedDate = DateTime.UtcNow;
+                    await _invitationsRepository.Update(invitation);
+                }
+
+                await _unitOfWork.CommitAsync();
+                await _notificationService.SendRegistrationEmail(userIdentity);
+            }
+            catch (Exception ex)
+            {
+                await _unitOfWork.RollbackAsync();
+                throw ex;
+            }
+
+            return _mapper.Map<HolderResponse>(userIdentity);
+        }
+
         public IEnumerable<HolderEmailAddressesResponse> ValidateEmails(ValidateEmailAddressesRequest request)
         {
             return _invitationsRepository.ValidateEmails(request.Emails);
         }
-
 
         public async Task<IEnumerable<HolderEmailAddressesResponse>> SendEmailInvitations(HolderInviteEmailsRequest request)
         {

@@ -14,10 +14,12 @@ namespace Consent.Api.Tenant.Infrastructure.Configs
             // request
             CreateMap<CreateTenantRequest, TblAuthTenants>();
             CreateMap<CreateTenantOnboardCommentRequest, TblAuthTenantOnboardStatus>();
+            CreateMap<CreateHolderRequest, UserIdentity>();
             
             // response
             CreateMap<TblAuthTenants, TenantResponse>();
             CreateMap<TblAuthTenantOnboardStatus, TenantOnboardCommentResponse>();
+            CreateMap<UserIdentity, HolderResponse>();
 
             // others
             CreateMap<TblAuthTenants, UserIdentity>();

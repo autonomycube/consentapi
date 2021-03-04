@@ -46,6 +46,57 @@ namespace Consent.Api.Tenant.API.v1
         #region CRUD - C
 
         /// <summary>
+        /// Registers Holder
+        /// </summary>
+        /// <remarks>
+        /// Sample Response:
+        /// 
+        ///     POST /holders
+        ///     {
+        ///         "message": "Holder created successfully",
+        ///         "result": {
+        ///             "id": "d75e914c-959c-426d-b986-8f229c615780",
+        ///             "firstName": "string",
+        ///             "lastName": "string",
+        ///             "dateOfBirth": "2021-03-04T05:49:32.718Z",
+        ///             "profilePicture": "string",
+        ///             "country": "string",
+        ///             "address": "string",
+        ///             "city": "string",
+        ///             "state": "string",
+        ///             "street": "string",
+        ///             "zip": "string",
+        ///             "gender": "string",
+        ///             "email": "lsappidi@sweyainfotech.com",
+        ///             "phoneNumber": "+919703379997"
+        ///         }
+        ///     }
+        /// 
+        /// </remarks>
+        /// <param name="request">Holder Details</param>
+        /// <returns>Returns Holder Details</returns>
+        /// <response code="200">Returns Holder Details</response>
+        [HttpPost]
+        [ProducesResponseType(typeof(HolderResponse), Status200OK)]
+        public async Task<ApiResponse> CreateTenant([FromBody] CreateHolderRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new ApiException(ModelState.AllErrors());
+            }
+
+            try
+            {
+                var result = await _holderService.CreateHolder(request);
+                return new ApiResponse("Holder created successfully", result, Status200OK);
+            }
+            catch (Exception ex)
+            {
+                throw new ApiException(ex);
+            }
+        }
+        
+        /// <summary>
         /// Validates Email Addresses
         /// </summary>
         /// <remarks>

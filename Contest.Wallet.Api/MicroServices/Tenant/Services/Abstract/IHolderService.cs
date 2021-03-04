@@ -8,8 +8,8 @@ namespace Consent.Api.Tenant.Services.Abstract
 {
     public interface IHolderService
     {
+        Task<HolderResponse> CreateHolder(CreateHolderRequest request);
         IEnumerable<HolderEmailAddressesResponse> ValidateEmails(ValidateEmailAddressesRequest request);
-
         Task<IEnumerable<HolderEmailAddressesResponse>> SendEmailInvitations(HolderInviteEmailsRequest request);
     }
 }

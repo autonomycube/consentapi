@@ -95,6 +95,7 @@ namespace Consent.Api.Tenant.Services
                 var response = await _tenantRepository.Add(entity);
                 var userIdentity = _mapper.Map<UserIdentity>(entity);
                 userIdentity.UserName = userIdentity.Email;
+                userIdentity.UserType = UserType.Tenant;
                 userIdentity.IsActive = true;
                 userIdentity.CreatedBy = _baseAuthHelper.GetUserId();
                 userIdentity.UpdatedBy = _baseAuthHelper.GetUserId();

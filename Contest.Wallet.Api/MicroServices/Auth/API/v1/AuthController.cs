@@ -105,6 +105,11 @@ namespace Consent.Api.Auth.API.v1
                     throw new ApiException($"PhoneNumber {request.PhoneNumber} is not registered.");
                 }
 
+                if (user.IsActive != null && !user.IsActive.Value)
+                {
+                    throw new ApiException("User is not activated.");
+                }
+
                 if (user.PhoneNumberConfirmed)
                 {
                     throw new ApiException($"PhoneNumber {user.PhoneNumber} already confirmed.");
@@ -164,6 +169,11 @@ namespace Consent.Api.Auth.API.v1
                 if (user == null)
                 {
                     throw new ApiException($"PhoneNumber {request.PhoneNumber} is not registered.");
+                }
+
+                if (user.IsActive != null && !user.IsActive.Value)
+                {
+                    throw new ApiException("User is not activated.");
                 }
 
                 if (user.PhoneNumberConfirmed)
@@ -231,6 +241,11 @@ namespace Consent.Api.Auth.API.v1
                 if (user == null)
                 {
                     throw new ApiException($"Email {request.Email} is not registered.", Status404NotFound);
+                }
+
+                if (user.IsActive != null && !user.IsActive.Value)
+                {
+                    throw new ApiException("User is not activated.");
                 }
 
                 if (user.EmailConfirmed)
@@ -341,6 +356,11 @@ namespace Consent.Api.Auth.API.v1
                 if (user == null)
                 {
                     throw new ApiException($"UserId {userId} is not found.");
+                }
+
+                if (user.IsActive != null && !user.IsActive.Value)
+                {
+                    throw new ApiException("User is not activated.");
                 }
 
                 if (user.EmailConfirmed)

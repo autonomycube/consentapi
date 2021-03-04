@@ -161,7 +161,7 @@ namespace Consent.Api.Notification.Services
                     Email = user.Email,
                     PlaceHolders = new Dictionary<string, string>()
                     {
-                        { "UserName", user.FirstName }
+                        { "FirstName", user.FirstName }
                     },
                     IsArabic = false
                 };
