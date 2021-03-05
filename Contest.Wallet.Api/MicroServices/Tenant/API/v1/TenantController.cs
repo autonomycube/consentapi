@@ -167,34 +167,66 @@ namespace Consent.Api.Tenant.API.v1
         }
 
         /// <summary>
-        /// Gets Tenant Dashboard Data
+        /// Gets Tenants Status Details
         /// </summary>
         /// <remarks>
         /// Sample Response:
         /// 
-        ///     GET /tenant/dashboard
+        ///     GET /tenant/status
         ///     {
         ///         "message": "Data feteched successfully",
         ///         "result": {
-        ///             "id": "9c441515-0820-4620-9dd6-97bcb1727248",
-        ///             "contact": "string",
-        ///             "address": "string",
-        ///             "email": "string",
-        ///             "employeesCount": 0,
-        ///             "cin": "string"
+        ///             "registratedCount": 1,
+        ///             "kycInProgressCount": 0,
+        ///             "approvedCount": 0,
+        ///             "rejectedCount": 0
         ///         }
         ///     }
         /// 
         /// </remarks>
-        /// <returns>Returns Tenant Dashboard Data</returns>
-        /// <response code="200">Returns Tenant Dashboard Data</response>
-        [HttpGet("dashboard")]
-        [ProducesResponseType(typeof(TenantDashboardResponse), Status200OK)]
+        /// <returns>Returns Tenants Status Details</returns>
+        /// <response code="200">Returns Tenants Status Details</response>
+        [HttpGet("status")]
+        [ProducesResponseType(typeof(TenantStatusResponse), Status200OK)]
         public async Task<ApiResponse> GetTenantDashboard()
         {
             try
             {
-                var result = await _tenantService.GetTenantDashboard();
+                var result = await _tenantService.GetTenantStatusCount();
+                return new ApiResponse("Data feteched successfully", result, Status200OK);
+            }
+            catch (Exception ex)
+            {
+                throw new ApiException(ex);
+            }
+        }
+
+        /// <summary>
+        /// Gets Holders Status Details
+        /// </summary>
+        /// <remarks>
+        /// Sample Response:
+        /// 
+        ///     GET /tenant/holder/status
+        ///     {
+        ///         "message": "Data feteched successfully",
+        ///         "result": {
+        ///             "invitionSentCount": 1,
+        ///             "registeredCount": 2,
+        ///             "kyeCompletedCount": 1
+        ///         }
+        ///     }
+        /// 
+        /// </remarks>
+        /// <returns>Returns Holders Status Details</returns>
+        /// <response code="200">Returns Holders Status Details</response>
+        [HttpGet("holder/status")]
+        [ProducesResponseType(typeof(HoldersStatusResponse), Status200OK)]
+        public ApiResponse GetHoldersStatusCount()
+        {
+            try
+            {
+                var result = _tenantService.GetHoldersStatusCount();
                 return new ApiResponse("Data feteched successfully", result, Status200OK);
             }
             catch (Exception ex)

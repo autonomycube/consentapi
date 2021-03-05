@@ -177,17 +177,22 @@ namespace Consent.Api.Tenant.Services
             return _mapper.Map<TenantResponse>(result);
         }
 
-        public async Task<TenantDashboardResponse> GetTenantDashboard()
+        public async Task<TenantStatusResponse> GetTenantStatusCount()
         {
             string tenantId = _baseAuthHelper.GetTenantId();
             var tenants = (await _tenantRepository.FindBy(t => t.TenantId == tenantId)).ToList();
-            return new TenantDashboardResponse
+            return new TenantStatusResponse
             {
                 ApprovedCount = tenants.Where(t => t.TenantStatus == TenantStatus.OnboardComplete).Count(),
                 KycInProgressCount = tenants.Where(t => t.TenantStatus == TenantStatus.OnboardProcessing).Count(),
                 RegistratedCount = tenants.Where(t => t.TenantStatus == TenantStatus.Registered).Count(),
                 RejectedCount = tenants.Where(t => t.TenantStatus == TenantStatus.OnboardRejected).Count(),
             };
+        }
+
+        public HoldersStatusResponse GetHoldersStatusCount()
+        {
+            return _tenantRepository.GetHoldersStatusCount(_baseAuthHelper.GetTenantId());
         }
 
         public async Task<IEnumerable<TenantOnboardCommentResponse>> GetTenantOnboardComments(string id)

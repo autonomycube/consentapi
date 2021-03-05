@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Consent.Api.Tenant.DTO.Request
 {
-    public class ValidateEmailAddressesRequest
+    public class EmailAddressesRequest
     {
         public List<string> Emails { get; set; }
     }
 
-    public class ValidateEmailAddressesRequestValidator : AbstractValidator<ValidateEmailAddressesRequest>
+    public class EmailAddressesRequestValidator : AbstractValidator<EmailAddressesRequest>
     {
-        public ValidateEmailAddressesRequestValidator()
+        public EmailAddressesRequestValidator()
         {
             RuleFor(o => o.Emails).NotNull();
             When(o => o.Emails?.Count > 0, () =>

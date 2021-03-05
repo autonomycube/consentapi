@@ -1,6 +1,6 @@
 ﻿namespace Consent.Api.Tenant.DTO.Response
 {
-    public class TenantDashboardResponse
+    public class TenantStatusResponse
     {
         public int RegistratedCount { get; set; }
         public int KycInProgressCount { get; set; }

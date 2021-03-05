@@ -13,7 +13,8 @@ namespace Consent.Api.Tenant.Services.Abstract
         Task<IEnumerable<TenantOnboardCommentResponse>> GetTenantOnboardComments(string id);
         Task<bool> UpdateTenant(UpdateTenantRequest request);
         Task<TenantResponse> Get(string id);
-        Task<TenantDashboardResponse> GetTenantDashboard();
+        Task<TenantStatusResponse> GetTenantStatusCount();
+        HoldersStatusResponse GetHoldersStatusCount();
         Task<PaginatedList<TenantResponse>> GetOnboardPendingTenantsPages(int pageIndex, int pageSize, TenantFilter filters, bool includeCount = false);
     }
 }

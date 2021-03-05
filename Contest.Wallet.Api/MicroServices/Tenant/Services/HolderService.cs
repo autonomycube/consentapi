@@ -77,7 +77,8 @@ namespace Consent.Api.Tenant.Services
                 _unitOfWork.BeginTransaction();
                 userIdentity.UserName = userIdentity.Email;
                 userIdentity.UserType = UserType.Holder;
-                userIdentity.IsActive = false;
+                userIdentity.IsKYE = false;
+                userIdentity.IsActive = true;
                 userIdentity.CreatedBy = _baseAuthHelper.GetUserId();
                 userIdentity.UpdatedBy = _baseAuthHelper.GetUserId();
                 userIdentity.TenantId = _baseAuthHelper.GetTenantId();
@@ -107,12 +108,27 @@ namespace Consent.Api.Tenant.Services
             return _mapper.Map<HolderResponse>(userIdentity);
         }
 
-        public IEnumerable<HolderEmailAddressesResponse> ValidateEmails(ValidateEmailAddressesRequest request)
+        public async Task UpdateHolderKYE(List<string> emails)
+        {
+            foreach (var email in emails)
+            {
+                var user = await _userManager.FindByEmailAsync(email);
+                if (user != null && user.TenantId == _baseAuthHelper.GetTenantId())
+                {
+                    user.IsKYE = true;
+                    user.UpdatedBy = _baseAuthHelper.GetUserId();
+                    user.UpdatedDate = DateTime.UtcNow;
+                    await _userManager.UpdateAsync(user);
+                }
+            }
+        }
+
+        public IEnumerable<HolderEmailAddressesResponse> ValidateEmails(EmailAddressesRequest request)
         {
             return _invitationsRepository.ValidateEmails(request.Emails);
         }
 
-        public async Task<IEnumerable<HolderEmailAddressesResponse>> SendEmailInvitations(HolderInviteEmailsRequest request)
+        public async Task<IEnumerable<HolderEmailAddressesResponse>> SendEmailInvitations(EmailAddressesRequest request)
         {
             try
             {

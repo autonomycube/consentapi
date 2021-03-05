@@ -95,7 +95,7 @@ namespace Consent.Api.Tenant.API.v1
                 throw new ApiException(ex);
             }
         }
-        
+
         /// <summary>
         /// Validates Email Addresses
         /// </summary>
@@ -133,7 +133,7 @@ namespace Consent.Api.Tenant.API.v1
         /// <response code="200">Returns Validate Email Addresses Response</response>
         [HttpPost("validateemails")]
         [ProducesResponseType(typeof(IEnumerable<HolderEmailAddressesResponse>), Status200OK)]
-        public ApiResponse CreateTenant([FromBody] ValidateEmailAddressesRequest request)
+        public ApiResponse CreateTenant([FromBody] EmailAddressesRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -182,7 +182,7 @@ namespace Consent.Api.Tenant.API.v1
         /// <response code="200">Returns Emails success model</response>
         [HttpPost("invites")]
         [ProducesResponseType(typeof(IEnumerable<HolderEmailAddressesResponse>), Status200OK)]
-        public async Task<ApiResponse> SendEmailInvitations([FromBody] HolderInviteEmailsRequest dto)
+        public async Task<ApiResponse> SendEmailInvitations([FromBody] EmailAddressesRequest dto)
         {
             if (!ModelState.IsValid)
             {
@@ -201,6 +201,56 @@ namespace Consent.Api.Tenant.API.v1
             }
         }
 
+        #endregion
+
+        #region CRUD - U
+
+
+        /// <summary>
+        /// Updates Users IsKYE
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        ///     POST /holders/udpatekye
+        ///     {
+        ///         "emails": [
+        ///             "lovaraju.sappidi@gmail.com",
+        ///             "lsappidi@sweyainfotech.com"
+        ///         ]
+        ///     }
+        ///     
+        /// Sample Response:
+        /// 
+        ///     PUT /holders/udpatekye
+        ///     {
+        ///         "message": "Holder KYE udpated successfully",
+        ///         "result": trye
+        ///     }
+        /// 
+        /// </remarks>
+        /// <param name="request">Holder Details</param>
+        /// <returns>Returns Holder Details</returns>
+        /// <response code="200">Returns Holder Details</response>
+        [HttpPut("udpatekye")]
+        [ProducesResponseType(typeof(HolderResponse), Status200OK)]
+        public async Task<ApiResponse> UpdateIsKYE([FromBody] EmailAddressesRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new ApiException(ModelState.AllErrors());
+            }
+
+            try
+            {
+                await _holderService.UpdateHolderKYE(request.Emails);
+                return new ApiResponse("Holder KYE udpated successfully", true, Status200OK);
+            }
+            catch (Exception ex)
+            {
+                throw new ApiException(ex);
+            }
+        }
 
         #endregion
     }

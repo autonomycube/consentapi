@@ -14,7 +14,7 @@ namespace Consent.Api.Tenant.Infrastructure.Installers
             //Register DTO Validators
             services.AddTransient<IValidator<CreateTenantRequest>, CreateTenantRequestValidator>();
             services.AddTransient<IValidator<UpdateTenantRequest>, UpdateTenantRequestValidator>();
-            services.AddTransient<IValidator<ValidateEmailAddressesRequest>, ValidateEmailAddressesRequestValidator>();
+            services.AddTransient<IValidator<EmailAddressesRequest>, EmailAddressesRequestValidator>();
 
             //Disable Automatic Model State Validation built-in to ASP.NET Core
             services.Configure<ApiBehaviorOptions>(opt => { opt.SuppressModelStateInvalidFilter = true; });
