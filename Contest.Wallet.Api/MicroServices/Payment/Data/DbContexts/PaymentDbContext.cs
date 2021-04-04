@@ -1,4 +1,5 @@
-﻿using Consent.Api.Payment.Data.Entities;
+﻿using Consent.Common.EnityFramework.Constants;
+using Consent.Common.EnityFramework.Entities;
 using Consent.Common.Repository.SQL.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.Infrastructure;
@@ -7,7 +8,7 @@ namespace Consent.Api.Payment.Data.DbContexts
 {
     public class PaymentDbContext : DbContext, IDbContext
     {
-        public DbSet<TblPayments> Tests { get; set; }
+        public DbSet<TblPaymentTransactions> PaymentTransactions { get; set; }
 
         public PaymentDbContext(DbContextOptions<PaymentDbContext> options) : base(options)
         {
@@ -33,42 +34,7 @@ namespace Consent.Api.Payment.Data.DbContexts
 
         private void ConfigureIdentityContext(ModelBuilder builder)
         {
-            builder.Entity<TblPayments>(entity =>
-            {
-                entity.ToTable("tbl_test");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasMaxLength(55)
-                    .IsUnicode(false)
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Prop)
-                    .HasColumnName("prop")
-                    .IsRequired()
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CreatedBy)
-                    .IsRequired()
-                    .HasColumnName("created_by")
-                    .HasMaxLength(55)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnName("created_date")
-                    .HasColumnType("datetime(6)");
-
-                entity.Property(e => e.UpdatedBy)
-                    .IsRequired()
-                    .HasColumnName("updated_by")
-                    .HasMaxLength(55)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnName("updated_date")
-                    .HasColumnType("datetime(6)");
-            });
+            builder.Entity<TblPaymentTransactions>().ToTable(TableConsts.PaymentTransactions);
         }
     }
 }

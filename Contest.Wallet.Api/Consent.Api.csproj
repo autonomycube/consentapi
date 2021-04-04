@@ -48,8 +48,8 @@
     <Folder Include="Logs\Info\" />
     <Folder Include="MicroServices\Auth\DTO\Response\" />
     <Folder Include="MicroServices\Notification\Data\Entities\" />
+    <Folder Include="MicroServices\Payment\Data\Entities\" />
     <Folder Include="MicroServices\Payment\DTO\Request\" />
-    <Folder Include="MicroServices\Payment\DTO\Response\" />
     <Folder Include="MicroServices\Tenant\Data\Entities\" />
     <Folder Include="MicroServices\Utility\DTO\Request\" />
   </ItemGroup>

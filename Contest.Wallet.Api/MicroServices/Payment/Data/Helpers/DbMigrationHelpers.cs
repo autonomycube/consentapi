@@ -51,9 +51,6 @@ namespace Consent.Api.Payment.Data.Helpers
         /// </summary>
         private static async Task EnsureSeedIssuerData(PaymentDbContext testDbContext)
         {
-            if (!testDbContext.Tests.Any())
-            {
-            }
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Consent.Api.MicroServices.Payment.DTO.Response;
+using Consent.Common.EnityFramework.Entities;
 
 namespace Consent.Api.Payment.Infrastructure.Configs
 {
@@ -7,6 +9,9 @@ namespace Consent.Api.Payment.Infrastructure.Configs
         public MappingProfileConfiguration()
         {
             // Mapping DTO to Models
+
+            // response
+            CreateMap<TblPaymentTransactions, PaymentConfirmationResponse>();
         }
     }
 }

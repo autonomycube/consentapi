@@ -23,5 +23,7 @@
         public const string NotifyOtpTracker = "tbl_notify_otp_tracker";
         public const string NotifyTopic = "tbl_notify_topic";
         public const string NotifyUserSubscription = "tbl_notify_user_subscription";
+
+        public const string PaymentTransactions = "tbl_payment_transactions";
     }
 }

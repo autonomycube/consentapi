@@ -11,7 +11,7 @@ namespace Consent.Api.Payment.Infrastructure.Installers
         public void RegisterAppServices(IServiceCollection services, IConfiguration config)
         {
             //Register Interface Mappings for Repositories
-            services.AddTransient<IPaymentRepository, PaymentRepository>();
+            services.AddTransient<IPaymentTransactionRepository, PaymentTransactionRepository>();
         }
     }
 }

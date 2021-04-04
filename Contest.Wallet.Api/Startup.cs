@@ -10,6 +10,7 @@ using Consent.Common.ApplicationMonitoring.CloudWatch.Extensions;
 using Consent.Common.ApplicationMonitoring.CloudWatch.Models;
 using Consent.Common.EnityFramework.DbContexts;
 using Consent.Common.EnityFramework.Entities.Identity;
+using Consent.Common.Payment.Paytm;
 using FluentValidation.AspNetCore;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
@@ -69,6 +70,8 @@ namespace Consent.Api
 
             // Add HttpContext Accessor Middleware
             services.AddHttpContextAccessor();
+
+            services.AddPaytmPaymentGateway(Configuration);
 
             // configure strongly typed settings objects  
             services.Configure<AppConfig>(Configuration.GetSection(nameof(AppConfig)));
