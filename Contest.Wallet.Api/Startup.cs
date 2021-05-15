@@ -106,21 +106,21 @@ namespace Consent.Api
             });
 
             //Enable HealthChecks and UI
-            app.UseHealthChecks("/selfcheck", new HealthCheckOptions
-            {
-                Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            }).UseHealthChecksUI(setup =>
-            {
-                setup.AddCustomStylesheet($"{env.ContentRootPath}/Infrastructure/HealthChecks/Ux/branding.css");
-            });
+            // app.UseHealthChecks("/selfcheck", new HealthCheckOptions
+            // {
+            //     Predicate = _ => true,
+            //     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            // }).UseHealthChecksUI(setup =>
+            // {
+            //     setup.AddCustomStylesheet($"{env.ContentRootPath}/Infrastructure/HealthChecks/Ux/branding.css");
+            // });
 
             //Enable AutoWrapper.Core
             //More info see: https://github.com/proudmonkey/AutoWrapper
             app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions { IsDebug = true });
 
             //Enable AspNetCoreRateLimit
-            app.UseIpRateLimiting();
+            // app.UseIpRateLimiting();
 
             app.UseRouting();
 

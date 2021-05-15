@@ -31,6 +31,7 @@ namespace Consent.Api
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                     logger.LogError("Seed data generation failed.  Error: " + ex.Message);
                 }
             }
@@ -42,6 +43,7 @@ namespace Consent.Api
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 logger.LogError("Host unexpectedly terminated. Error: {0}", ex.StackTrace);
             }
         }

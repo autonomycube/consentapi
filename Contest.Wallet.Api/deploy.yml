@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consentapi
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consentapi
+  template:
+    metadata:
+      labels:
+        app: consentapi
+    spec:
+      containers:
+        - image: "665155927982.dkr.ecr.us-west-1.amazonaws.com/consentapi:{tag}"
+          imagePullPolicy: Always
+          name: consentapi
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consentapi
+  namespace: dev
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: consentapi

@@ -117,7 +117,7 @@ namespace Consent.Api.Payment.Services
                 payment.Status = status;
                 payment.ResponseCode = respCode;
                 payment.ResponseMessage = respMsg;
-                payment.TransactionDate = string.IsNullOrEmpty(txnDate) ? null : Convert.ToDateTime(txnDate);
+                payment.TransactionDate = string.IsNullOrEmpty(txnDate) ? (DateTime?)null : Convert.ToDateTime(txnDate);
                 payment.GatewayName = gatewayName;
                 payment.BankName = bankName;
                 payment.PaymentMode = paymentMode;

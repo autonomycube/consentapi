@@ -1,4 +1,5 @@
-﻿using Amazon.Runtime;
+﻿using Amazon;
+using Amazon.Runtime;
 using Amazon.S3;
 using Consent.Api.Contracts;
 using Consent.Common.S3Bucket;
@@ -14,7 +15,7 @@ namespace Consent.Api.Infrastructure.Installers
         {
             string accessKey = configuration["AWS:AccessKey"];
             string secretKey = configuration["AWS:SecretKey"];
-            services.AddSingleton(new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey)));
+            services.AddSingleton(new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey), RegionEndpoint.USWest1));
             services.AddSingleton<IS3BucketService, S3BucketService>();
         }
     }

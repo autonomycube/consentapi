@@ -1,0 +1,27 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+    commands:
+      - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
+      - chmod +x ./kubectl
+      - curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/aws-iam-authenticator
+      - chmod +x ./aws-iam-authenticator
+      - export PATH=$PWD/:$PATH
+  pre_build:
+    commands:
+      - REPOSITORY_URI=665155927982.dkr.ecr.us-west-1.amazonaws.com/consentapi
+      - SERVICE_VERSION=$(cat version)
+      - $(aws ecr get-login --region us-west-1 --no-include-email)
+      - export KUBECONFIG=$HOME/.kube/config
+  build:
+    commands:
+      - docker build -t $REPOSITORY_URI:latest -f ./Contest.Wallet.Api/Dockerfile .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$SERVICE_VERSION
+  post_build:
+    commands:
+      - docker push $REPOSITORY_URI:$SERVICE_VERSION
+      - aws eks update-kubeconfig --name consent
+      - sed "s/{tag}/$SERVICE_VERSION/g" ./Contest.Wallet.Api/deploy.yml > deploy.yml
+      - kubectl apply -f deploy.yml
